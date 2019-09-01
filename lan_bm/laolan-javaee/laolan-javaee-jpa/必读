@@ -1,0 +1,2 @@
+1.每种不同的走不同的 META-INF/persistence.xml
+2.如果跑不起，记得去doc找“数据库”，laolan-javaee-jpa

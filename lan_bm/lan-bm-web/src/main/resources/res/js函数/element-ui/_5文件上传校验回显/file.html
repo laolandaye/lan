@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @import url("//unpkg.com/element-ui@2.7.2/lib/theme-chalk/index.css");
+        .avatar-uploader .el-upload {
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .avatar-uploader .el-upload:hover {
+            border-color: #409EFF;
+        }
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        .avatar {
+            width: 50px;
+            height: 50px;
+            display: block;
+        }
+    </style>
+    <script src="//unpkg.com/vue/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.7.2/lib/index.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+    <el-upload
+            class="avatar-uploader"
+            :action="upload.imgAction"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccessImg"
+            :before-upload="beforeUploadImg">
+        <i class="el-icon-plus avatar-uploader-icon"></i>
+    </el-upload>
+    <img :src="upload.imgUrl">
+    <el-upload
+            class="upload-demo"
+            drag
+            :action="upload.videoAction"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccessVideo"
+            :before-upload="beforeUploadVideo">
+        <i class="el-icon-upload"></i>
+        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+    </el-upload>
+    <video v-if="upload.videoUrl" :src="upload.videoUrl" controls="controls"></video>
+</div>
+
+<script src="file_upload_common.js"></script>
+<script src="file.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+这里是指带有 team_code 的，实际大于这些
+String INPUT_PARAM1 = "%data_trans_database%";  // 数据库 33
+String INPUT_PARAM2 = "%tablefile%";            // 物理模型 32
+String INPUT_PARAM3 = "%dp_dev_file%";          // 文件模型 14
+String INPUT_PARAM4 = "%dam_gb_dim%";           // 维度映射 1
+
+-- 元模型与dp  团队资源
+-- 以前请遵循 ={teamId}没有空格，修改
+-- 数据库 SELECT DISTINCT T3.* FROM ( ... in {teamIdStr} ...) T3
+-- 物理模型 SELECT DISTINCT T3.* FROM ( ... in {teamIdStr} AND STATE = 'PUBLISH' ...) T3
+-- 文件模型 SELECT DISTINCT T3.* FROM ( ... in {teamIdStr} AND FILE_STATUS = 'PUBLISH'...) T3
+-- 维度映射 SELECT DISTINCT T3.* FROM ( ... in {teamIdStr} ...) T3
+SELECT
+T1.ID, T1.ATTR_GROUP, T1.ATTR_CN_NAME, T1.INPUT_PARAM, T1.obj_type, T2.FUNC_CODE
+FROM
+( SELECT * FROM META_OBJ_ATTR moa WHERE moa.INPUT_PARAM  LIKE '%data_trans_database%' AND INPUT_PARAM LIKE '%team_%'  ) T1
+LEFT JOIN dp_proc_func_def_java T2
+ON T1.obj_type = T2.FUNC_CODE
+WHERE T2.FUNC_CODE IS NOT NULL ORDER BY T1.OBJ_TYPE
+
+// 第二种方式
+select
+ID, ATTR_CN_NAME, ATTR_GROUP, ATTR_NAME, ATTR_STATUS, CREATE_TIME, CREATOR, DEFAULT_VAL, INPUT_PARAM, INPUT_PARAM_TYPE, INPUT_TYPE, IS_NULL, IS_READONLY, OBJ_TYPE, REMARK, SEQ, DEPENDENT_CONDITIONS, DEFAULT_VAL_TYPE, CHILDREN_ATTRS
+from meta_obj_attr where obj_type IN(select func_code FROM dp_proc_func_def_java) and INPUT_PARAM
+LIKE '%dp_dev_file%' AND INPUT_PARAM LIKE '%team_%'  ORDER BY OBJ_TYPE;
+
+// mysql和oracle兼容sql
+DELETE from META_OBJ_ATTR where obj_type IN(select func_code FROM dp_proc_func_def_java) and INPUT_PARAM  LIKE '%data_trans_database%' AND INPUT_PARAM LIKE '%team_%' ;
+
+-- meta_obj_attr 去重
+SELECT ATTR_GROUP,ATTR_NAME, COUNT(1) FROM META_OBJ_ATTR  where obj_type IN(select func_code FROM dp_proc_func_def_java) GROUP BY ATTR_GROUP, ATTR_NAME ORDER BY COUNT(1) DESC
+
+-- meta_obj_attr 取差集，前提，将META_OBJ_ATTR2 只导入dp的，测试通过ATTR_GROUP/obj_type 有没剩余
+SELECT * FROM META_OBJ_ATTR2 MINUS SELECT T1.*
+-- T1.ID, T1.ATTR_GROUP, T1.ATTR_CN_NAME, T1.INPUT_PARAM,T1.INPUT_PARAM_TYPE, T1.obj_type, T2.FUNC_CODE
+FROM ( SELECT * FROM META_OBJ_ATTR2 moa ) T1 LEFT JOIN dp_proc_func_def_java T2 ON T1.obj_type = T2.FUNC_CODE WHERE T2.FUNC_CODE IS NOT NULL
+
+-- dp_proc_func_def_para 去重
+SELECT func_code, para_name, count(1) FROM dp_proc_func_def_para GROUP BY func_code, para_name ORDER BY count(1) DESC, func_code
+
+

@@ -1,0 +1,31 @@
+上线环境清空的表
+TRUNCATE TABLE act_evt_log;
+TRUNCATE TABLE dam_dau_task_log_lines;
+TRUNCATE TABLE dam_dau_task_log_remotetmp;
+TRUNCATE TABLE dam_dq_log_lines;
+TRUNCATE TABLE dam_gb_upload_log;
+TRUNCATE TABLE dam_gb_visit_log;
+TRUNCATE TABLE dam_meta_dau_task_log;
+TRUNCATE TABLE databus_msgsub_runlog;
+TRUNCATE TABLE datam_visit_log;
+TRUNCATE TABLE ddp_exec_log;
+TRUNCATE TABLE dp_data_trans_log;
+TRUNCATE TABLE dp_dc_file_parse_log;
+TRUNCATE TABLE dp_dc_file_upload_log;
+TRUNCATE TABLE dp_dev_run_log;
+TRUNCATE TABLE dp_dev_sqleditor_log;
+TRUNCATE TABLE dp_dev_upload_log;
+TRUNCATE TABLE dp_pro_exec_log;
+TRUNCATE TABLE dp_proc_log;
+TRUNCATE TABLE dp_proc_step_log;
+TRUNCATE TABLE hc_coll_job_log;
+TRUNCATE TABLE hc_data_scale_log;
+TRUNCATE TABLE fw_trace_log; -- 操作日志审计
+TRUNCATE TABLE fw_trace_sql_log;
+TRUNCATE TABLE job_schedule_log; -- (任务监控)调度日志
+
+-------------------------------------常用sql-------------------------------
+元模型标准（数据服务）
+SELECT * FROM meta_obj_attr WHERE obj_type = 'OPENAPI'
+删除调度日志
+DELETE FROM job_schedule_log WHERE job_name = 'lan_test'

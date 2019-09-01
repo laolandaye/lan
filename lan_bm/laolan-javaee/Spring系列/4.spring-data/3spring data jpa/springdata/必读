@@ -1,0 +1,7 @@
+单表，多表查询看 JpqlNamedQuerySql
+    CustomerDao 单表查询都在里面
+级联关系看 stardar
+多表sql查询
+    EntityManagerSql
+
+

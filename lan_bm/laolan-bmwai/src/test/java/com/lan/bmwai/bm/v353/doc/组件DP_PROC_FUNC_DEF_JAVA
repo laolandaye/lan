@@ -1,0 +1,12 @@
+mysql:
+UPDATE dp_proc_func_def_java T1 INNER JOIN
+( SELECT FUNC_CODE, REMARK FROM dp_proc_func_def_java2 ) T2 ON T1.FUNC_CODE = T2.FUNC_CODE
+SET T1.REMARK = T2.REMARK
+
+
+oracle:
+merge into dp_proc_func_def_java T1
+using  (select * from dp_proc_func_def_java2 ) T2
+on (T1.FUNC_CODE = T2.FUNC_CODE)
+when matched then
+update set T1.REMARK = T2.REMARK

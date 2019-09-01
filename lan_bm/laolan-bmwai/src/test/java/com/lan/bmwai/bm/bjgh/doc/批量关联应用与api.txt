@@ -1,0 +1,40 @@
+注意修改app_key, api_code LIKE 'SP_UC_%'
+
+2c9849536c502347016c5066d04d0000		用户管理应用	'SP_UC_%'	28
+2c9849536c502347016c506720ee0001		中央厨房应用	'SP_CK_%'	9
+2c9849536c502347016c50674baf0002		指挥调度应用	'SP_DD_%'	17
+2c9849536c502347016c506774120003		监测管理应用	'SP_MS_%'	3
+4028b8816bfed7b8016bfef3ec960000		数据中台应用	'SP_DS_%'	2
+
+用户管理sql
+UPDATE kun_api SET state = 'PUBLISH' WHERE api_code LIKE 'SP_UC_%';  //'PUBLISH'  'NEW'
+DELETE  FROM kun_api_permit WHERE api_code LIKE 'SP_UC_%'；
+INSERT INTO kun_api_permit (
+	id,
+	api_code,
+	api_id,
+	app_key,
+	apply_user,
+	create_dt,
+	eff_time,
+	exp_time,
+	extend_cfg,
+	lastupd,
+	state,
+	user_id,
+	user_times_limit
+)
+SELECT md5(uuid()) as id,
+api_code,
+api_id,
+'2c9849536c502347016c5066d04d0000' as app_key,
+'8a9e80126be92a1b016be92de2de0000' AS apply_user,
+NOW() AS create_dt,
+NOW() AS eff_time,
+'2037-12-31 23:59:59' as exp_time,
+extend_cfg,
+NOW() AS lastupd,
+'PUBLISH' AS state,
+'8a9e80126be92a1b016be92de2de0000' AS user_id,
+'-1' AS user_times_limit
+ FROM kun_api WHERE api_code LIKE 'SP_UC_%'

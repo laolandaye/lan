@@ -1,0 +1,10 @@
+# 拷贝到resources/bmwai/db.properties
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:3306/kun_dam_bjgh?useUnicode=true&characterEncoding=utf8
+jdbc.user=root
+jdbc.password=root
+
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://127.0.0.1:8000/kun_dam_bjgh?useUnicode=true&characterEncoding=utf8
+jdbc.user=root
+jdbc.password=bmsoft@123

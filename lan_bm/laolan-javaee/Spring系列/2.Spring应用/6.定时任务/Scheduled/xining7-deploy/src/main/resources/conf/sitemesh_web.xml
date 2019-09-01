@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+	<!-- 写在xining 文件夹下的页面都会引用到xiangtanWrapper.ftl 的内容 -->
+	<mapping path="/ftl/xining7/**" decorator="/view/sitemesh/xining7Wrapper.ftl" />
+</sitemesh>
