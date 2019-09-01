@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>traffic-parent</artifactId>
+	<packaging>pom</packaging>
+	<parent>
+		<groupId>com.kun.framework</groupId>
+		<artifactId>parent</artifactId>
+		<version>3.5.1</version>
+	</parent>
+	<name>traffic-parent</name>
+	<url>https://git.oschina.net</url>
+	<repositories>
+		<repository>
+			<id>nexus-kun</id>
+			<name>Nexus Kun</name>
+			<url>http://115.29.53.66:8081/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>nexus-releases</id>
+			<name>Nexus Release Repository</name>
+			<url>http://115.29.53.66:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://115.29.53.66:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

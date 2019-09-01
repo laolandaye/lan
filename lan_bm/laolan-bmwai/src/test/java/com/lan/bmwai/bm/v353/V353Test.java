@@ -1,5 +1,6 @@
 package com.lan.bmwai.bm.v353;
 
+import com.lan._1utils._1str._2UuidUtils;
 import com.lan.bmwai.CommonJunitTest;
 import com.lan.bmwai.dao.BaseDaoImpl;
 import com.lan.bmwai.utils.BjghUtils;
@@ -251,7 +252,7 @@ public class V353Test extends CommonJunitTest {
                     case "mysql":
                         System.out.println(REMARK);
                         REMARK = REMARK.replaceAll("\'", "\\\'");
-                    System.out.println(REMARK);
+                        System.out.println(REMARK);
                         break;
                     default:
                         break;
@@ -265,4 +266,11 @@ public class V353Test extends CommonJunitTest {
         }
 
     }
+
+    @Test
+    public void dp_proc_func_def_()  throws Exception {
+        System.out.println(_2UuidUtils.getUUID());
+
+    }
+
 }

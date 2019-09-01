@@ -1,19 +1,19 @@
-package _4api._3util._2Calendar;
+package com.lan.javase._4api._3util._2Calendar;
 
 import java.util.Calendar;
 
 public class _Calendar {
     /**
-     * * A:CalendarÀàµÄ¸ÅÊö
-     * Calendar ÀàÊÇÒ»¸ö³éÏóÀà£¬ËüÎªÌØ¶¨Ë²¼äÓëÒ»×éÖîÈç YEAR¡¢MONTH¡¢DAY_OF_MONTH¡¢HOUR µÈÈÕÀú×Ö¶ÎÖ®¼äµÄ×ª»»Ìá¹©ÁËÒ»Ğ©·½·¨£¬²¢Îª²Ù×÷ÈÕÀú×Ö¶Î£¨ÀıÈç»ñµÃÏÂĞÇÆÚµÄÈÕÆÚ£©Ìá¹©ÁËÒ»Ğ©·½·¨¡£
-     * B:³ÉÔ±·½·¨
+     * * A:Calendarç±»çš„æ¦‚è¿°
+     * Calendar ç±»æ˜¯ä¸€ä¸ªæŠ½è±¡ç±»ï¼Œå®ƒä¸ºç‰¹å®šç¬é—´ä¸ä¸€ç»„è¯¸å¦‚ YEARã€MONTHã€DAY_OF_MONTHã€HOUR ç­‰æ—¥å†å­—æ®µä¹‹é—´çš„è½¬æ¢æä¾›äº†ä¸€äº›æ–¹æ³•ï¼Œå¹¶ä¸ºæ“ä½œæ—¥å†å­—æ®µï¼ˆä¾‹å¦‚è·å¾—ä¸‹æ˜ŸæœŸçš„æ—¥æœŸï¼‰æä¾›äº†ä¸€äº›æ–¹æ³•ã€‚
+     * B:æˆå‘˜æ–¹æ³•
      * public static Calendar getInstance()
      * public int get(int field)
-     * C:³ÉÔ±·½·¨
+     * C:æˆå‘˜æ–¹æ³•
      * public void add(int field,int amount)
      * public final void set(int year,int month,int date)
-     * D:°¸ÀıÑİÊ¾
-     * CalendarÀàµÄ³ÉÔ±·½·¨Ê¹ÓÃ
+     * D:æ¡ˆä¾‹æ¼”ç¤º
+     * Calendarç±»çš„æˆå‘˜æ–¹æ³•ä½¿ç”¨
      */
     public static void main(String[] args) {
         demo1();
@@ -22,43 +22,43 @@ public class _Calendar {
     }
 
     public static void demo2() {
-        Calendar c = Calendar.getInstance();			//¸¸ÀàÒıÓÃÖ¸Ïò×ÓÀà¶ÔÏó
-        //c.add(Calendar.MONTH, -1);					//¶ÔÖ¸¶¨µÄ×Ö¶Î½øĞĞÏòÇ°¼õ»òÏòºó¼Ó
-        //c.set(Calendar.YEAR, 2000);					//ĞŞ¸ÄÖ¸¶¨×Ö¶Î
+        Calendar c = Calendar.getInstance();			//çˆ¶ç±»å¼•ç”¨æŒ‡å‘å­ç±»å¯¹è±¡
+        //c.add(Calendar.MONTH, -1);					//å¯¹æŒ‡å®šçš„å­—æ®µè¿›è¡Œå‘å‰å‡æˆ–å‘ååŠ 
+        //c.set(Calendar.YEAR, 2000);					//ä¿®æ”¹æŒ‡å®šå­—æ®µ
         c.set(2000, 7, 8);
 
-        System.out.println(c.get(Calendar.YEAR) + "Äê" + getNum((c.get(Calendar.MONTH)+1))
-                + "ÔÂ" + getNum(c.get(Calendar.DAY_OF_MONTH)) + "ÈÕ" + getWeek(c.get(Calendar.DAY_OF_WEEK)));
+        System.out.println(c.get(Calendar.YEAR) + "å¹´" + getNum((c.get(Calendar.MONTH)+1))
+                + "æœˆ" + getNum(c.get(Calendar.DAY_OF_MONTH)) + "æ—¥" + getWeek(c.get(Calendar.DAY_OF_WEEK)));
     }
 
     public static void demo1() {
-        Calendar c = Calendar.getInstance();			//¸¸ÀàÒıÓÃÖ¸Ïò×ÓÀà¶ÔÏó
+        Calendar c = Calendar.getInstance();			//çˆ¶ç±»å¼•ç”¨æŒ‡å‘å­ç±»å¯¹è±¡
 
-        System.out.println(c.get(Calendar.YEAR));		//Í¨¹ı×Ö¶Î»ñÈ¡Äê
-        System.out.println(c.get(Calendar.MONTH));		//Í¨¹ı×Ö¶ÎºóÆÚÔÂ,µ«ÊÇÔÂÊÇ´Ó0¿ªÊ¼±àºÅµÄ
-        System.out.println(c.get(Calendar.DAY_OF_MONTH));//ÔÂÖĞµÄµÚ¼¸Ìì
-        System.out.println(c.get(Calendar.DAY_OF_WEEK));//ÖÜÈÕÊÇµÚÒ»Ìì,ÖÜÁùÊÇ×îºóÒ»Ìì
+        System.out.println(c.get(Calendar.YEAR));		//é€šè¿‡å­—æ®µè·å–å¹´
+        System.out.println(c.get(Calendar.MONTH));		//é€šè¿‡å­—æ®µåæœŸæœˆ,ä½†æ˜¯æœˆæ˜¯ä»0å¼€å§‹ç¼–å·çš„
+        System.out.println(c.get(Calendar.DAY_OF_MONTH));//æœˆä¸­çš„ç¬¬å‡ å¤©
+        System.out.println(c.get(Calendar.DAY_OF_WEEK));//å‘¨æ—¥æ˜¯ç¬¬ä¸€å¤©,å‘¨å…­æ˜¯æœ€åä¸€å¤©
 
-        System.out.println(c.get(Calendar.YEAR) + "Äê" + getNum((c.get(Calendar.MONTH)+1))
-                + "ÔÂ" + getNum(c.get(Calendar.DAY_OF_MONTH)) + "ÈÕ" + getWeek(c.get(Calendar.DAY_OF_WEEK)));
+        System.out.println(c.get(Calendar.YEAR) + "å¹´" + getNum((c.get(Calendar.MONTH)+1))
+                + "æœˆ" + getNum(c.get(Calendar.DAY_OF_MONTH)) + "æ—¥" + getWeek(c.get(Calendar.DAY_OF_WEEK)));
     }
 
     /*
-     * ½«ĞÇÆÚ´æ´¢±íÖĞ½øĞĞ²é±í
-     * 1,·µ»ØÖµÀàĞÍString
-     * 2,²ÎÊıÁĞ±íint week
+     * å°†æ˜ŸæœŸå­˜å‚¨è¡¨ä¸­è¿›è¡ŒæŸ¥è¡¨
+     * 1,è¿”å›å€¼ç±»å‹String
+     * 2,å‚æ•°åˆ—è¡¨int week
      */
 
     public static String getWeek(int week) {
-        String[] arr = {"","ĞÇÆÚÈÕ","ĞÇÆÚÒ»","ĞÇÆÚ¶ş","ĞÇÆÚÈı","ĞÇÆÚËÄ","ĞÇÆÚÎå","ĞÇÆÚÁù"};
+        String[] arr = {"","æ˜ŸæœŸæ—¥","æ˜ŸæœŸä¸€","æ˜ŸæœŸäºŒ","æ˜ŸæœŸä¸‰","æ˜ŸæœŸå››","æ˜ŸæœŸäº”","æ˜ŸæœŸå…­"};
 
         return arr[week];
     }
 
     /*
-     * Èç¹ûÊÇ¸öÊıÊı×ÖÇ°Ãæ²¹0
-     * 1,·µ»ØÖµÀàĞÍStringÀàĞÍ
-     * 2,²ÎÊıÁĞ±í,int num
+     * å¦‚æœæ˜¯ä¸ªæ•°æ•°å­—å‰é¢è¡¥0
+     * 1,è¿”å›å€¼ç±»å‹Stringç±»å‹
+     * 2,å‚æ•°åˆ—è¡¨,int num
      */
     public static String getNum(int num) {
         return num > 9 ? "" + num : "0" + num;
