@@ -2,16 +2,14 @@ package com.lan.bmwai.bm.v353;
 
 import com.lan._1utils._1str._2UuidUtils;
 import com.lan.bmwai.CommonJunitTest;
-import com.lan.bmwai.dao.BaseDaoImpl;
+import com.lan.bmwai.bm.v400.V400Test;
 import com.lan.bmwai.utils.BjghUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.interceptor.SimpleKey;
 
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +66,7 @@ public class V353Test extends CommonJunitTest {
         List<String> inputParams = Arrays.asList(new String[]{"%data_trans_database%", "%tablefile%", "%dp_dev_file%", "%dam_gb_dim%"});
         String INPUT_PARAM_Team = "%team_%"; //条件查询团队
         for (String inputParam : inputParams) {
-            List<Map<String, Object>> list = getMaps_Meta_SELETE(inputParam, INPUT_PARAM_Team);
+            List<Map<String, Object>> list = getMaps_Meta_SELETE(inputParam, INPUT_PARAM_Team, "META_OBJ_ATTR");
             for (Map<String, Object> map : list) {
                 String INPUT_PARAM = (String) map.get("INPUT_PARAM");
                 //  请在对应元模型修改，值显示当前团队，目前改为  team_code ='{teamId}'
@@ -91,32 +89,32 @@ public class V353Test extends CommonJunitTest {
                     INPUT_PARAM += " ) T3 ";
                     // 只有变化的语句才去执行删除，增加操作
                     LOG.info( inputParam + "的ID:" + map.get("ID") + "已变化：" + INPUT_PARAM);
-//                    getMaps_Meta_Del_Insert(map, INPUT_PARAM);
+//                    getMaps_Meta_Del_Insert(map, INPUT_PARAM, "META_OBJ_ATTR");
                 }
             }
         }
     }
 
     // 1. 先查询选出要处理的sql
-    private List<Map<String, Object>> getMaps_Meta_SELETE(String INPUT_PARAM1, String INPUT_PARAM_Team)  throws Exception {
+    private List<Map<String, Object>> getMaps_Meta_SELETE(String INPUT_PARAM1, String INPUT_PARAM_Team, String table)  throws Exception {
         String sql=" SELECT  " +
                 " T1.ID AS ID, T1.ATTR_CN_NAME AS ATTR_CN_NAME, T1.ATTR_GROUP AS ATTR_GROUP, T1.ATTR_NAME AS ATTR_NAME, T1.ATTR_STATUS AS ATTR_STATUS, T1.CREATE_TIME AS CREATE_TIME, T1.CREATOR AS CREATOR, T1.DEFAULT_VAL AS DEFAULT_VAL, T1.INPUT_PARAM AS INPUT_PARAM, T1.INPUT_PARAM_TYPE AS INPUT_PARAM_TYPE, T1.INPUT_TYPE AS INPUT_TYPE, T1.IS_NULL AS IS_NULL, T1.IS_READONLY AS IS_READONLY, T1.OBJ_TYPE AS OBJ_TYPE, T1.REMARK AS REMARK, T1.SEQ AS SEQ, T1.DEPENDENT_CONDITIONS AS DEPENDENT_CONDITIONS, T1.DEFAULT_VAL_TYPE AS DEFAULT_VAL_TYPE, T1.CHILDREN_ATTRS AS CHILDREN_ATTRS" +
                 ", T2.FUNC_CODE FROM  " +
-                "( SELECT * FROM META_OBJ_ATTR moa WHERE moa.INPUT_PARAM LIKE ?  AND INPUT_PARAM LIKE ? ) T1 " +
+                "( SELECT * FROM " + table + " moa WHERE moa.INPUT_PARAM LIKE ?  AND INPUT_PARAM LIKE ? ) T1 " +
                 "LEFT JOIN dp_proc_func_def_java T2  " +
                 "ON T1.obj_type = T2.FUNC_CODE " +
-                "WHERE T2.FUNC_CODE IS NOT NULL ORDER BY T1.ATTR_GROUP ";
+                "WHERE T2.FUNC_CODE IS NOT NULL ORDER BY T1.OBJ_TYPE ";
 
         //查询处理 “数据库”
         return baseDao.queryForList(sql,  new Object[] {INPUT_PARAM1, INPUT_PARAM_Team});
     }
 
     // 2.先删除，再插入，不要update语句
-    private void getMaps_Meta_Del_Insert(Map<String, Object> map, String INPUT_PARAM) throws SQLException {
-        String sqlDEL = " DELETE FROM META_OBJ_ATTR WHERE ID = '" + map.get("ID").toString() + "' " ;
-        baseDao.executeUpdate(sqlDEL);
+    private void getMaps_Meta_Del_Insert(Map<String, Object> map, String INPUT_PARAM, String table) throws SQLException {
+        String sqlDEL = " DELETE FROM " + table + " WHERE ID = '" + map.get("ID").toString() + "' " ;
+        baseDao2.executeUpdate(sqlDEL);
 
-        String sqlInsert = "INSERT INTO META_OBJ_ATTR ( " +
+        String sqlInsert = "INSERT INTO " + table + " ( " +
                 "ID, " +
                 "ATTR_CN_NAME, " +
                 "ATTR_GROUP, " +
@@ -159,7 +157,7 @@ public class V353Test extends CommonJunitTest {
                 "  ?, " +
                 "  ? " +
                 " )";
-        baseDao.executeUpdate(sqlInsert, new Object[]{
+        baseDao2.executeUpdate(sqlInsert, new Object[]{
                 (String) map.get("ID"),
                 (String) map.get("ATTR_CN_NAME"),
                 (String) map.get("ATTR_GROUP"),
@@ -189,7 +187,7 @@ public class V353Test extends CommonJunitTest {
         List<String> inputParams = Arrays.asList(new String[]{"%data_trans_database%", "%tablefile%", "%dp_dev_file%", "%dam_gb_dim%"});
         String INPUT_PARAM_Team = "%team_%"; //条件查询团队
         for (String inputParam : inputParams) {
-            List<Map<String, Object>> list = getMaps_Meta_SELETE(inputParam, INPUT_PARAM_Team);
+            List<Map<String, Object>> list = getMaps_Meta_SELETE(inputParam, INPUT_PARAM_Team, "META_OBJ_ATTR");
             for (Map<String, Object> map : list) {
                 String INPUT_PARAM = (String) map.get("INPUT_PARAM");
                 //  请在对应元模型修改，值显示当前团队，目前改为  team_code ='{teamId}'
@@ -198,7 +196,7 @@ public class V353Test extends CommonJunitTest {
                     INPUT_PARAM += " ) T3 ";
                     // 只有变化的语句才去执行删除，增加操作
                     LOG.info( inputParam + "的ID:" + map.get("ID") + "已变化：" + INPUT_PARAM);
-                    getMaps_Meta_Del_Insert(map, INPUT_PARAM);
+                    getMaps_Meta_Del_Insert(map, INPUT_PARAM, "META_OBJ_ATTR");
                 }
             }
         }
@@ -209,7 +207,7 @@ public class V353Test extends CommonJunitTest {
         List<String> inputParams = Arrays.asList(new String[]{"%data_trans_database%", "%tablefile%", "%dp_dev_file%", "%dam_gb_dim%"});
         String INPUT_PARAM_Team = "%team_%"; //条件查询团队
         for (String inputParam : inputParams) {
-            List<Map<String, Object>> list = getMaps_Meta_SELETE(inputParam, INPUT_PARAM_Team);
+            List<Map<String, Object>> list = getMaps_Meta_SELETE(inputParam, INPUT_PARAM_Team, "META_OBJ_ATTR");
             for (Map<String, Object> map : list) {
                 String INPUT_PARAM = (String) map.get("INPUT_PARAM");
                 //  请在对应元模型修改，值显示当前团队，目前改为  team_code ='{teamId}'
@@ -232,9 +230,59 @@ public class V353Test extends CommonJunitTest {
 
                     // 只有变化的语句才去执行删除，增加操作
                     LOG.info( inputParam + "的ID:" + map.get("ID") + "已变化：" + INPUT_PARAM);
-                    getMaps_Meta_Del_Insert(map, INPUT_PARAM);
+                    getMaps_Meta_Del_Insert(map, INPUT_PARAM, "META_OBJ_ATTR");
                 }
             }
+        }
+    }
+
+    // 本级团队，也要对也要加上已经发布的资源处理
+    @Test
+    public void META_OBJ_ATTR3()  throws Exception {
+        List<String> inputParams = Arrays.asList(new String[]{"%data_trans_database%", "%tablefile%", "%dp_dev_file%", "%dam_gb_dim%"});
+        String INPUT_PARAM_Team = "%team_%"; //条件查询团队
+        for (String inputParam : inputParams) {
+            List<Map<String, Object>> list = getMaps_Meta_SELETE(inputParam, INPUT_PARAM_Team, "META_OBJ_ATTR");
+            for (Map<String, Object> map : list) {
+                String INPUT_PARAM = (String) map.get("INPUT_PARAM");
+                //  请在对应元模型修改，值显示当前团队，目前改为  team_code ='{teamId}'
+                //   显示本团队以及下级团队资源 team_code in ({teamIdStr})
+                if (INPUT_PARAM.contains("{teamId}")) {
+                    String INPUT_PARAM2 = "";
+                    switch (inputParam) {
+                        case "%data_trans_database%": case "%dam_gb_dim%":
+                            INPUT_PARAM2 = INPUT_PARAM;
+                            break;
+                        case "%tablefile%":
+                            INPUT_PARAM2 = INPUT_PARAM.replaceAll("\\=\'\\{teamId\\}\'", "\\=\'\\{teamId\\}\' AND STATE = 'PUBLISH' ");
+                            break;
+                        case "%dp_dev_file%":
+                            INPUT_PARAM2 = INPUT_PARAM.replaceAll("\\=\'\\{teamId\\}\'", "\\=\'\\{teamId\\}\' AND FILE_STATUS = 'PUBLISH' ");
+                            break;
+                        default:
+                            break;
+                    }
+                    if(!INPUT_PARAM2.equals(INPUT_PARAM)) {
+                        // 只有变化的语句才去执行删除，增加操作
+                        LOG.info( inputParam + "的ID:" + map.get("ID") + "已变化：" + INPUT_PARAM2);
+                        getMaps_Meta_Del_Insert(map, INPUT_PARAM2, "META_OBJ_ATTR");
+                    }
+                }
+            }
+        }
+    }
+
+    // oracle 数据交换到 dam
+    @Test
+    public void META_OBJ_ATTR4()  throws Exception {
+        String sql1 = "select " +
+                " T1.ID AS ID, T1.ATTR_CN_NAME AS ATTR_CN_NAME, T1.ATTR_GROUP AS ATTR_GROUP, T1.ATTR_NAME AS ATTR_NAME, T1.ATTR_STATUS AS ATTR_STATUS, T1.CREATE_TIME AS CREATE_TIME, T1.CREATOR AS CREATOR, T1.DEFAULT_VAL AS DEFAULT_VAL, T1.INPUT_PARAM AS INPUT_PARAM, T1.INPUT_PARAM_TYPE AS INPUT_PARAM_TYPE, T1.INPUT_TYPE AS INPUT_TYPE, T1.IS_NULL AS IS_NULL, T1.IS_READONLY AS IS_READONLY, T1.OBJ_TYPE AS OBJ_TYPE, T1.REMARK AS REMARK, T1.SEQ AS SEQ, T1.DEPENDENT_CONDITIONS AS DEPENDENT_CONDITIONS, T1.DEFAULT_VAL_TYPE AS DEFAULT_VAL_TYPE, T1.CHILDREN_ATTRS AS CHILDREN_ATTRS" +
+                " from meta_obj_attr T1 where obj_type IN(select func_code FROM dp_proc_func_def_java)  ORDER BY LOWER(obj_type), seq ";
+        List<Map<String, Object>> list = baseDao.queryForList(sql1);
+        for (Map<String, Object> map : list) {
+            String INPUT_PARAM = (String) map.get("INPUT_PARAM");
+            LOG.info(INPUT_PARAM);
+            getMaps_Meta_Del_Insert(map, INPUT_PARAM, "META_OBJ_ATTR");
         }
     }
 

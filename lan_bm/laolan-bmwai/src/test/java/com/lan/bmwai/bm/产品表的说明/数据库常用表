@@ -1,0 +1,10 @@
+
+dp_
+DP_TEAM_OBJ_CATEGORY    // 数据工厂目录表
+    唯一：id
+    重要字段：
+    外键：id(1)-topic_name(n)的 DP_DEV_PROC；
+DP_DEV_PROC     // dp程序表
+    唯一：xml_id
+    重要字段：
+    外键：topic_name(n)-id(1)的 DP_TEAM_OBJ_CATEGORY；

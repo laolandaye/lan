@@ -1,6 +1,6 @@
 这里是指带有 team_code 的，实际大于这些
 String INPUT_PARAM1 = "%data_trans_database%";  // 数据库 33
-String INPUT_PARAM2 = "%tablefile%";            // 物理模型 32
+String INPUT_PARAM2 = "%tablefile%";            // 物理模型 33
 String INPUT_PARAM3 = "%dp_dev_file%";          // 文件模型 14
 String INPUT_PARAM4 = "%dam_gb_dim%";           // 维度映射 1
 

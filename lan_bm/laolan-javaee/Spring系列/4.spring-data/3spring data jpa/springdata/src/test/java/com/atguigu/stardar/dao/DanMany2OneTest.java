@@ -49,6 +49,7 @@ public class DanMany2OneTest {
         customer.setCreatedTime(new Date());
         customer.setEmail("gg@163.com");
         customer.setLastName("GG");
+        customer.setXml("xml");
 
         DanM2oOrder order1 = new DanM2oOrder();
         order1.setOrderName("G-GG-1");

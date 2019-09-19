@@ -12,6 +12,8 @@ public class DanM2oCustomer {
 	@Column(name = "last_name", length = 50, nullable = false)
 	private String lastName;
 	private String email;
+	@Column(name = "_xml")
+	private String xml;
 	private int age;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -55,5 +57,13 @@ public class DanM2oCustomer {
 	}
 	public void setBirth(Date birth) {
 		this.birth = birth;
+	}
+
+	public String getXml() {
+		return xml;
+	}
+
+	public void setXml(String xml) {
+		this.xml = xml;
 	}
 }

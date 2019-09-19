@@ -18,10 +18,10 @@
     <name>laolan-utils</name>
     <url>http://www.example.com</url>
 
-    <modules>
+   <!-- <modules>
         <module>laolan-utils-model-code</module>
         <module>laolan-utils-static</module>
-    </modules>
+    </modules>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

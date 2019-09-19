@@ -1,6 +1,30 @@
 var Main = new Vue({
     el: '#app',
     data() {
+        let validatorFillDate = (rule,value,callback) => {
+            let self = this;
+            if(value && self.formCompanyEnterp.companyId && self.formCompanyEnterp.formType == 'add') {
+                axios.get(self.contextPath + '/api/companyEnterp/checkFillDate', {
+                    params: {
+                        companyId: self.formCompanyEnterp.companyId,
+                        fillDate: value,
+                    }
+                }).then(function (res) {
+                    const data = res.data;
+                    switch (data.result) {
+                        case "0000":
+                            callback();
+                            break;
+                        case "9999":
+                            callback(new Error(data.msg));
+                            break;
+                        default:
+                    }
+                }).catch(function (err) {
+                    callback(new Error(err));
+                });
+            }
+        };
         return {
             ruleForm: {
                 name: '',
@@ -56,6 +80,9 @@ var Main = new Vue({
                 phone: [
                     { required: true, message: '请输入电话', trigger: 'blur' },
                     { validator: validator.validatePhone, message: '请输入正确的电话', trigger: ['blur', 'change'] }
+                ],
+                fillDate:[
+                    { validator: validatorFillDate, message: '当前日期已填报', trigger: ['blur'] }
                 ],
             }
         };

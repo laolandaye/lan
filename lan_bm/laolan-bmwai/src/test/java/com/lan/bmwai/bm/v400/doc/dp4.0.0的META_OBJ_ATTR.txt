@@ -1,0 +1,67 @@
+attr表需要修改的地方：
+1.default_val("")和 default_val_type 。要确定type值(json)。
+    default_val(""): 全部都用json 包裹起来，先手动改为 json 类型 UPDATE meta_obj_attr_v400 SET default_val = CONCAT("\"",default_val,"\"") WHERE obj_type IN (SELECT func_code FROM dp_proc_func_def_java) AND default_val_type = 'json'
+    default_val_type
+   先所有default_val  “” 为 null，
+        UPDATE meta_obj_attr SET default_val = NULL WHERE obj_type IN(SELECT FUNC_CODE FROM dp_proc_func_def_java ) AND default_val = ''
+   所有default_val 为null的， default_val_type 也为 null
+        UPDATE meta_obj_attr SET default_val_type = NULL WHERE obj_type IN(SELECT FUNC_CODE FROM dp_proc_func_def_java ) AND default_val is null
+    收到修改要快的
+        SELECT * FROM  meta_obj_attr WHERE obj_type IN(SELECT FUNC_CODE FROM dp_proc_func_def_java ) AND default_val IS NOT NULL ORDER BY default_val
+
+2.input_param，要改成""把参数包起来，包括true/false
+    脚本在跑
+        //  给 input_param 添加 "" ( 除了 sql， null, ''  以外的)
+        分组函数：SELECT input_param AS INPUT_PARAM FROM meta_obj_attr WHERE obj_type IN(SELECT func_code FROM dp_proc_func_def_java ) AND input_param_type NOT IN ('sql') AND input_param IS NOT NULL  AND input_param != '' GROUP BY input_param ORDER BY input_param
+
+3.input_type可能有部分类型不支持，比如create-select（mysqlreader的create-select都改成了select便于测试）
+UPDATE meta_obj_attr SET input_type = 'select' WHERE obj_type IN(SELECT FUNC_CODE FROM dp_proc_func_def_java ) AND input_type = 'create-select'
+
+4.dependent_conditions需要把''改成""吗？（先不管）
+5.增加 rules 检验规则字段，is_null为N的全部增加 required
+UPDATE meta_obj_attr SET rules = 'required' where obj_type IN(select func_code FROM dp_proc_func_def_java) AND is_null = 'N'
+
+6.attr_group全都置为空
+UPDATE meta_obj_attr SET attr_group = NULL where obj_type IN(select func_code FROM dp_proc_func_def_java)
+
+7.attr_name 是 statements 的这一条数据，input_type 改为 dp-statements，rules 改为 statementsValidator
+UPDATE meta_obj_attr SET input_type = 'dp-statements', rules = 'statementsValidator' where obj_type IN(select func_code FROM dp_proc_func_def_java)  AND attr_name = 'statements'
+
+8.遇到 attr_name 是 metaTableName、migInTabname、importTable的，input_type 全部改成 dp-importtable
+UPDATE meta_obj_attr SET input_type = 'dp-importtable' WHERE obj_type IN (SELECT func_code FROM dp_proc_func_def_java) AND attr_name in ('metaTableName', 'migInTabname','importTable')
+9.遇到 attr_name 是 metaFileName 的，input_type 全部改成 dp-metafilename
+UPDATE meta_obj_attr SET input_type = 'dp-metafilename' WHERE obj_type IN (SELECT func_code FROM dp_proc_func_def_java) AND attr_name in ('metaFileName')
+
+10.遇到 attr_name 是 expression、'sql', 'sqls', 'querySql', 'migDataSql','script'的，input_type 全部改成 dp-expression
+UPDATE meta_obj_attr SET input_type = 'dp-expression' WHERE obj_type IN (SELECT func_code FROM dp_proc_func_def_java) AND attr_name in ('expression','sql', 'sqls', 'querySql', 'migDataSql','script')
+
+11.遇到attr_name是 header、migInColumns、column 的，input_type 全部改成 dp-column，并且 rules 改为 columnValidator（注意下一条）
+UPDATE meta_obj_attr SET input_type = 'dp-column', rules = 'columnValidator' where obj_type IN(select func_code FROM dp_proc_func_def_java)  AND attr_name in ('header', 'migInColumns', 'column')
+
+12.遇到attr_name是header、column的，同时不属于以下组件的：
+    "mysqlwriter",
+    "oraclewriter",
+    "rdbmswriter",
+    "excelwriter",
+    "mysqlreader",
+    "oraclereader",
+    "postgresqlreader",
+    "sqlserverreader",
+    "mysqlreaderBytab",
+    "oraclereaderBytab",
+    "postgresqlreaderBytab",
+    "sqlserverreaderBytab"，
+    "ftpreader",
+    "ftpwriter",
+    "excelreader",
+    "hdfsreader",
+    "hdfswriter"
+input_type 全部改成dp-expression
+UPDATE meta_obj_attr SET input_type = 'dp-expression' where obj_type IN(select func_code FROM dp_proc_func_def_java)  AND attr_name in ('header', 'migInColumns', 'column') AND obj_type not IN ('mysqlwriter', 'oraclewriter', 'rdbmswriter', 'excelwriter', 'mysqlreader', 'oraclereader', 'postgresqlreader', 'sqlserverreader', 'mysqlreaderBytab', 'oraclereaderBytab', 'postgresqlreaderBytab', 'sqlserverreaderBytab', 'ftpreader', 'ftpwriter', 'excelreader', 'hdfsreader', 'hdfswriter')
+
+13.清洗转换组件全部改成字段选择的形式。（attr_name增加 column 参数，input_type 全部改成 dp-column，并且 rules 改为 columnValidator）
+UPDATE meta_obj_attr SET attr_name = 'column', input_type = 'dp-column', rules = 'columnValidator' WHERE obj_type IN(SELECT func_code FROM dp_proc_func_def_java WHERE apply LIKE '%清洗转换%') AND attr_name = 'columnIndex'
+
+
+
+
