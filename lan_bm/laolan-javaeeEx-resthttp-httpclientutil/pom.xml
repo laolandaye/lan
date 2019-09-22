@@ -11,10 +11,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.lan</groupId>
-    <artifactId>laolan-apache-httpclientutil</artifactId>
+    <artifactId>laolan-javaeeEx-resthttp-httpclientutil</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>laolan-apache-httpclientutil</name>
+    <name>laolan-javaeeEx-resthttp-httpclientutil</name>
     <url>http://www.example.com</url>
 
     <properties>
@@ -24,16 +24,49 @@
     </properties>
 
     <dependencies>
+        <!-- 自己工程 -->
+       <dependency>
+            <groupId>com.lan</groupId>
+            <artifactId>laolan-utils-model-code</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lan</groupId>
+            <artifactId>laolan-utils-static</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- httpclientutil -->
         <dependency>
             <groupId>com.arronlong</groupId>
             <artifactId>httpclientutil</artifactId>
-            <version>1.0.4</version>
         </dependency>
         <!-- httpclient -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+
+        <!-- JsonLib -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <classifier>jdk15</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

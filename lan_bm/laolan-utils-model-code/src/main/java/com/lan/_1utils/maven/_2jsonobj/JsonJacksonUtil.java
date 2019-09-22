@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 自定义响应结构 jackson对象
  */
-public class JsonUtils {
+public class JsonJacksonUtil {
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();

@@ -7,6 +7,7 @@ import com.arronlong.httpclientutil.common.HttpHeader;
 import com.arronlong.httpclientutil.exception.HttpProcessException;
 import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,14 +19,13 @@ import java.util.concurrent.Executors;
 
 /** 
  * 
- * @author arron
- * @date 2015年11月1日 下午2:23:18 
- * @version 1.0 
+ *  //参看网址：轻松把玩HttpClient之封装HttpClient工具类(四)，单线程调用及多线程批量调用测试
+ *  https://blog.csdn.net/xiaoxian8023/article/details/49910885
  */
-public class HttpClientTest {
-	
-	public static void testOne() throws HttpProcessException {
-		
+public class _3HttpClientTest {
+
+	@Test
+	public void testOne() throws Exception {
 		System.out.println("--------简单方式调用（默认post）--------");
 		String url = "http://tool.oschina.net/";
 		HttpConfig config = HttpConfig.custom();
@@ -33,9 +33,9 @@ public class HttpClientTest {
 		String resp = HttpClientUtil.get(config.url(url));
 
 		System.out.println("请求结果内容长度："+ resp.length());
-		
+
 		System.out.println("\n#################################\n");
-		
+
 		System.out.println("--------加入header设置--------");
 		url="http://blog.csdn.net/xiaoxian8023";
 		//设置header信息
@@ -45,7 +45,7 @@ public class HttpClientTest {
 		System.out.println("请求结果内容长度："+ resp.length());
 
 		System.out.println("\n#################################\n");
-		
+
 		System.out.println("--------代理设置（绕过证书验证）-------");
 		url="https://www.facebook.com/";
 		HttpClient client= HCB.custom().timeout(10000).proxy("127.0.0.1", 8087).ssl().build();//采用默认方式（绕过证书验证）
@@ -62,28 +62,12 @@ public class HttpClientTest {
 //		//执行请求
 //		resp = CopyOfHttpClientUtil.get(config.method(HttpMethods.GET));
 //		System.out.println("请求结果内容长度："+ resp.length());
-		try {
-			System.out.println("--------下载测试-------");
-			url="http://ss.bdimg.com/static/superman/img/logo/logo_white_fe6da1ec.png";
-			FileOutputStream out = new FileOutputStream(new File("d://aaa//000.png"));
-			HttpClientUtil.down(HttpConfig.custom().url(url).out(out));
-			out.flush();
-			out.close();
-			System.out.println("--------下载测试+代理-------");
-			
-			out = new FileOutputStream(new File("d://aaa//001.png"));
-			HttpClientUtil.down(HttpConfig.custom().client(client).url(url).out(out));
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 
 		System.out.println("\n#################################\n");
 	}
-	
-	
-	
+
+
 	public static void testMutilTask() throws HttpProcessException {
 		// URL列表数组
 		String[] urls = {
@@ -191,7 +175,6 @@ public class HttpClientTest {
 //		if(!file.exists() && file.isDirectory()){
 //			file.mkdir();
 //		}
-		testOne();
 //		testMutilTask();
 	}
 }
