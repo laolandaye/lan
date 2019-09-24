@@ -13,45 +13,45 @@ import javax.servlet.annotation.HandlesTypes;
 
 import com.atguigu.service.HelloService;
 
-//ÈİÆ÷Æô¶¯µÄÊ±ºò»á½«@HandlesTypesÖ¸¶¨µÄÕâ¸öÀàĞÍÏÂÃæµÄ×ÓÀà£¨ÊµÏÖÀà£¬×Ó½Ó¿ÚµÈ£©´«µİ¹ıÀ´£»
-//´«Èë¸ĞĞËÈ¤µÄÀàĞÍ£»
+//å®¹å™¨å¯åŠ¨çš„æ—¶å€™ä¼šå°†@HandlesTypesæŒ‡å®šçš„è¿™ä¸ªç±»å‹ä¸‹é¢çš„å­ç±»ï¼ˆå®ç°ç±»ï¼Œå­æ¥å£ç­‰ï¼‰ä¼ é€’è¿‡æ¥ï¼›
+//ä¼ å…¥æ„Ÿå…´è¶£çš„ç±»å‹ï¼›
 @HandlesTypes(value={HelloService.class})
 public class MyServletContainerInitializer implements ServletContainerInitializer {
 
 	/**
-	 * Ó¦ÓÃÆô¶¯µÄÊ±ºò£¬»áÔËĞĞonStartup·½·¨£»
-	 * 
-	 * Set<Class<?>> arg0£º¸ĞĞËÈ¤µÄÀàĞÍµÄËùÓĞ×ÓÀàĞÍ£»
-	 * ServletContext arg1:´ú±íµ±Ç°WebÓ¦ÓÃµÄServletContext£»Ò»¸öWebÓ¦ÓÃÒ»¸öServletContext£»
-	 * 
-	 * 1£©¡¢Ê¹ÓÃServletContext×¢²áWeb×é¼ş£¨Servlet¡¢Filter¡¢Listener£©
-	 * 2£©¡¢Ê¹ÓÃ±àÂëµÄ·½Ê½£¬ÔÚÏîÄ¿Æô¶¯µÄÊ±ºò¸øServletContextÀïÃæÌí¼Ó×é¼ş£»
-	 * 		±ØĞëÔÚÏîÄ¿Æô¶¯µÄÊ±ºòÀ´Ìí¼Ó£»
-	 * 		1£©¡¢ServletContainerInitializerµÃµ½µÄServletContext£»
-	 * 		2£©¡¢ServletContextListenerµÃµ½µÄServletContext£»
+	 * åº”ç”¨å¯åŠ¨çš„æ—¶å€™ï¼Œä¼šè¿è¡ŒonStartupæ–¹æ³•ï¼›
+	 *
+	 * Set<Class<?>> arg0ï¼šæ„Ÿå…´è¶£çš„ç±»å‹çš„æ‰€æœ‰å­ç±»å‹ï¼›
+	 * ServletContext arg1:ä»£è¡¨å½“å‰Webåº”ç”¨çš„ServletContextï¼›ä¸€ä¸ªWebåº”ç”¨ä¸€ä¸ªServletContextï¼›
+	 *
+	 * 1ï¼‰ã€ä½¿ç”¨ServletContextæ³¨å†ŒWebç»„ä»¶ï¼ˆServletã€Filterã€Listenerï¼‰
+	 * 2ï¼‰ã€ä½¿ç”¨ç¼–ç çš„æ–¹å¼ï¼Œåœ¨é¡¹ç›®å¯åŠ¨çš„æ—¶å€™ç»™ServletContexté‡Œé¢æ·»åŠ ç»„ä»¶ï¼›
+	 * 		å¿…é¡»åœ¨é¡¹ç›®å¯åŠ¨çš„æ—¶å€™æ¥æ·»åŠ ï¼›
+	 * 		1ï¼‰ã€ServletContainerInitializerå¾—åˆ°çš„ServletContextï¼›
+	 * 		2ï¼‰ã€ServletContextListenerå¾—åˆ°çš„ServletContextï¼›
 	 */
 	@Override
 	public void onStartup(Set<Class<?>> arg0, ServletContext sc) throws ServletException {
 		// TODO Auto-generated method stub
-		System.out.println("¸ĞĞËÈ¤µÄÀàĞÍ£º");
+		System.out.println("æ„Ÿå…´è¶£çš„ç±»å‹ï¼š");
 		for (Class<?> claz : arg0) {
 			System.out.println(claz);
 		}
-		
-		//×¢²á×é¼ş  ServletRegistration  
+
+		//æ³¨å†Œç»„ä»¶  ServletRegistration
 		ServletRegistration.Dynamic servlet = sc.addServlet("userServlet", new UserServlet());
-		//ÅäÖÃservletµÄÓ³ÉäĞÅÏ¢
+		//é…ç½®servletçš„æ˜ å°„ä¿¡æ¯
 		servlet.addMapping("/user");
-		
-		
-		//×¢²áListener
+
+
+		//æ³¨å†Œ Listener
 		sc.addListener(UserListener.class);
-		
-		//×¢²áFilter  FilterRegistration
+
+		//æ³¨å†Œ Filter  FilterRegistration
 		FilterRegistration.Dynamic filter = sc.addFilter("userFilter", UserFilter.class);
-		//ÅäÖÃFilterµÄÓ³ÉäĞÅÏ¢
+		//é…ç½®Filterçš„æ˜ å°„ä¿¡æ¯
 		filter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
-		
+
 	}
 
 }
