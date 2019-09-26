@@ -1,0 +1,8 @@
+
+kun_api
+kun_api_step 服务步骤表
+    唯一：id
+    重要字段：
+        step_cfg_val(2000): 组件步骤。存储当前组件在这一步的执行操作的数据
+    外键：id(1)-topic_name(n)的 DP_DEV_PROC；
+

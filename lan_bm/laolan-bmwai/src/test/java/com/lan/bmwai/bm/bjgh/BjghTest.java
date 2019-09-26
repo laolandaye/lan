@@ -28,10 +28,10 @@ public class BjghTest extends CommonJunitTest {
     @Test
     public void kun_api_permit1()  throws Exception {
         List<Map<String, Object>> cons = Arrays.asList(
-                new HashMap<String, Object>(){{ put("app_key","2c9849536c502347016c5066d04d0000"); put("app_label","用户管理应用");put("_api_code","SP_UC_"); }},
-                new HashMap<String, Object>(){{ put("app_key","2c9849536c502347016c506720ee0001"); put("app_label","中央厨房应用");put("_api_code","SP_CK_"); }},
-                new HashMap<String, Object>(){{ put("app_key","2c9849536c502347016c50674baf0002"); put("app_label","指挥调度应用");put("_api_code","SP_DD_"); }},
-                new HashMap<String, Object>(){{ put("app_key","2c9849536c502347016c506774120003"); put("app_label","监测管理应用");put("_api_code","SP_MS_"); }},
+//                new HashMap<String, Object>(){{ put("app_key","2c9849536c502347016c5066d04d0000"); put("app_label","用户管理应用");put("_api_code","SP_UC_"); }},
+//                new HashMap<String, Object>(){{ put("app_key","2c9849536c502347016c506720ee0001"); put("app_label","中央厨房应用");put("_api_code","SP_CK_"); }},
+//                new HashMap<String, Object>(){{ put("app_key","2c9849536c502347016c50674baf0002"); put("app_label","指挥调度应用");put("_api_code","SP_DD_"); }},
+//                new HashMap<String, Object>(){{ put("app_key","2c9849536c502347016c506774120003"); put("app_label","监测管理应用");put("_api_code","SP_MS_"); }},
                 new HashMap<String, Object>(){{ put("app_key","4028b8816bfed7b8016bfef3ec960000"); put("app_label","数据中台应用");put("_api_code","SP_DS_"); }}
         );
 

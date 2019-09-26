@@ -32,5 +32,19 @@
 			<a class="btn btn-sm" th:href="@{/index.html(l='en_US')}">English</a>
 		</form>
 	</body>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+	 axios.get("http://47.95.182.97:8081/openapi/service/auth?appKey=4028b8816bfed7b8016bfef3ec960000&appSecret=Z9hUspQxjnEzwuF")
+			 .then(function (res) {
+
+				 const data = res.data;
+				 axios.post("http://47.95.182.97:8081/openapi/service/sPDsWechatRanking/v1?token=" + data.token + "&appKey=4028b8816bfed7b8016bfef3ec960000", {
+					 rankingId: 353
+				 }) .then(function (res2) {
+					 console.log(res2)
+				 })
+		 }).catch(function (error) {
+	 })
+ </script>
 
 </html>

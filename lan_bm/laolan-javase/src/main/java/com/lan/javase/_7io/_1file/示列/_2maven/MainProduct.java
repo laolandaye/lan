@@ -42,10 +42,10 @@ public class MainProduct {
     private static Set<String> getDelFiles() {
         Set<String> delFiles = new HashSet<>();
 //        delFiles.add("parent-3.5.3.pom");
-        delFiles.add("kun-web-3.5.3.jar");
-        delFiles.add("kun-core-3.5.3.jar");
-        delFiles.add("kun-crypto-3.5.3.jar");
-        delFiles.add("kun-orm-3.5.3.jar");
+//        delFiles.add("kun-web-3.5.3.jar");
+//        delFiles.add("kun-core-3.5.3.jar");
+//        delFiles.add("kun-crypto-3.5.3.jar");
+//        delFiles.add("kun-orm-3.5.3.jar");
 //        delFiles.add("kun-webframe-3.5.3.jar");
 //        delFiles.add("kun-webframe-entity-3.5.3.jar");
 //        delFiles.add("kun-webframe-notice-3.5.3.jar");
