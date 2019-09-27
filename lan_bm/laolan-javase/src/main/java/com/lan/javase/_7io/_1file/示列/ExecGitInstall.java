@@ -11,7 +11,7 @@ public class ExecGitInstall {
         Runtime runtime=Runtime.getRuntime();
         Process process=null;
         try {
-            StringBuffer cmdTxt = new StringBuffer("cmd /c  ");
+            StringBuffer cmdTxt = new StringBuffer("cmd /c  \n ");
             List<String> poms = getGehuaPom();
             for (String pom : poms) {
                 cmdTxt.append("  cd  ");

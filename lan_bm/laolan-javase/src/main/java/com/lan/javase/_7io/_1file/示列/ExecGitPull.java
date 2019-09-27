@@ -9,7 +9,7 @@ import java.util.Map;
 public class ExecGitPull {
 
     public static void main(String[] args) throws Exception {
-        StringBuffer cmdTxt = new StringBuffer("cmd /c  ");
+        StringBuffer cmdTxt = new StringBuffer("cmd /c \n ");
         List<Map<String, Object>> poms = getGehuaPom();
         for (Map<String, Object> pom : poms) {
             cmdTxt.append("  cd  " + pom.get("dir"));
