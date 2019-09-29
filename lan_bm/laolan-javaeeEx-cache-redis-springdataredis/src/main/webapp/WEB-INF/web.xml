@@ -3,7 +3,7 @@
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
-  <display-name>spring-data-redis-danji</display-name>
+  <display-name>laolan-javaeeEx-cache-redis-springdataredis</display-name>
 
   <!-- 1.Spring容器 applicationContext.xml -->
   <context-param>
