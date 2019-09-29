@@ -8,25 +8,20 @@ import java.util.Set;
 public class ExecGitInstall {
 
     public static void main(String[] args) throws Exception {
-        Runtime runtime=Runtime.getRuntime();
-        Process process=null;
-        try {
-            StringBuffer cmdTxt = new StringBuffer("cmd /c  \n ");
-            List<String> poms = getGehuaPom();
-            for (String pom : poms) {
-                cmdTxt.append("  cd  ");
-                cmdTxt.append(pom);
-                cmdTxt.append(" && ");
-                cmdTxt.append("  mvn clean package install -U ");
-                cmdTxt.append(" && ");
-            }
-            System.out.println(cmdTxt);
-            process= runtime.exec(cmdTxt.toString());
-            process.waitFor();
-            process.destroy();
-        } catch (IOException e) {
-            e.printStackTrace();
+        getExecGitInstall();
+    }
+
+    public static void getExecGitInstall() {
+        StringBuffer cmdTxt = new StringBuffer("cmd /c  \n ");
+        List<String> poms = getGehuaPom();
+        for (String pom : poms) {
+            cmdTxt.append("  cd  ");
+            cmdTxt.append(pom);
+            cmdTxt.append(" && ");
+            cmdTxt.append("  mvn clean package install -U ");
+            cmdTxt.append(" && ");
         }
+        System.out.println(cmdTxt);
     }
 
     private final static String mavenRepository = "D:\\code\\bm";
@@ -49,6 +44,9 @@ public class ExecGitInstall {
         // common-entity
         list.add(mavenRepository + "\\product\\common-entity\\v3.5.3\\common-entity\\kun-entity-parent ");
         list.add(mavenRepository + "\\product\\common-entity\\v3.5.3\\common-entity\\kun-entity-po ");
+        // bigdata-components
+        list.add(mavenRepository + "\\product\\bigdata-components\\v3.5.3\\bigdata-components\\kun-bigdata-components-parent ");
+        list.add(mavenRepository + "\\product\\bigdata-components\\v3.5.3\\bigdata-components\\kun-bigdata-components-interface ");
         // kun-data-map
         list.add(mavenRepository + "\\product\\kun-data-map\\v3.5.3\\kun-data-map\\kun-datam-parent ");
         list.add(mavenRepository + "\\product\\kun-data-map\\v3.5.3\\kun-data-map\\kun-datam ");

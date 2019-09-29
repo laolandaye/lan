@@ -26,9 +26,6 @@ public class RedisUtils {
     private static Logger logger = LoggerFactory.getLogger(RedisUtils.class);
 
     private static RedisUtils redisUtils;
-    /**
-     * The constant RUN_MESSAGE.
-     */
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -36,7 +33,6 @@ public class RedisUtils {
     public void init() {
         redisUtils = this;
         redisUtils.redisTemplate = this.redisTemplate;
-        System.out.println("");
     }
 
     /**

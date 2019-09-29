@@ -1,11 +1,14 @@
 package cn.e3mall.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -23,13 +26,21 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-
-//@PropertySource(name = "resourcePropertySource", value = {"redis.properties", "classpath:redis.properties"}, factory = ResourcePropertySource.class)
-@EnableCaching
-@Configuration
+// 集群版注解
+//@PropertySource(name = "resourcePropertySource", value = { "classpath:redis.properties"})
+//@EnableCaching
+//@Configuration
 public class RedisClusterConfig {
+
+    @Autowired
+    private Environment environment;
+
+    @Value("${spring.redis.password}")
+    private String password;
 
     @Value("${spring.redis.timeout}")
     private Integer timeout;
@@ -80,7 +91,20 @@ public class RedisClusterConfig {
         return jedisPoolConfig;
     }
 
-    /*@Bean
+    // 方式
+    // 参看： https://www.e-learn.cn/content/java/914867
+    @Bean
+    public RedisClusterConfiguration redisClusterConfiguration() {
+        Map<String, Object> source = new HashMap<>();
+        source.put("spring.redis.cluster.nodes", environment.getProperty("spring.redis.cluster.nodes"));
+        source.put("spring.redis.cluster.max-redirects", environment.getProperty("spring.redis.cluster.max-redirects"));
+        RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration(new MapPropertySource("RedisClusterConfiguration", source));
+        redisClusterConfiguration.setMaxRedirects(3);
+        return redisClusterConfiguration;
+    }
+
+    // 方式二
+      /*@Bean
     public RedisClusterConfiguration redisClusterConfiguration() {
         RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration();
         redisClusterConfiguration.setMaxRedirects(3);
@@ -92,29 +116,14 @@ public class RedisClusterConfig {
         return redisClusterConfiguration;
     }
 */
-    @Bean
-    public ResourcePropertySource resourcePropertySource() {
-        Resource resource = PropertiesLoaderUtils.loadProperties(new EncodedResource("classpath:redis.properties"));
-        ResourcePropertySource resourcePropertySource = new ResourcePropertySource("redis.properties", );
-    }
-
-    @Bean
-    public RedisClusterConfiguration redisClusterConfiguration() {
-        RedisClusterConfiguration redisClusterConfiguration = new RedisClusterConfiguration();
-        redisClusterConfiguration.setMaxRedirects(3);
-        Set<RedisNode> nodes = new HashSet<>();
-        nodes.add(new RedisClusterNode("192.168.25.101", 6380));
-        nodes.add(new RedisClusterNode("192.168.25.101", 6381));
-        nodes.add(new RedisClusterNode("192.168.25.101", 6382));
-        redisClusterConfiguration.setClusterNodes(nodes);
-        return redisClusterConfiguration;
-    }
 
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory(JedisPoolConfig jedisPoolConfig, RedisClusterConfiguration redisClusterConfiguration) {
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisClusterConfiguration, jedisPoolConfig);
         jedisConnectionFactory.setTimeout(timeout);
+        jedisConnectionFactory.setPassword(password);
+        jedisConnectionFactory.setPoolConfig(jedisPoolConfig);
         return jedisConnectionFactory;
     }
 

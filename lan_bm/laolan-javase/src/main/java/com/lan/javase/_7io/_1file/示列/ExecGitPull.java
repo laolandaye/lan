@@ -9,6 +9,10 @@ import java.util.Map;
 public class ExecGitPull {
 
     public static void main(String[] args) throws Exception {
+        getExeGitPull();
+    }
+
+    public static void getExeGitPull() {
         StringBuffer cmdTxt = new StringBuffer("cmd /c \n ");
         List<Map<String, Object>> poms = getGehuaPom();
         for (Map<String, Object> pom : poms) {
@@ -34,6 +38,8 @@ public class ExecGitPull {
         list.add( new HashMap<String, Object>(){{ put("branch", "3.5.3-dev"); put("dir", mavenRepository + "/product/jslib/v3.5.3/jslib "); }});
         // common-entity
         list.add( new HashMap<String, Object>(){{ put("branch", "3.5.3-dev"); put("dir", mavenRepository + "/product/common-entity/v3.5.3/common-entity "); }});
+        // bigdata-components
+        list.add( new HashMap<String, Object>(){{ put("branch", "3.5.3-dev"); put("dir", mavenRepository + "/product/bigdata-components/v3.5.3/bigdata-components "); }});
         // kun-data-map
         list.add( new HashMap<String, Object>(){{ put("branch", "3.5.3-dev"); put("dir", mavenRepository + "/product/kun-data-map/v3.5.3/kun-data-map "); }});
         // kun-openapi 和 歌华

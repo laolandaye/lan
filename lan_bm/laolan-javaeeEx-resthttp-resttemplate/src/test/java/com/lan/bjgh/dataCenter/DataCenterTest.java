@@ -27,7 +27,8 @@ import java.util.Map;
 @SpringBootTest(classes = RestTemplateBoot.class)
 public class DataCenterTest {
 
-    public String openapiUrl = "http://47.95.182.97:8081/openapi/service/";
+//    public String openapiUrl = "http://47.95.182.97:8081/openapi/service/";
+    public String openapiUrl = "https://datagov.beijingcloud.com.cn:18081/openapi/service/";
 
     @Autowired
     public BjghToken bjghToken;

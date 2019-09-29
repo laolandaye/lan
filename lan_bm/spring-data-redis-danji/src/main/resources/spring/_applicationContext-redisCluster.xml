@@ -41,9 +41,9 @@
     <!-- 配置Cluster -->
     <bean id="redisClusterConfiguration"
           class="org.springframework.data.redis.connection.RedisClusterConfiguration">
-        <constructor-arg name="propertySource" ref="resourcePropertySource"/>
-        <property name="maxRedirects" value="3"></property>
-        <!-- 节点配置 -->
+        <constructor-arg name="propertySource" ref="resourcePropertySource"/>	<!-- 方式三 -->
+        <property name="maxRedirects" value="6"></property>
+        <!--  方式二：节点配置 -->
        <!-- <property name="clusterNodes">
             <set>
                 <bean class="org.springframework.data.redis.connection.RedisClusterNode">
