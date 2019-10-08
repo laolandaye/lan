@@ -14,18 +14,22 @@ import com.atguigu.dao.BookDao;
 import com.atguigu.service.BookService;
 
 public class IOCTest_AOP {
-	
+
 	@Test
 	public void test01(){
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfigOfAOP.class);
-		
-		//1°¢≤ª“™◊‘º∫¥¥Ω®∂‘œÛ
-//		MathCalculator mathCalculator = new MathCalculator();
-//		mathCalculator.div(1, 1);
+
+		//1„ÄÅ‰∏çË¶ÅËá™Â∑±ÂàõÂª∫ÂØπË±°
+		MathCalculator mathCalculator0 = new MathCalculator();
+		mathCalculator0.div(1, 1);
+		System.out.println("*************************************************************************************************");
+		//2. ‰ΩøÁî® spring ÂÆπÂô®
 		MathCalculator mathCalculator = applicationContext.getBean(MathCalculator.class);
-		
-		mathCalculator.div(1, 0);
-		
+		mathCalculator.div(1, 1);
+		System.out.println("*************************************************************************************************");
+		MathCalculator mathCalculator2 = applicationContext.getBean(MathCalculator.class);
+		mathCalculator2.div(1, 0);
+
 		applicationContext.close();
 	}
 
