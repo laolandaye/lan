@@ -3,6 +3,8 @@ package com.atguigu.task.service;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class ScheduledService {
 
@@ -20,6 +22,6 @@ public class ScheduledService {
    // @Scheduled(cron = "0-4 * * * * MON-SAT")
     @Scheduled(cron = "0/4 * * * * MON-SAT")  //每4秒执行一次
     public void hello(){
-        System.out.println("hello ... ");
+        System.out.println("hello ... " + new Date());
     }
 }

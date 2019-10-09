@@ -1,0 +1,19 @@
+①JDBC 是什么？
+②简述实现数据操作的步骤？
+③Statement 和PreparedStatement 的区别？【面试题】
+④execute、executeUpdate 和executeQuery 方法的区别？【面试题】
+
+
+【JDBC】
+DriverManager
+
+
+-- 开启代码提示功能  Window-Preferences，
+-- 输入content，找到Java下面的Editor找到Content Assist
+把.和26个英文字母的大小写粘贴进去。
+for(char i='A'; i<='Z'; i++){
+	System.out.print(i);
+}
+for(char i='a'; i<='z'; i++){
+	System.out.print(i);
+}

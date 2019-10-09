@@ -48,6 +48,7 @@ public class Springboot04TaskApplicationTests {
 		//上传文件
 		helper.addAttachment("1.gif",new File("G:\\我的资料\\图片\\gif\\1.gif"));
 		helper.addAttachment("2.gif",new File("G:\\我的资料\\图片\\gif\\2.gif"));
+		helper.addAttachment("3.gif",new File("G:\\我的资料\\图片\\gif\\3.gif"));
 
 		mailSender.send(mimeMessage);
 

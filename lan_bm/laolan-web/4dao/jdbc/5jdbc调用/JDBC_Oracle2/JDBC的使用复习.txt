@@ -1,0 +1,13 @@
+【1】JDBC是什么？
+	sun公司提供的给第三方数据库，使用Java连接数据库，而开发的一套规范和标准。
+	涉及的几个常用接口Connection、Statement、PreparedStatement、ResultSet。
+
+【2】JDBC如何使用？
+	DriverManager.getConnetion(url,user,password);
+	DriverManager（*根）			*********************
+	Driver驱动，jar、class
+
+	url,user,password,dirverName通过Eclipse软件获取？
+【3】JDBC常见的笔试题？
+	Statement和PreparedStatement区别？
+	execute、executeUpdate、executeQuery
