@@ -52,10 +52,12 @@ public class ExecGitInstall {
         list.add(mavenRepository + "\\product\\kun-data-map\\v3.5.3\\kun-data-map\\kun-datam ");
         // kun-openapi 和 歌华
         list.add(mavenRepository + "\\product\\kun-openapi\\v3.5.3\\kun-openapi\\kun-openapi-parent ");
-        list.add(mavenRepository + "\\javaee\\bjgh\\gehua\\kun-openapi-sdk ");
+        list.add(mavenRepository + "\\product\\kun-openapi\\v3.5.3\\kun-openapi\\kun-openapi-sdk ");
         list.add(mavenRepository + "\\product\\kun-openapi\\v3.5.3\\kun-openapi\\kun-openapi-entity ");
-        list.add(mavenRepository + "\\javaee\\bjgh\\gehua\\kun-openapi-runtime ");
+        list.add(mavenRepository + "\\product\\kun-openapi\\v3.5.3\\kun-openapi\\kun-openapi-runtime ");
+        list.add(mavenRepository + "\\javaee\\bjgh\\gehua\\kun-openapi-runtime-bjgh ");
         list.add(mavenRepository + "\\product\\kun-openapi\\v3.5.3\\kun-openapi\\kun-openapi-web ");
+        list.add(mavenRepository + "\\product\\kun-openapi\\v3.5.3\\kun-openapi\\kun-openapi-boot ");
         // dp-de
         list.add(mavenRepository + "\\product\\dp-dev\\v3.5.3\\dp-dev\\kun-dp-parent ");
         list.add(mavenRepository + "\\product\\dp-dev\\v3.5.3\\dp-dev\\kun-dp-version ");

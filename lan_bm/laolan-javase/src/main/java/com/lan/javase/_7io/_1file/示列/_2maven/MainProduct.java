@@ -12,7 +12,7 @@ import java.util.*;
 public class MainProduct {
 
     public static void main(String[] args) throws Exception {
-        String folderPath = "F:\\maven\\repository\\repository\\com\\kun";
+        String folderPath = "D:\\module\\maven\\repository\\repository\\com\\kun";
 
         ArrayList<Object> filePaths = ScanFiles.scanFilesWithRecursion(folderPath);
 
@@ -41,40 +41,40 @@ public class MainProduct {
 
     private static Set<String> getDelFiles() {
         Set<String> delFiles = new HashSet<>();
-        delFiles.add("parent-3.5.3.pom");
-        delFiles.add("kun-web-3.5.3.jar");
-        delFiles.add("kun-core-3.5.3.jar");
-        delFiles.add("kun-crypto-3.5.3.jar");
-        delFiles.add("kun-orm-3.5.3.jar");
-        delFiles.add("kun-webframe-3.5.3.jar");
-        delFiles.add("kun-webframe-entity-3.5.3.jar");
-        delFiles.add("kun-webframe-notice-3.5.3.jar");
-        delFiles.add("kun-entity-po-3.5.3.jar");
+//        delFiles.add("parent-3.5.3.pom");
+//        delFiles.add("kun-web-3.5.3.jar");
+//        delFiles.add("kun-core-3.5.3.jar");
+//        delFiles.add("kun-crypto-3.5.3.jar");
+//        delFiles.add("kun-orm-3.5.3.jar");
+//        delFiles.add("kun-webframe-3.5.3.jar");
+//        delFiles.add("kun-webframe-entity-3.5.3.jar");
+//        delFiles.add("kun-webframe-notice-3.5.3.jar");
+//        delFiles.add("kun-entity-po-3.5.3.jar");
         delFiles.add("kun-workflow-parent-3.5.3.pom");
         delFiles.add("kun-workflow-3.5.3.jar");
         delFiles.add("kun-workflow-interface-3.5.3.jar");
-        delFiles.add("kun-openapi-web-3.5.3.jar");
-        delFiles.add("kun-openapi-entity-3.5.3.jar");
-       delFiles.add("kun-datam-parent-3.5.3.pom");
-        delFiles.add("kun-datam-3.5.3.jar");
+//        delFiles.add("kun-openapi-web-3.5.3.jar");
+//        delFiles.add("kun-openapi-entity-3.5.3.jar");
+//        delFiles.add("kun-datam-parent-3.5.3.pom");
+//        delFiles.add("kun-datam-3.5.3.jar");
         delFiles.add("kun-dam-parent-3.5.3.pom");
         delFiles.add("kun-dam-base-3.5.3.jar");
         delFiles.add("kun-dam-meta-3.5.3.jar");
         delFiles.add("kun-dam-quality-3.5.3.jar");
         delFiles.add("kun-dam-standard-3.5.3.jar");
-        delFiles.add("kun-dp-dev-3.5.3.jar");
-        delFiles.add("kun-dp-job-3.5.3.jar");
-        delFiles.add("kun-dp-version-3.5.3.jar");
+//        delFiles.add("kun-dp-dev-3.5.3.jar");
+//        delFiles.add("kun-dp-job-3.5.3.jar");
+//        delFiles.add("kun-dp-version-3.5.3.jar");
         delFiles.add("kun-metaca-parent-3.5.3.pom");
         delFiles.add("kun-metaca-parser-3.5.3.jar");
         delFiles.add("kun-monitor-parent-3.5.3.pom");
         delFiles.add("kun-monitor-web-3.5.3.jar");
-        delFiles.add("kun-bigdata-components-interface-3.5.3.jar");
+//        delFiles.add("kun-bigdata-components-interface-3.5.3.jar");
         delFiles.add("kun-parser-parent-3.5.3.pom");
         delFiles.add("kun-parser-3.5.3.jar");
         delFiles.add("kun-parser-druid-3.5.3.jar");
-        delFiles.add("kun-dp-dataSwitching-3.5.3.jar");
-        delFiles.add("kun-dp-po-3.5.3.jar");
+//        delFiles.add("kun-dp-dataSwitching-3.5.3.jar");
+//        delFiles.add("kun-dp-po-3.5.3.jar");
         delFiles.add("kun-sec-parent-3.5.3.pom");
         delFiles.add("kun-sec-3.5.3.jar");
         delFiles.add("kun-sec-entity-po-3.5.3.jar");

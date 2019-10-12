@@ -1,8 +1,8 @@
 var aesIvKey = "7b51fd7053196308";
-var contextPath = "/dam"
+var contextPath = vm.contextPath
 var url = contextPath + "/login?redirect=" + encodeURIComponent("/ftl/framework/bjghFramework_pro");
-var data = "userId=" + encodeURIComponent(vm.aesEncrypt("dam")) +
-    "&pwd=" + encodeURIComponent(vm.aesEncrypt("bmsoft@123")) +
+var data = "userId=" + encodeURIComponent(vm.aesEncrypt("sys")) +
+    "&pwd=" + encodeURIComponent(vm.aesEncrypt("12345678")) +
     "&callback=" +
     "&checkcode="
 

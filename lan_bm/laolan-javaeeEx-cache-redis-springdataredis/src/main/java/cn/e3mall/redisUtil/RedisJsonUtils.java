@@ -7,9 +7,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 
 /**
- * 淘淘商城自定义响应结构
+ * Redis 专用
  */
-public class JsonUtils {
+public class RedisJsonUtils {
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();

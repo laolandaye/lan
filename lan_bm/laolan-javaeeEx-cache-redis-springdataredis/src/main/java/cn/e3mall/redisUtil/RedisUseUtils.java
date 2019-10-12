@@ -15,17 +15,16 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * redis 工具类
- * @author： example
- * @create: 2019/5/31
+ * @author： 老兰
  */
 @Component
-public class RedisUtils {
+public class RedisUseUtils {
     /**
      * 日志对象
      */
-    private static Logger logger = LoggerFactory.getLogger(RedisUtils.class);
+    private static Logger logger = LoggerFactory.getLogger(RedisUseUtils.class);
 
-    private static RedisUtils redisUtils;
+    private static RedisUseUtils redisUtils;
     @Autowired
     private RedisTemplate redisTemplate;
 

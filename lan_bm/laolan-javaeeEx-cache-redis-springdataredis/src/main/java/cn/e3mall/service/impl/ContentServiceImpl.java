@@ -43,9 +43,9 @@ public class ContentServiceImpl implements ContentService {
         //查询缓存
         try {
             //如果缓存中有直接响应结果
-            String json = (String) stringRedisTemplate.opsForHash().get( RedisStatic.CONTENT_LIST,id + "");
+            String json = (String) stringRedisTemplate.opsForHash().get( RedisStaticConstant.CONTENT_LIST,id + "");
             if (StringUtils.isNotBlank(json)) {
-                List<TbContent> list = JsonUtils.jsonToList(json, TbContent.class);
+                List<TbContent> list = RedisJsonUtils.jsonToList(json, TbContent.class);
                 return list;
             }
         } catch (Exception e) {
@@ -60,7 +60,7 @@ public class ContentServiceImpl implements ContentService {
         List<TbContent> list = contentMapper.selectByExampleWithBLOBs(example);
         //把结果添加到缓存
         try {
-            stringRedisTemplate.opsForHash().put(RedisStatic.CONTENT_LIST,  id + "", JsonUtils.objectToJson(list));
+            stringRedisTemplate.opsForHash().put(RedisStaticConstant.CONTENT_LIST,  id + "", RedisJsonUtils.objectToJson(list));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,16 +81,16 @@ public class ContentServiceImpl implements ContentService {
         //插入到数据库
         contentMapper.updateByPrimaryKeySelective(tbContent);
         //缓存同步,删除缓存中对应的数据。
-//        jedisClient.hdel(RedisStatic.CONTENT_LIST, tbContent.getId().toString());
-        stringRedisTemplate.opsForHash().delete( RedisStatic.CONTENT_LIST, tbContent.getId().toString());
+//        jedisClient.hdel(RedisStaticConstant.CONTENT_LIST, tbContent.getId().toString());
+        stringRedisTemplate.opsForHash().delete( RedisStaticConstant.CONTENT_LIST, tbContent.getId().toString());
         return tbContent;
     }
 
     @Cacheable(cacheNames = { "CONTENT_LIST"}, key = "'' + #id")
     @Override
     public List<TbContent> getContentById2(long id) {
-        redisCacheManager.getCache(RedisStatic.CONTENT_LIST);
-        stringRedisCacheManager.getCache(RedisStatic.CONTENT_LIST);
+        redisCacheManager.getCache(RedisStaticConstant.CONTENT_LIST);
+        stringRedisCacheManager.getCache(RedisStaticConstant.CONTENT_LIST);
         //如果没有查询数据库
         TbContentExample example = new TbContentExample();
         TbContentExample.Criteria criteria = example.createCriteria();
@@ -106,10 +106,10 @@ public class ContentServiceImpl implements ContentService {
         //查询缓存
         try {
             //如果缓存中有直接响应结果
-            String json = (String) RedisUtils.hget( RedisStatic.CONTENT_LIST,id + "");
-//            String json = (String) stringRedisTemplate.opsForHash().get( RedisStatic.CONTENT_LIST,id + "");
+            String json = (String) RedisUseUtils.hget( RedisStaticConstant.CONTENT_LIST,id + "");
+//            String json = (String) stringRedisTemplate.opsForHash().get( RedisStaticConstant.CONTENT_LIST,id + "");
             if (StringUtils.isNotBlank(json)) {
-                List<TbContent> list = JsonUtils.jsonToList(json, TbContent.class);
+                List<TbContent> list = RedisJsonUtils.jsonToList(json, TbContent.class);
                 return list;
             }
         } catch (Exception e) {
@@ -124,8 +124,8 @@ public class ContentServiceImpl implements ContentService {
         List<TbContent> list = contentMapper.selectByExampleWithBLOBs(example);
         //把结果添加到缓存
         try {
-            RedisUtils.hset(RedisStatic.CONTENT_LIST,  id + "", JsonUtils.objectToJson(list), 60);
-//            stringRedisTemplate.opsForHash().put(RedisStatic.CONTENT_LIST,  id + "", JsonUtils.objectToJson(list));
+            RedisUseUtils.hset(RedisStaticConstant.CONTENT_LIST,  id + "", RedisJsonUtils.objectToJson(list), 60);
+//            stringRedisTemplate.opsForHash().put(RedisStaticConstant.CONTENT_LIST,  id + "", RedisJsonUtils.objectToJson(list));
         } catch (Exception e) {
             e.printStackTrace();
         }

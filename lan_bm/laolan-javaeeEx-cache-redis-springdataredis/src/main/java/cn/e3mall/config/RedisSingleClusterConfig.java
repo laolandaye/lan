@@ -1,7 +1,5 @@
 package cn.e3mall.config;
 
-import cn.e3mall.redisUtil.JsonUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,6 @@ import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 单机

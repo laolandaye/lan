@@ -1,0 +1,6 @@
+
+kun_api
+kun_api_permit 授权表
+    每条数据key:appKey +"-"+ getKunApi().getApiCode() + getKunApi().getVersionNo();
+    value: com.kun.openapi.application.cache.vo.KunApiPermitVo
+
