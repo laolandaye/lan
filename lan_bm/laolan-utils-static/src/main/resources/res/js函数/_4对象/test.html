@@ -11,6 +11,20 @@
     console.log('----------------------------  表单对象清空--------------------');
     console.log(JSON.stringify(arr1));
     console.log(JSON.stringify(obj.initObj(arr1)));
+
+    console.log('----------------------------  获得属性中的某一元素集合 --------------------');
+    console.log(JSON.stringify(attrGroup));
+    let ss = obj.extractAttr(attrGroup, "attr_name");
+    console.log(JSON.stringify(ss))
+
+    console.log('----------------------------   --------------------');
+    console.log(JSON.stringify(attrGroupObj))
+    console.log(JSON.stringify(obj.extractAttrObj(attrGroupObj, ss)))
+
+
+
+
+
 </script>
 </body>
 </html>

@@ -42,6 +42,27 @@ Obj.prototype.initObj = function (obj) {
     return obj;
 }
 
+Obj.prototype.extractAttr = function(arr, attr) {
+    let ss = [];
+    if(arr && arr.length) {
+        arr.forEach(function (item, index) {
+            ss.push(item[attr])
+        })
+    }
+    return ss;
+}
+
+Obj.prototype.extractAttrObj = function(obj, conArr) {
+    let objs = {}
+    for (let key2 in obj) {
+        if (conArr.indexOf(key2) + 1) {
+            objs[key2] = obj[key2]
+        }
+    }
+    return objs;
+}
+
+
 
 
 let obj = new Obj().init();

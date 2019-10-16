@@ -1,4 +1,54 @@
+一、服务模块依赖关系
+1.entity->runtime->web->deploy
 
+2.entity->runtime->boot
+
+二、日志依赖关系:
+1.日志读取
+web页面(日志明细和日志总览)-elasticsearchComponent-elasticsrarch
+2.日志存放
+服务调用-(kun-openapi-deploy，kun-openpi-boot)-zipkin-elasticsearch
+zipkiin页面地址:http://localhost:9411
+
+
+三、可能需要修改的配置文件
+1.mvc-servlet.xml:
+修改zookeeper,zipkin配置
+
+2.elasticsearch-motan-server.xml
+修改zookeeper
+
+3.kun_openapi_web.properties(kun_openapi.properties)
+修改redis,es配置
+
+4.zipkin-start.bat
+修改es配置
+
+
+四、需要的组件
+1.kun-openapi-deploy.war(kun-openapi-boot.jar),
+2.kun-elasticsearch-component.jar,
+3.zipkin.jar,
+4.elasticsearch,
+5.redis,
+6.zookeeper;
+
+五、服务常用表
+kun_api 服务配置主表
+kun_api_step 服务组件配置
+kun_api_param 服务配置请求参数表
+kun_api_body 服务配置返回参数
+
+kun_api_app 应用表
+kun_api_black_white_list 黑白名单
+kun_api_permit 服务授权表
+kun_api_step_define 服务组件定义表
+meta_obj_attr 服务组件参数表
+
+kun_api_cdr 日志明细
+kun_api_cdr_total 调用日志汇总
+
+********************************* mysql ******************************************
 kun_api
 kun_api_step 服务步骤表
     唯一：id
@@ -6,3 +56,7 @@ kun_api_step 服务步骤表
         step_cfg_val(2000): 组件步骤。存储当前组件在这一步的执行操作的数据
     外键：id(1)-topic_name(n)的 DP_DEV_PROC；
 
+********************************* redis ******************************************
+kun_api_permit 授权表
+    每条数据key:appKey +"-"+ getKunApi().getApiCode() + getKunApi().getVersionNo();
+    value: com.kun.openapi.application.cache.vo.KunApiPermitVo

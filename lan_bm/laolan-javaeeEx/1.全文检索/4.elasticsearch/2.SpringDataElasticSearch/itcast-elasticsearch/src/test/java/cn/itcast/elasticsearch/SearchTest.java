@@ -21,9 +21,6 @@ import java.util.Optional;
 public class SearchTest {
 
     @Autowired
-    private ElasticsearchTemplate elasticsearchTemplate;
-
-    @Autowired
     private ItemRepository itemRepository;
 
     @Test
