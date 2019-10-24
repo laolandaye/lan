@@ -170,6 +170,50 @@ Objarr.prototype.getValByItem = function (Objarr, item, resKey) {
     return "";
 }
 
+Objarr.prototype.arrObjSort = function (prop) {
+    return function (obj1, obj2) {
+        var val1 = obj1[prop];
+        var val2 = obj2[prop];
+        if (!isNaN(Number(val1)) && !isNaN(Number(val2))) {
+            val1 = Number(val1);
+            val2 = Number(val2);
+        }
+        if (val1 < val2) {
+            return -1;
+        } else if (val1 > val2) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+Objarr.prototype.getObjarrBySelect = function (objArr, conArr) {
+    let arrObj = [];
+    if(objArr && objArr.length) {
+        objArr.forEach((item, index) => {
+            let obj = {};
+            for (let objKey in  item) {
+                if (conArr.indexOf(objKey) + 1) {
+                    obj[objKey] = item[objKey]
+                }
+            }
+            arrObj.push(obj)
+        })
+    }
+    return arrObj;
+}
+
+Objarr.prototype.getValueById = function(objarr, conItem, resKey) {
+    for (let i = 0; i < objarr.length; i++) {
+        if (conItem.value == objarr[i][conItem.key]) {
+            return objarr[i][resKey]
+        }
+    }
+    return ""
+}
+
+
 
 let objarr = new Objarr().init();
 

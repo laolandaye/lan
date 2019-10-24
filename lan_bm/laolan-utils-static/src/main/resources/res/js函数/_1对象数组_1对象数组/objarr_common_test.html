@@ -7,7 +7,7 @@
     <script src="objarr_common.js"></script>
     <!-- 必须写在这上面，console.table 才生效，目前不知道为神魔-->
     <script>
-        console.log('----------------------------  前端分组函数 -------------------------------------');
+      /*  console.log('----------------------------  前端分组函数 -------------------------------------');
         console.log(citybusLineStationByLine);
         console.table(objarr.getObjArrGroupJs(citybusLineStationByLine));
         console.table(objarr.getObjArrGroup(citybusLineStationByLine, ['line_code']));
@@ -24,6 +24,16 @@
         console.table(objarr.getObjArrWhere(data2, [{key: "id", value: ids}, {key: "areaPurpose", value: areaPurposes}]));
         console.log('----------------------------   数组中，根据一个对象找同一个对象的其他值 item{ key, value }  ""--------------');
         console.table(objarr.getValByItem(data2, {key: "id", value: "1030"}, "areaName"));
+        console.log('----------------------------   数组中，根据一个属性排序, 改变原属性 ""--------------');
+        console.table(arr);
+        console.table(JSON.parse(JSON.stringify(arr)).sort(objarr.arrObjSort("age")));
+        console.log('----------------------------   数组中，根据几个属性组成新的数组 --------------');
+        console.table(citybusLineStationByLine);
+       console.table(objarr.getObjarrBySelect(citybusLineStationByLine, ["line_name", "kind", "station_name"]));*/
+
+        console.log('----------------------------  根据id 获得对象数组中其他的值 -------------------------------------');
+        console.log(data2);
+      console.table(objarr.getValueById(data2, {key: "id", value: "1011"}, "areaName"));
 
     </script>
 </head>
