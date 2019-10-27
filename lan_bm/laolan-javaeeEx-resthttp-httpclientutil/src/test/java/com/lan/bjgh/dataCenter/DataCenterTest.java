@@ -31,7 +31,7 @@ public class DataCenterTest {
     @Test
     public void SP_MS_GetBaseAccountListTest() throws Exception {
         // 1. 先获取token
-        String bjghToken = BjghToken.getDataCenterToken(openapiUrl);
+        String bjghToken = BjghToken.getMonitoreSupervision(openapiUrl);
 
         //插件式配置Header（各种header信息、自定义header）
         Header[] headers 	= HttpHeader.custom()
@@ -65,7 +65,7 @@ public class DataCenterTest {
     @Test
     public void SP_MS_GetSpiderResultListTest() throws Exception {
         // 1. 先获取token
-        String bjghToken = BjghToken.getDataCenterToken(openapiUrl);
+        String bjghToken = BjghToken.getMonitoreSupervision(openapiUrl);
 
         //插件式配置Header（各种header信息、自定义header）
         Header[] headers 	= HttpHeader.custom()
@@ -107,7 +107,7 @@ public class DataCenterTest {
     @Test
     public void SP_MS_GetSensitiveProgramListTest() throws Exception {
         // 1. 先获取token
-        String bjghToken = BjghToken.getDataCenterToken(openapiUrl);
+        String bjghToken = BjghToken.getMonitoreSupervision(openapiUrl);
 
         //插件式配置Header（各种header信息、自定义header）
         Header[] headers 	= HttpHeader.custom()

@@ -16,7 +16,7 @@ public class BjghToken {
     private static final Logger logger = LoggerFactory.getLogger(BjghToken.class);
 
     // 数据中台
-    public static String getDataCenterToken(String openapiUrl) throws Exception {
+    public static String getMonitoreSupervision(String openapiUrl) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("appKey", "2c9849536c502347016c506774120003");
         map.put("appSecret", "Am3iIOHFnPkItsY");

@@ -1,6 +1,9 @@
 package com.lan.bmwai.bm.bjgh;
 
+import com.lan._1utils.maven._2jsonobj.JsonJacksonUtil;
 import com.lan.bmwai.CommonJunitTest;
+import com.lan.bmwai.CommonQuery;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -63,7 +66,7 @@ public class BjghTest extends CommonJunitTest {
                 ") " +
                 "SELECT " +
                 "md5(uuid()) as id, " +
-                "api_code, " +
+                "CONCAT(api_code,version_no) AS api_code, " +
                 "api_id, " +
                 "'" + app_key + "' as app_key, " +
                 "'8a9e80126be92a1b016be92de2de0000' AS apply_user, " +
@@ -79,5 +82,39 @@ public class BjghTest extends CommonJunitTest {
         baseDao.executeUpdate(sb.toString());
     }
 
+    // 给所有扩展属性默认值
+    @Test
+    public void kun_api_permit2()  throws Exception {
+        // 查询所有 kun_api_permit
+        List<Map<String, Object>> cons = CommonQuery.queryAll("kun_api_permit");
+
+        for (Map<String, Object> con : cons) {
+            String id = con.get("id").toString();
+            Object extendCfg = con.get("extend_cfg");
+            HashMap<String, Object> extendCfgMap = new HashMap<>();
+            if(null != extendCfg && StringUtils.isNotEmpty(extendCfg.toString())) {
+                extendCfgMap = JsonJacksonUtil.jsonToPojo(extendCfg.toString(), HashMap.class);
+            }
+            extendCfgMap.put("applicationSys", "SysTeam");
+            extendCfgMap.put("workScene", "");
+            extendCfgMap.put("blockInfo", "");
+            extendCfgMap.put("applicationBasis", "");
+            extendCfgMap.put("useScope", "");
+            extendCfgMap.put("usageRateType", "date");
+            extendCfgMap.put("usageRateDate", "day");
+            extendCfgMap.put("usageRateDateDif", "");
+            extendCfgMap.put("usageRate", "-1");
+            extendCfgMap.put("applicantName", "人民政府办公厅");
+            extendCfgMap.put("contactName", "系统管理员");
+            extendCfgMap.put("contactPhone", "15390089119");
+            extendCfgMap.put("contactMail", "sys@163.com");
+            extendCfgMap.put("addProtocol", "15390089119");
+            extendCfgMap.put("apiCustomerIp", "127.0.0.1");
+            extendCfgMap.put("apiUserTimesUnitRule", -1);
+            extendCfgMap.put("apiUserTimesLimitRule", -1);
+            String sql2 = "UPDATE kun_api_permit SET  extend_cfg = '"+ JsonJacksonUtil.objectToJson(extendCfgMap) +"' WHERE id = '"+ id +"'";
+            baseDao.executeUpdate(sql2);
+        }
+    }
 
 }

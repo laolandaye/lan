@@ -55,8 +55,11 @@ kun_api_step 服务步骤表
     重要字段：
         step_cfg_val(2000): 组件步骤。存储当前组件在这一步的执行操作的数据
     外键：id(1)-topic_name(n)的 DP_DEV_PROC；
+kun_api_permit 服务授权表
+    重要字段：
+    	kun_api_permit 的 api_code 是 kun_api （api_code + version_no）
 
 ********************************* redis ******************************************
 kun_api_permit 授权表
-    每条数据key:appKey +"-"+ getKunApi().getApiCode() + getKunApi().getVersionNo();
+    每条数据key:appKey +"-"+ getKunApi().getApiCode();
     value: com.kun.openapi.application.cache.vo.KunApiPermitVo
