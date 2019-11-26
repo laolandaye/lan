@@ -13,14 +13,19 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisClusterConfiguration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisNode;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisShardInfo;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -138,6 +143,49 @@ public class RedisSingleClusterConfig {
         jedisConnectionFactory.setPassword(password);
         jedisConnectionFactory.setPoolConfig(jedisPoolConfig);
         return jedisConnectionFactory;
+    }
+
+    public  Object getFieldValueByObject (Object object , String targetFieldName) throws Exception {
+        // 获取该对象的Class
+        Class objClass = object.getClass();
+        // 获取所有的属性数组
+        Field[] fields = objClass.getDeclaredFields();
+        for (Field field:fields) {
+            // 属性名称
+            field.setAccessible(true);
+            String currentFieldName = field.getName();
+            if(currentFieldName.equals(targetFieldName)){
+                return field.get(object); // 通过反射拿到该属性在此对象中的值(也可能是个对象)
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 通过反射获取JedisCluster
+     * @param jedisConnectionFactory
+     * @return
+     */
+    @Bean
+    public JedisCluster redisCluster(JedisConnectionFactory jedisConnectionFactory){
+        Object object =null;
+        try {
+            object= getFieldValueByObject(jedisConnectionFactory,"cluster");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (JedisCluster)object;
+    }
+
+    @Bean
+    public Jedis jedis(JedisConnectionFactory jedisConnectionFactory){
+        Object object =null;
+        try {
+            object= getFieldValueByObject(jedisConnectionFactory,"shardInfo");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Jedis((JedisShardInfo) object);
     }
 
     @Bean
