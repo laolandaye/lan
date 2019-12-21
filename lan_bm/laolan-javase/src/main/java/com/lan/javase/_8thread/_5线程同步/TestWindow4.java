@@ -1,4 +1,4 @@
-package com.atguigu.java;
+package com.lan.javase._8thread._5线程同步;
 
 //使用实现Runnable接口的方式，售票
 /*
@@ -20,36 +20,44 @@ package com.atguigu.java;
  * 		要求：所有的线程必须共用同一把锁！
  * 		注：在实现的方式中，考虑同步的话，可以使用this来充当锁。但是在继承的方式中，慎用this!
  * 
- * 		方式二：同步方法
- * 		
+* 		方式二：同步方法
+ * 		将操作共享数据的方法声明为synchronized。即此方法为同步方法，能够保证当其中一个线程执行
+ * 		此方法时，其它线程在外等待直至此线程执行完此方法。
+ * 		>同步方法的锁：this
+ * 
+ * 4.线程的同步的弊端：由于同一个时间只能有一个线程访问共享数据，效率变低了。
  * 
  */
 
-class Window2 implements Runnable {
+class Window4 implements Runnable {
 	int ticket = 100;// 共享数据
-//	Object obj = new Object();
+
 	public void run() {
-//		Animal a = new Animal();//局部变量
 		while (true) {
-			synchronized (this) {//this表示当前对象，本题中即为w
-				if (ticket > 0) {
-					try {
-						Thread.currentThread().sleep(10);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					System.out.println(Thread.currentThread().getName()
-							+ "售票，票号为：" + ticket--);
-				}
-			}
+			show();
 		}
+	}
+   
+
+	public synchronized void show() {
+		
+		if (ticket > 0) {
+			try {
+				Thread.currentThread().sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(Thread.currentThread().getName() + "售票，票号为："
+					+ ticket--);
+		}
+
 	}
 }
 
-public class TestWindow2 {
+public class TestWindow4 {
 	public static void main(String[] args) {
-		Window2 w = new Window2();
+		Window4 w = new Window4();
 		Thread t1 = new Thread(w);
 		Thread t2 = new Thread(w);
 		Thread t3 = new Thread(w);
@@ -62,7 +70,4 @@ public class TestWindow2 {
 		t2.start();
 		t3.start();
 	}
-}
-class Animal{
-	
 }

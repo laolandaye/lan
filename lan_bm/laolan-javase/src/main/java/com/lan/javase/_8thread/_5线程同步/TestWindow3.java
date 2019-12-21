@@ -1,4 +1,4 @@
-package com.atguigu.java;
+package com.lan.javase._8thread._5线程同步;
 
 //模拟火车站售票窗口，开启三个窗口售票，总票数为100张
 //存在线程的安全问题--->使用同步代码块处理。

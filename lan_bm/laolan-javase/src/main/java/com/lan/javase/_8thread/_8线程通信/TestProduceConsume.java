@@ -1,4 +1,4 @@
-package com.atguigu.java1;
+package com.lan.javase._8thread._8线程通信;
 /*
  * 生产者/消费者问题
  * 生产者(Productor)将产品交给店员(Clerk)，而消费者(Customer)从店员处取走产品，

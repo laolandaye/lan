@@ -1,4 +1,4 @@
-package com.atguigu.java1;
+package com.lan.javase._8thread._8线程通信;
 
 //线程通信。如下的三个关键字使用的话，都得在同步代码块或同步方法中。
 //wait():一旦一个线程执行到wait()，就释放当前的锁。

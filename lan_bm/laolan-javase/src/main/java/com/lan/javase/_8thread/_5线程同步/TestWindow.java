@@ -1,7 +1,9 @@
-package com.atguigu.java;
+package com.lan.javase._8thread._5线程同步;
+/**
+ * 模拟火车站售票，开启3个窗口，总票数100张
+ * 存在线程的安全问题
+ */
 
-//模拟火车站售票窗口，开启三个窗口售票，总票数为100张
-//存在线程的安全问题
 class Window extends Thread {
 	static int ticket = 100;
 
@@ -23,6 +25,8 @@ public class TestWindow {
 		Window w2 = new Window();
 		Window w3 = new Window();
 		
+		String aString = "00";
+		
 		w1.setName("窗口1");
 		w2.setName("窗口2");
 		w3.setName("窗口3");
@@ -30,8 +34,7 @@ public class TestWindow {
 		w1.start();
 		w2.start();
 		w3.start();
-		
-		
+			
 	}
 
 }
