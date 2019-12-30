@@ -1,15 +1,20 @@
-package com.lan.javase._8thread._2´´½¨Ïß³Ì;
+package com.lan.javase._8thread._2åˆ›å»ºçº¿ç¨‹;
 
 /*
- * ´´½¨Ò»¸ö×ÓÏß³Ì£¬Íê³É1-20Ö®¼ä×ÔÈ»ÊıµÄÊä³ö¡£Í¬ÑùµØ£¬Ö÷Ïß³ÌÖ´ĞĞÍ¬ÑùµÄ²Ù×÷
- * ´´½¨¶àÏß³ÌµÄµÚÒ»ÖÖ·½Ê½£º¼Ì³Ğjava.lang.ThreadÀà
+ * åˆ›å»ºä¸€ä¸ªå­çº¿ç¨‹ï¼Œå®Œæˆ1-20ä¹‹é—´è‡ªç„¶æ•°çš„è¾“å‡ºã€‚åŒæ ·åœ°ï¼Œä¸»çº¿ç¨‹æ‰§è¡ŒåŒæ ·çš„æ“ä½œ
+ * åˆ›å»ºå¤šçº¿ç¨‹çš„ç¬¬ä¸€ç§æ–¹å¼ï¼šç»§æ‰¿java.lang.Threadç±»
  */
 
-//1.´´½¨Ò»¸ö¼Ì³ĞÓëThreadµÄ×ÓÀà
+//1.åˆ›å»ºä¸€ä¸ªç»§æ‰¿ä¸Threadçš„å­ç±»
 class MyThread extends Thread{
-	//2.ÖØĞ´ThreadµÄrun·½·¨.·½·¨ÄÚÊµÏÖ´Ë×ÓÏß³ÌÒªÍê³ÉµÄ¹¦ÄÜ
+
+	public MyThread() {
+	}
+
+	//2.é‡å†™Threadçš„runæ–¹æ³•.æ–¹æ³•å†…å®ç°æ­¤å­çº¿ç¨‹è¦å®Œæˆçš„åŠŸèƒ½
+	@Override
 	public void run(){
-		Thread.currentThread().setName("Éµ±Æ");
+		Thread.currentThread().setName("å‚»é€¼");
 		for (int i = 1; i <= 20; i++) {
 			System.out.println(Thread.currentThread().getName()+":"+i);
 		}
@@ -19,11 +24,11 @@ class MyThread extends Thread{
 public class TestThread {
 
 	public static void main(String[] args) {
-		//3.´´½¨Ò»¸ö×ÓÀà¶ÔÏó
+		//3.åˆ›å»ºä¸€ä¸ªå­ç±»å¯¹è±¡
 		MyThread st = new MyThread();
-		//4.µ÷¶¯ÏÖ³ÉµÄStart£¨£©£¬Æô¶¯´ËÏß³Ì£»µ÷ÓÃÏàÓ¦µÄrun·½·¨
-		//Ò»¸öÏß³ÌÖ»ÄÜ¹»Ö´ĞĞÒ»´Îstart()
-		//²»ÄÜÍ¨¹ıThreadÊµÏÖÀà¶ÔÏóµÄrun()È¥Æô¶¯Ò»¸öÏß³Ì
+		//4.è°ƒåŠ¨ç°æˆçš„Startï¼ˆï¼‰ï¼Œå¯åŠ¨æ­¤çº¿ç¨‹ï¼›è°ƒç”¨ç›¸åº”çš„runæ–¹æ³•
+		//ä¸€ä¸ªçº¿ç¨‹åªèƒ½å¤Ÿæ‰§è¡Œä¸€æ¬¡start()
+		//ä¸èƒ½é€šè¿‡Threadå®ç°ç±»å¯¹è±¡çš„run()å»å¯åŠ¨ä¸€ä¸ªçº¿ç¨‹
 		st.start();
 		
 		for (int i = 1; i <= 20; i++) {

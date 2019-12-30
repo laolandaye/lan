@@ -1,4 +1,4 @@
-package com.lan.javase._8thread._2创建线程;
+package com.lan.javase._8thread._2鍒涘缓绾跨▼;
 
 public class TestAnonymousInnerClass {
 

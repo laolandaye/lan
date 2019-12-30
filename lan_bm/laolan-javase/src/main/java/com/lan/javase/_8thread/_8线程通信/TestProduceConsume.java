@@ -1,22 +1,22 @@
-package com.lan.javase._8thread._8Ïß³ÌÍ¨ĞÅ;
+package com.lan.javase._8thread._8çº¿ç¨‹é€šä¿¡;
 /*
- * Éú²úÕß/Ïû·ÑÕßÎÊÌâ
- * Éú²úÕß(Productor)½«²úÆ·½»¸øµêÔ±(Clerk)£¬¶øÏû·ÑÕß(Customer)´ÓµêÔ±´¦È¡×ß²úÆ·£¬
- * µêÔ±Ò»´ÎÖ»ÄÜ³ÖÓĞ¹Ì¶¨ÊıÁ¿µÄ²úÆ·(±ÈÈç:20£©£¬Èç¹ûÉú²úÕßÊÔÍ¼Éú²ú¸ü¶àµÄ²úÆ·£¬µêÔ±»á½ĞÉú²úÕßÍ£Ò»ÏÂ£¬
- * Èç¹ûµêÖĞÓĞ¿ÕÎ»·Å²úÆ·ÁËÔÙÍ¨ÖªÉú²úÕß¼ÌĞøÉú²ú£»Èç¹ûµêÖĞÃ»ÓĞ²úÆ·ÁË£¬µêÔ±»á¸æËßÏû·ÑÕßµÈÒ»ÏÂ£¬
- * Èç¹ûµêÖĞÓĞ²úÆ·ÁËÔÙÍ¨ÖªÏû·ÑÕßÀ´È¡×ß²úÆ·¡£
+ * ç”Ÿäº§è€…/æ¶ˆè´¹è€…é—®é¢˜
+ * ç”Ÿäº§è€…(Productor)å°†äº§å“äº¤ç»™åº—å‘˜(Clerk)ï¼Œè€Œæ¶ˆè´¹è€…(Customer)ä»åº—å‘˜å¤„å–èµ°äº§å“ï¼Œ
+ * åº—å‘˜ä¸€æ¬¡åªèƒ½æŒæœ‰å›ºå®šæ•°é‡çš„äº§å“(æ¯”å¦‚:20ï¼‰ï¼Œå¦‚æœç”Ÿäº§è€…è¯•å›¾ç”Ÿäº§æ›´å¤šçš„äº§å“ï¼Œåº—å‘˜ä¼šå«ç”Ÿäº§è€…åœä¸€ä¸‹ï¼Œ
+ * å¦‚æœåº—ä¸­æœ‰ç©ºä½æ”¾äº§å“äº†å†é€šçŸ¥ç”Ÿäº§è€…ç»§ç»­ç”Ÿäº§ï¼›å¦‚æœåº—ä¸­æ²¡æœ‰äº§å“äº†ï¼Œåº—å‘˜ä¼šå‘Šè¯‰æ¶ˆè´¹è€…ç­‰ä¸€ä¸‹ï¼Œ
+ * å¦‚æœåº—ä¸­æœ‰äº§å“äº†å†é€šçŸ¥æ¶ˆè´¹è€…æ¥å–èµ°äº§å“ã€‚
 
-	·ÖÎö£º
-	1.ÊÇ·ñÉæ¼°µ½¶àÏß³ÌµÄÎÊÌâ£¿ÊÇ£¡Éú²úÕß¡¢Ïû·ÑÕß
-	2.ÊÇ·ñÉæ¼°µ½¹²ÏíÊı¾İ£¿ÓĞ£¡¿¼ÂÇÏß³ÌµÄ°²È«
-	3.´Ë¹²ÏíÊı¾İÊÇË­£¿¼´Îª²úÆ·µÄÊıÁ¿
-	4.ÊÇ·ñÉæ¼°µ½Ïß³ÌµÄÍ¨ĞÅÄØ£¿´æÔÚÕâÉú²úÕßÓëÏû·ÑÕßµÄÍ¨ĞÅ
+	åˆ†æï¼š
+	1.æ˜¯å¦æ¶‰åŠåˆ°å¤šçº¿ç¨‹çš„é—®é¢˜ï¼Ÿæ˜¯ï¼ç”Ÿäº§è€…ã€æ¶ˆè´¹è€…
+	2.æ˜¯å¦æ¶‰åŠåˆ°å…±äº«æ•°æ®ï¼Ÿæœ‰ï¼è€ƒè™‘çº¿ç¨‹çš„å®‰å…¨
+	3.æ­¤å…±äº«æ•°æ®æ˜¯è°ï¼Ÿå³ä¸ºäº§å“çš„æ•°é‡
+	4.æ˜¯å¦æ¶‰åŠåˆ°çº¿ç¨‹çš„é€šä¿¡å‘¢ï¼Ÿå­˜åœ¨è¿™ç”Ÿäº§è€…ä¸æ¶ˆè´¹è€…çš„é€šä¿¡
 
  */
-class Clerk{//µêÔ±
+class Clerk{//åº—å‘˜
 	int product;
 	
-	public synchronized void addProduct(){//Éú²ú²úÆ·
+	public synchronized void addProduct(){//ç”Ÿäº§äº§å“
 		if(product >= 20){
 			try {
 				wait();
@@ -26,11 +26,11 @@ class Clerk{//µêÔ±
 			}
 		}else{
 			product++;
-			System.out.println(Thread.currentThread().getName() + ":Éú²úÁËµÚ" + product + "¸ö²úÆ·");
+			System.out.println(Thread.currentThread().getName() + ":ç”Ÿäº§äº†ç¬¬" + product + "ä¸ªäº§å“");
 			notifyAll();
 		}
 	}
-	public synchronized void consumeProduct(){//Ïû·Ñ²úÆ·
+	public synchronized void consumeProduct(){//æ¶ˆè´¹äº§å“
 		if(product <= 0){
 			try {
 				wait();
@@ -39,21 +39,21 @@ class Clerk{//µêÔ±
 				e.printStackTrace();
 			}
 		}else{
-			System.out.println(Thread.currentThread().getName() + ":Ïû·ÑÁËµÚ" + product + "¸ö²úÆ·");
+			System.out.println(Thread.currentThread().getName() + ":æ¶ˆè´¹äº†ç¬¬" + product + "ä¸ªäº§å“");
 			product--;
 			notifyAll();
 		}
 	}
 }
 
-class Producer implements Runnable{//Éú²úÕß
+class Producer implements Runnable{//ç”Ÿäº§è€…
 	Clerk clerk;
 	
 	public Producer(Clerk clerk){
 		this.clerk = clerk;
 	}
 	public void run(){
-		System.out.println("Éú²úÕß¿ªÊ¼Éú²ú²úÆ·");
+		System.out.println("ç”Ÿäº§è€…å¼€å§‹ç”Ÿäº§äº§å“");
 		while(true){
 			try {
 				Thread.currentThread().sleep(100);
@@ -66,13 +66,13 @@ class Producer implements Runnable{//Éú²úÕß
 		}
 	}
 }
-class Consumer implements Runnable{//Ïû·ÑÕß
+class Consumer implements Runnable{//æ¶ˆè´¹è€…
 	Clerk clerk;
 	public Consumer(Clerk clerk){
 		this.clerk = clerk;
 	}
 	public void run(){
-		System.out.println("Ïû·ÑÕßÏû·Ñ²úÆ·");
+		System.out.println("æ¶ˆè´¹è€…æ¶ˆè´¹äº§å“");
 		while(true){
 			try {
 				Thread.currentThread().sleep(10);
@@ -91,13 +91,13 @@ public class TestProduceConsume {
 		Clerk clerk = new Clerk();
 		Producer p1 = new Producer(clerk);
 		Consumer c1 = new Consumer(clerk);
-		Thread t1 = new Thread(p1);//Ò»¸öÉú²úÕßµÄÏß³Ì
+		Thread t1 = new Thread(p1);//ä¸€ä¸ªç”Ÿäº§è€…çš„çº¿ç¨‹
 		Thread t3 = new Thread(p1);
-		Thread t2 = new Thread(c1);//Ò»¸öÏû·ÑÕßµÄÏß³Ì
+		Thread t2 = new Thread(c1);//ä¸€ä¸ªæ¶ˆè´¹è€…çš„çº¿ç¨‹
 		
-		t1.setName("Éú²úÕß1");
-		t2.setName("Ïû·ÑÕß1");
-		t3.setName("Éú²úÕß2");
+		t1.setName("ç”Ÿäº§è€…1");
+		t2.setName("æ¶ˆè´¹è€…1");
+		t3.setName("ç”Ÿäº§è€…2");
 		
 		t1.start();
 		t2.start();

@@ -1,25 +1,26 @@
-package com.lan.javase._8thread._3�̳߳��÷���;
+package com.lan.javase._8thread._3线程常用方法;
 
 /*
- * Thread�ĳ��÷�����
- * 1.start()�������̲߳�ִ����Ӧ��run()����
- * 2.run():���߳�Ҫִ�еĴ������run()������
- * 3.currentThread()����̬�ģ���ȡ��ǰ���߳�
- * 4.getName():��ȡ���̵߳�����
- * 5.setName():���ô��̵߳�����
+ * Thread的常用方法：
+ * 1.start()：启动线程并执行相应的run()方法
+ * 2.run():子线程要执行的代码放入run()方法中
+ * 3.currentThread()：静态的，调取当前的线程
+ * 4.getName():获取此线程的名字
+ * 5.setName():设置此线程的名字
  * 
- * 6.yield():���ô˷������߳��ͷŵ�ǰCPU��ִ��Ȩ������ͣ��ǰ����ִ�е��̣߳���ִ�л����ø����ȼ���ͬ����ߵ��̣߳�
- * 7.join():��A�߳��е���B�̵߳�join()��������ʾ����ִ�е��˷�����A�߳�ִֹͣ�У�ֱ��B�߳�ִ����ϣ�A�߳��ٽ���join()֮��Ĵ���ִ��
- * 8.isAlive():�жϵ�ǰ�߳��Ƿ񻹴��
- * 9.sleep(long l):��ʽ���õ�ǰ�߳�˯��l����
- * 10.�߳�ͨ�ţ�wait()   notify()  notifyAll()
+ * 6.yield():调用此方法的线程释放当前CPU的执行权，（暂停当前正在执行的线程，把执行机会让给优先级相同或更高的线程）
+ * 7.join():在A线程中调用B线程的join()方法，表示：当执行到此方法，A线程停止执行，直至B线程执行完毕，A线程再接着join()之后的代码执行
+ * 8.isAlive():判断当前线程是否还存活
+ * 9.sleep(long l):显式的让当前线程睡眠l毫秒
+ * 10.线程通信：wait()   notify()  notifyAll()
  * 
- * �����̵߳����ȼ�
- * getPriority() �������߳�����ֵ 
-   setPriority(int newPriority) ���ı��̵߳����ȼ�
+ * 设置线程的优先级
+ * getPriority() ：返回线程优先值 
+   setPriority(int newPriority) ：改变线程的优先级
 
  */
 class SubThread1 extends Thread {
+	@Override
 	public void run() {
 		for (int i = 1; i <= 100; i++) {
 			// try {
@@ -37,10 +38,10 @@ public class TestUsedMethod {
 	public static void main(String[] args) {
 
 		SubThread1 st1 = new SubThread1();
-		st1.setName("���߳�1");
+		st1.setName("子线程1");
 		st1.setPriority(Thread.MAX_PRIORITY);
 		st1.start();
-		Thread.currentThread().setName("========���߳�");
+		Thread.currentThread().setName("========主线程");
 		for (int i = 1; i <= 100; i++) {
 			System.out.println(Thread.currentThread().getName() + ":"
 					+ Thread.currentThread().getPriority() + ":" + i);

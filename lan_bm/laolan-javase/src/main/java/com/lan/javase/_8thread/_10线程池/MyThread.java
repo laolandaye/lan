@@ -1,11 +1,13 @@
-package com.lan.javase._8thread._10Ïß³Ì³Ø;
+package com.lan.javase._8thread._10çº¿ç¨‹æ± ;
 
-//1.´´½¨Ò»¸ö¼Ì³ĞÓëThreadµÄ×ÓÀà
+import java.util.Date;
+
+//1.åˆ›å»ºä¸€ä¸ªç»§æ‰¿ä¸Threadçš„å­ç±»
 class MyThread extends Thread{
-    //2.ÖØĞ´ThreadµÄrun·½·¨.·½·¨ÄÚÊµÏÖ´Ë×ÓÏß³ÌÒªÍê³ÉµÄ¹¦ÄÜ
+    //2.é‡å†™Threadçš„runæ–¹æ³•.æ–¹æ³•å†…å®ç°æ­¤å­çº¿ç¨‹è¦å®Œæˆçš„åŠŸèƒ½
     @Override
     public void run(){
-        Thread.currentThread().setName("Éµ±Æ");
+        Thread.currentThread().setName("å‚»é€¼" + new Date());
         for (int i = 1; i <= 20; i++) {
             System.out.println(Thread.currentThread().getName()+":"+i);
         }

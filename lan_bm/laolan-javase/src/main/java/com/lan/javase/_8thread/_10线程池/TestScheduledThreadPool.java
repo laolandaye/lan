@@ -1,14 +1,14 @@
-package com.lan.javase._8thread._10Ïß³Ì³Ø;
+package com.lan.javase._8thread._10çº¿ç¨‹æ± ;
 
 import java.util.concurrent.*;
 
 public class TestScheduledThreadPool {
     public static void main(String[] args) throws InterruptedException, ExecutionException{
-        // µÚËÄÖÖÏß³Ì³Ø:¹Ì¶¨¸öÊıµÄÏß³Ì³Ø£¬Ïà±ÈÓÚµÚÒ»¸ö¹Ì¶¨¸öÊıµÄÏß³Ì³Ø Ç¿´óÔÚ ¢Ù¿ÉÒÔÖ´ĞĞÑÓÊ±ÈÎÎñ£¬¢ÚÒ²¿ÉÒÔÖ´ĞĞ
-        // ÓĞ·µ»ØÖµµÄÈÎÎñ¡£
-        // scheduledThreadPool.submit(); Ö´ĞĞ´øÓĞ·µ»ØÖµµÄÈÎÎñ
-        // scheduledThreadPool.schedule() ÓÃÀ´Ö´ĞĞÑÓÊ±ÈÎÎñ.
-        // ¹Ì¶¨¸öÊıµÄÏß³Ì³Ø£¬¿ÉÒÔÖ´ĞĞÑÓÊ±ÈÎÎñ£¬Ò²¿ÉÒÔÖ´ĞĞ´øÓĞ·µ»ØÖµµÄÈÎÎñ¡£
+        // ç¬¬å››ç§çº¿ç¨‹æ± :å›ºå®šä¸ªæ•°çš„çº¿ç¨‹æ± ï¼Œç›¸æ¯”äºç¬¬ä¸€ä¸ªå›ºå®šä¸ªæ•°çš„çº¿ç¨‹æ±  å¼ºå¤§åœ¨ â‘ å¯ä»¥æ‰§è¡Œå»¶æ—¶ä»»åŠ¡ï¼Œâ‘¡ä¹Ÿå¯ä»¥æ‰§è¡Œ
+        // æœ‰è¿”å›å€¼çš„ä»»åŠ¡ã€‚
+        // scheduledThreadPool.submit(); æ‰§è¡Œå¸¦æœ‰è¿”å›å€¼çš„ä»»åŠ¡
+        // scheduledThreadPool.schedule() ç”¨æ¥æ‰§è¡Œå»¶æ—¶ä»»åŠ¡.
+        // å›ºå®šä¸ªæ•°çš„çº¿ç¨‹æ± ï¼Œå¯ä»¥æ‰§è¡Œå»¶æ—¶ä»»åŠ¡ï¼Œä¹Ÿå¯ä»¥æ‰§è¡Œå¸¦æœ‰è¿”å›å€¼çš„ä»»åŠ¡ã€‚
         ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5);
         FutureTask<String> ft = new FutureTask<>(new Callable<String>() {
             @Override
@@ -19,11 +19,11 @@ public class TestScheduledThreadPool {
         });
         scheduledThreadPool.submit(ft);
 
-        // Í¨¹ıFutureTask¶ÔÏó»ñµÃ·µ»ØÖµ.
+        // é€šè¿‡FutureTaskå¯¹è±¡è·å¾—è¿”å›å€¼.
         String result = ft.get();
         System.out.println("result : " + result);
 
-        // Ö´ĞĞÑÓÊ±ÈÎÎñ
+        // æ‰§è¡Œå»¶æ—¶ä»»åŠ¡
         scheduledThreadPool.schedule(new Runnable() {
             @Override
             public void run() {

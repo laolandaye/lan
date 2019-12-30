@@ -1,25 +1,25 @@
-package com.lan.javase._8thread._10Ïß³Ì³Ø;
+package com.lan.javase._8thread._10çº¿ç¨‹æ± ;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class TestFixedThreadPool {
     public static void main(String[] args) {
-        //´´½¨Ò»¸ö¿ÉÖØÓÃ¹Ì¶¨Ïß³ÌÊıµÄÏß³Ì³Ø
+        //åˆ›å»ºä¸€ä¸ªå¯é‡ç”¨å›ºå®šçº¿ç¨‹æ•°çš„çº¿ç¨‹æ± 
         ExecutorService pool = Executors.newFixedThreadPool(2);
-        //´´½¨ÊµÏÖÁËRunnable½Ó¿Ú¶ÔÏó£¬Thread¶ÔÏóµ±È»Ò²ÊµÏÖÁËRunnable½Ó¿Ú
+        //åˆ›å»ºå®ç°äº†Runnableæ¥å£å¯¹è±¡ï¼ŒThreadå¯¹è±¡å½“ç„¶ä¹Ÿå®ç°äº†Runnableæ¥å£
         Thread t1 = new MyThread();
         Thread t2 = new MyThread();
         Thread t3 = new MyThread();
         Thread t4 = new MyThread();
         Thread t5 = new MyThread();
-        //½«Ïß³Ì·ÅÈë³ØÖĞ½øĞĞÖ´ĞĞ
+        //å°†çº¿ç¨‹æ”¾å…¥æ± ä¸­è¿›è¡Œæ‰§è¡Œ
         pool.execute(t1);
         pool.execute(t2);
         pool.execute(t3);
         pool.execute(t4);
         pool.execute(t5);
-        //¹Ø±ÕÏß³Ì³Ø
+        //å…³é—­çº¿ç¨‹æ± 
         pool.shutdown();
     }
 }

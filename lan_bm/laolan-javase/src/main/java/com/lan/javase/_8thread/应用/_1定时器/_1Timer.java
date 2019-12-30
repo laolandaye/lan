@@ -1,4 +1,4 @@
-package com.lan.javase._8thread.Ó¦ÓÃ._1¶¨Ê±Æ÷;
+package com.lan.javase._8thread.åº”ç”¨._1å®šæ—¶å™¨;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -18,11 +18,11 @@ public class _1Timer {
             @Override
             public void run() {
                 try{
-                    //ĞèÒªÖ´ĞĞµÄ²Ù×÷
+                    //éœ€è¦æ‰§è¡Œçš„æ“ä½œ
                     for (int i = 0; i < 20000000; i++) {
                         System.out.print("");
                     }
-                    System.out.println(new Date() + "¶¨Ê±Ö´ĞĞÒ»´Î£¬°üÀ¨Ö´ĞĞÊ±¼ä");
+                    System.out.println(new Date() + "å®šæ—¶æ‰§è¡Œä¸€æ¬¡ï¼ŒåŒ…æ‹¬æ‰§è¡Œæ—¶é—´");
                 }catch(Exception e){
                     System.out.println(new Date()+":capacity statistics fail");
                 }
@@ -34,11 +34,11 @@ public class _1Timer {
             @Override
             public void run() {
                 try{
-                    //ĞèÒªÖ´ĞĞµÄ²Ù×÷
+                    //éœ€è¦æ‰§è¡Œçš„æ“ä½œ
                     for (int i = 0; i < 20000000; i++) {
                         System.out.print("");
                     }
-                    System.out.println(new Date() + "¶¨Ê±Ö´ĞĞÒ»´Î222222£¬°üÀ¨Ö´ĞĞÊ±¼ä");
+                    System.out.println(new Date() + "å®šæ—¶æ‰§è¡Œä¸€æ¬¡222222ï¼ŒåŒ…æ‹¬æ‰§è¡Œæ—¶é—´");
                 }catch(Exception e){
                     System.out.println(new Date()+":capacity statistics fail");
                 }
@@ -54,11 +54,11 @@ public class _1Timer {
             @Override
             public void run() {
                 try{
-                    //ĞèÒªÖ´ĞĞµÄ²Ù×÷
+                    //éœ€è¦æ‰§è¡Œçš„æ“ä½œ
                     for (int i = 0; i < 20000000; i++) {
                         System.out.print("");
                     }
-                    System.out.println(new Date() + "¶¨Ê±Ö´ĞĞÒ»´Î£¬²»°üÀ¨Ö´ĞĞÊ±¼ä");
+                    System.out.println(new Date() + "å®šæ—¶æ‰§è¡Œä¸€æ¬¡ï¼Œä¸åŒ…æ‹¬æ‰§è¡Œæ—¶é—´");
                 }catch(Exception e){
                     System.out.println(new Date()+":capacity statistics fail");
                 }

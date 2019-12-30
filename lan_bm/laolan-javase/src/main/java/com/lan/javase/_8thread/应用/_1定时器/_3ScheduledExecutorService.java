@@ -1,15 +1,15 @@
-package com.lan.javase._8thread.Ó¦ÓÃ._1¶¨Ê±Æ÷;
+package com.lan.javase._8thread.åº”ç”¨._1å®šæ—¶å™¨;
 
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import java.util.concurrent.*;
 
 /**
- *  Ô­ÎÄÁ´½Ó£ºhttps://blog.csdn.net/lzl9421na/article/details/87881960
+ *  åŸæ–‡é“¾æ¥ï¼šhttps://blog.csdn.net/lzl9421na/article/details/87881960
  */
 public class _3ScheduledExecutorService {
     public static void main(String[] args) {
-        // ÊÖ¶¯´´½¨Ïß³Ì³Ø, ´´½¨Ïß³Ì³ØµÄ·½Ê½¶àÖÖ£¬×Ô¼ºÑ¡Ôñ
+        // æ‰‹åŠ¨åˆ›å»ºçº¿ç¨‹æ± , åˆ›å»ºçº¿ç¨‹æ± çš„æ–¹å¼å¤šç§ï¼Œè‡ªå·±é€‰æ‹©
         ScheduledExecutorService executorService  = new ScheduledThreadPoolExecutor(10);
 
         System.out.println("          x = " + System.currentTimeMillis());

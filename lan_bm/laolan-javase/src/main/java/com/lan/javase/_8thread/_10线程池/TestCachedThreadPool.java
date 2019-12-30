@@ -1,4 +1,4 @@
-package com.lan.javase._8thread._10Ïß³Ì³Ø;
+package com.lan.javase._8thread._10çº¿ç¨‹æ± ;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
@@ -13,7 +13,7 @@ public class TestCachedThreadPool {
         //Common Thread Pool
         ExecutorService pool = new ThreadPoolExecutor(5,200,0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingDeque<Runnable>(1024),namedThreadFactory,new ThreadPoolExecutor.AbortPolicy());
-        // »º´æÏß³Ì³Ø£¬ÎŞÉÏÏŞ
+        // ç¼“å­˜çº¿ç¨‹æ± ï¼Œæ— ä¸Šé™
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
         for (int i = 0; i < 100; i++) {
             cachedThreadPool.execute(new Runnable() {
