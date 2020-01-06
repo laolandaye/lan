@@ -13,5 +13,4 @@ public interface ContentService {
 
 	List<TbContent> getContentById3(long id);
 
-	public void testUserInfo();
 }

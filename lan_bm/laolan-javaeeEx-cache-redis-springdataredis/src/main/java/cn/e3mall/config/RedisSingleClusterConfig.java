@@ -189,7 +189,7 @@ public class RedisSingleClusterConfig {
     }
 
     @Bean
-    public StringRedisTemplate stringRedisTemplate(JedisConnectionFactory jedisConnectionFactory){
+    public StringRedisTemplate redisTemplate(JedisConnectionFactory jedisConnectionFactory){
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
         stringRedisTemplate.setConnectionFactory(jedisConnectionFactory);
         stringRedisTemplate.setEnableTransactionSupport(true);
@@ -198,7 +198,7 @@ public class RedisSingleClusterConfig {
         return stringRedisTemplate;
     }
 
-    @Bean
+   /* @Bean
     public RedisTemplate redisTemplate(JedisConnectionFactory jedisConnectionFactory){
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(jedisConnectionFactory);
@@ -206,9 +206,9 @@ public class RedisSingleClusterConfig {
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(new JdkSerializationRedisSerializer());
         return redisTemplate;
-    }
+    }*/
 
     /*********************** @EnableCaching 缓存管理器 一般不用 *************************************** */
     @Primary  //将某个缓存管理器作为默认的

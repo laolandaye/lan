@@ -1,9 +1,8 @@
 package cn.e3mall.config;
 
-import cn.e3mall.pubsub.RedisReceiver;
+import cn.e3mall.pub.pubsub.RedisReceiver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
@@ -28,8 +27,8 @@ public class RedisListenerConfig {
         container.setConnectionFactory(jedisConnectionFactory);
 
         //可以添加多个 messageListener
-        container.addMessageListener(listenerAdapter, new PatternTopic("index"));
-        container.addMessageListener(listenerAdapter2, new PatternTopic("index2"));
+        container.addMessageListener(listenerAdapter, new PatternTopic("topic"));
+        container.addMessageListener(listenerAdapter2, new PatternTopic("topic2"));
 
         return container;
     }
@@ -42,13 +41,13 @@ public class RedisListenerConfig {
      */
     @Bean
     MessageListenerAdapter listenerAdapter(RedisReceiver redisReceiver) {
-        System.out.println("消息适配器进来了");
+        System.out.println("receiveMessage 消息适配器进来了");
         return new MessageListenerAdapter(redisReceiver, "receiveMessage");
     }
 
     @Bean
     MessageListenerAdapter listenerAdapter2(RedisReceiver receiveMessage2) {
-        System.out.println("消息适配器进来了");
+        System.out.println("receiveMessage2 消息适配器进来了");
         return new MessageListenerAdapter(receiveMessage2, "receiveMessage2");
     }
 

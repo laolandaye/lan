@@ -30,14 +30,14 @@ public class ContentServiceImpl implements ContentService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    @Qualifier("redisCacheManager")
+   /* @Qualifier("redisCacheManager")
     @Autowired
     private RedisCacheManager redisCacheManager;
 
     @Qualifier("stringRedisCacheManager")
     @Autowired
     private RedisCacheManager stringRedisCacheManager;
-
+*/
 	@Override
 	public List<TbContent> getContentById(long id) {
         //查询缓存
@@ -89,8 +89,8 @@ public class ContentServiceImpl implements ContentService {
     @Cacheable(cacheNames = { "CONTENT_LIST"}, key = "'' + #id")
     @Override
     public List<TbContent> getContentById2(long id) {
-        redisCacheManager.getCache(RedisStaticConstant.CONTENT_LIST);
-        stringRedisCacheManager.getCache(RedisStaticConstant.CONTENT_LIST);
+       /* redisCacheManager.getCache(RedisStaticConstant.CONTENT_LIST);
+        stringRedisCacheManager.getCache(RedisStaticConstant.CONTENT_LIST);*/
         //如果没有查询数据库
         TbContentExample example = new TbContentExample();
         TbContentExample.Criteria criteria = example.createCriteria();
@@ -132,24 +132,5 @@ public class ContentServiceImpl implements ContentService {
         return list;
     }
 
-    @Override
-    public void testUserInfo() {
-        //这里返回值是个上面的RedisCallback<Integer> 中的泛型一直，
-        redisTemplate.execute(new RedisCallback<Integer>() {
-            @Override
-            public Integer doInRedis(RedisConnection connection) {
-                int i = 0;
-                for (; i < 100; i++) {
-                    byte[] key = ("key:" + i).getBytes();
-                    byte[] value = ("value:" + i).getBytes();
-                    connection.set(key, value);
-                }
-                //这里返回值是个上面的RedisCallback<Integer> 中的泛型一直，
-                return i;
-
-            }
-        });
-
-    }
 
 }

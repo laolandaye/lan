@@ -34,6 +34,7 @@ public class RedisUseUtils {
         redisUtils.redisTemplate = this.redisTemplate;
     }
 
+    /************************************* 基础 ****************************************************/
     /**
      * 指定缓存失效时间
      * @param key 键
@@ -76,6 +77,15 @@ public class RedisUseUtils {
     }
 
     /**
+     * 判断key是否存在
+     * @param keyPattern 键模糊： 1.通配任意多个字符   2.?：通配单个字符  3.[]：通配括号内的某一个字符
+     * @return true 存在 false不存在
+     */
+    public static Set<Object> keys(String keyPattern){
+        return redisUtils.redisTemplate.keys(keyPattern);
+    }
+
+    /**
      * 删除缓存
      * @param key 可以传一个值 或多个
      */
@@ -89,6 +99,8 @@ public class RedisUseUtils {
             }
         }
     }
+
+    /************************************* 基础 end ****************************************************/
 
     /**
      * 普通缓存获取
