@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.atguigu.gmall.service.OrderService;
 
-public class MainApplication {
+public class MainConsumerApplication {
 	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws IOException {

@@ -12,6 +12,8 @@ import com.atguigu.gmall.service.OrderService;
 import com.atguigu.gmall.service.UserService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+import javax.annotation.Resource;
+
 /**
  * 1、将服务提供者注册到注册中心（暴露服务）
  * 		1）、导入dubbo依赖（2.6.2）\操作zookeeper的客户端(curator)
@@ -27,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
 	//@Autowired
 	@Reference(loadbalance="random",timeout=1000) //dubbo直连
 	UserService userService;
-	
+
 	@HystrixCommand(fallbackMethod="hello")
 	@Override
 	public List<UserAddress> initOrder(String userId) {

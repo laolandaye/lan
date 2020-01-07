@@ -17,14 +17,17 @@ import com.atguigu.gmall.service.UserService;
 
 @Configuration
 public class MyDubboConfig {
-	
+
+	//<!-- 1、指定当前服务/应用的名字（同样的服务名字相同，不要和别的服务同名） -->
+	//	<dubbo:application name="boot-user-service-provider"></dubbo:application>
 	@Bean
 	public ApplicationConfig applicationConfig() {
 		ApplicationConfig applicationConfig = new ApplicationConfig();
 		applicationConfig.setName("boot-user-service-provider");
 		return applicationConfig;
 	}
-	
+
+	// <!-- 2、指定注册中心的位置 -->
 	//<dubbo:registry protocol="zookeeper" address="114.116.14.239:2181"></dubbo:registry>
 	@Bean
 	public RegistryConfig registryConfig() {
@@ -33,7 +36,8 @@ public class MyDubboConfig {
 		registryConfig.setAddress("114.116.14.239:2181");
 		return registryConfig;
 	}
-	
+
+	// <!-- 3、指定通信规则（通信协议？通信端口） -->
 	//<dubbo:protocol name="dubbo" port="20882"></dubbo:protocol>
 	@Bean
 	public ProtocolConfig protocolConfig() {
@@ -42,7 +46,8 @@ public class MyDubboConfig {
 		protocolConfig.setPort(20882);
 		return protocolConfig;
 	}
-	
+
+	// <!-- 4、暴露服务   ref：指向服务的真正的实现对象 -->
 	/**
 	 *<dubbo:service interface="com.atguigu.gmall.service.UserService" 
 		ref="userServiceImpl01" timeout="1000" version="1.0.0">
