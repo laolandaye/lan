@@ -23,6 +23,9 @@ import java.net.URI;
 public class MonitoreSupervisionTest {
 
 //    public String openapiUrl = "http://47.95.182.97:8081/openapi/service/";
+    private String openapiUrl = "https://datagov.beijingcloud.com.cn:18081/openapi/service/";
+    private String appKey = "2c9849536c502347016c506774120003";
+    private String appSecret = "Am3iIOHFnPkItsY";
 
     @Autowired
     private MonitoreSupervisionService monitoreSupervisionService;
@@ -40,20 +43,20 @@ public class MonitoreSupervisionTest {
 
     @Test
     public void SP_MS_GetBaseAccountListTest() throws Exception {
-        String result = monitoreSupervisionService.SP_MS_GetBaseAccountList();
+        String result = monitoreSupervisionService.SP_MS_GetBaseAccountList(openapiUrl, appKey, appSecret);
         System.out.println(result);
     }
 
     @Test
     public void SP_MS_GetSpiderResultListTest() throws Exception {
-        String result = monitoreSupervisionService.SP_MS_GetSpiderResultList();
+        String result = monitoreSupervisionService.SP_MS_GetSpiderResultList(openapiUrl, appKey, appSecret);
         System.out.println(result);
     }
 
 
     @Test
     public void SP_MS_GetSensitiveProgramListTest() throws Exception {
-        String result = monitoreSupervisionService.SP_MS_GetSensitiveProgramList();
+        String result = monitoreSupervisionService.SP_MS_GetSensitiveProgramList(openapiUrl, appKey, appSecret);
         System.out.println(result);
 
     }

@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,15 +14,15 @@ import org.springframework.web.client.RestTemplate;
 //@SpringBootTest
 // 加入启动类，方便spring 注入
 @SpringBootTest(classes = RestTemplateBoot.class)
-public class ChangpingTest {
+public class PingGuTest {
 
 //    public String openapiUrl = "http://47.95.182.97:8081/openapi/service/";
     private String openapiUrl = "https://datagov.beijingcloud.com.cn:18081/openapi/service/";
-    private String appKey = "2c9849536da9faae016db38edd310011";
-    private String appSecret = "dKvpVM0GgOkMns6";
+    private String appKey = "2c9849546e21bbe9016e3ffaad4b0069";
+    private String appSecret = "gl37bQK1gMfOxl0";
 
     @Autowired
-    private CentralKitchenService centralKitchenService;
+    private DataCenterService dataCenterService;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -37,9 +36,9 @@ public class ChangpingTest {
     }
 
     @Test
-    public void SP_CK_AddPushTest() throws Exception {
-        ResponseEntity<String> result = centralKitchenService.SP_CK_AddPush(openapiUrl, appKey, appSecret);
-        System.out.println(result.getBody());
+    public void SP_DD_FeedBackTest() throws Exception {
+        String result = dataCenterService.SP_DD_FeedBack(openapiUrl, appKey, appSecret);
+        System.out.println(result);
     }
 
 

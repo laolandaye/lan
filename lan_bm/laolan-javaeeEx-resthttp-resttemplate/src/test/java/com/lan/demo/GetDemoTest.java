@@ -125,6 +125,13 @@ public class GetDemoTest {
         // 使用方法三，URI访问
     }
 
+    @Test
+    public void testGetHeaderByContentType2() {
+        URI uri = URI.create("https://datagov.beijingcloud.com.cn:18081/openapi/service/auth?appKey=2c9849536c502347016c506720ee0001&appSecret=6AOrH0nIqOsz4cN");
+        String res = restTemplate.getForObject(uri, String.class);
+        System.out.println(res);
+    }
+
     @lombok.Data
     static class InnerRes {
         private Status status;

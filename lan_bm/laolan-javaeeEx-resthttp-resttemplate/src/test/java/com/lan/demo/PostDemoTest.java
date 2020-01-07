@@ -42,8 +42,8 @@ public class PostDemoTest {
    // curl  -H "Content-Type:application/json" -X POST --data '{"accountCode":"22_RMTWZ_BJDCOMCN_00_110000","startTime":"2018-11-10 20:00:10","endTime":"2019-11-10 20:00:10","pageSize":12,"pageIndex":1}' "http://pom.beijingcloud.com.cn:8080/TrinityAres-POM/jcjg/api/cm/getSpiderResultList"
     @Test
     public void testPostHeaderByContentType() throws Exception {
-        String result = monitoreSupervisionService.SP_MS_GetSpiderResultList();
-        System.out.println(result);
+//        String result = monitoreSupervisionService.SP_MS_GetSpiderResultList();
+//        System.out.println(result);
     }
 
 

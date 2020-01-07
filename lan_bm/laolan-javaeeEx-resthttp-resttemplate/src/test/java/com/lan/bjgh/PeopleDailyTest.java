@@ -15,12 +15,12 @@ import org.springframework.web.client.RestTemplate;
 //@SpringBootTest
 // 加入启动类，方便spring 注入
 @SpringBootTest(classes = RestTemplateBoot.class)
-public class ChangpingTest {
+public class PeopleDailyTest {
 
 //    public String openapiUrl = "http://47.95.182.97:8081/openapi/service/";
     private String openapiUrl = "https://datagov.beijingcloud.com.cn:18081/openapi/service/";
-    private String appKey = "2c9849536da9faae016db38edd310011";
-    private String appSecret = "dKvpVM0GgOkMns6";
+    private String appKey = "2c9849536e21bb29016e6e16840f007e";
+    private String appSecret = "XfB91IKGj7t26hx";
 
     @Autowired
     private CentralKitchenService centralKitchenService;
@@ -39,7 +39,7 @@ public class ChangpingTest {
     @Test
     public void SP_CK_AddPushTest() throws Exception {
         ResponseEntity<String> result = centralKitchenService.SP_CK_AddPush(openapiUrl, appKey, appSecret);
-        System.out.println(result.getBody());
+        System.out.println(result);
     }
 
 

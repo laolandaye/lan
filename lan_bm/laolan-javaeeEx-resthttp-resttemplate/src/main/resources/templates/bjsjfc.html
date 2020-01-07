@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Signin Template for Bootstrap</title>
+</head>
+<body class="text-center">
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+
+    axios.get("https://datagov.beijingcloud.com.cn:18081/openapi/service/auth?appKey=2c9849546d39b4bd016d624fbbf600bb&appSecret=JCuyAi1FFKj2pZo")
+        .then(function (res) {
+            const data = res.data;
+            axios.get("https://datagov.beijingcloud.com.cn:18081/openapi/service/sPDsIndex/v1?token=" + data.token + "&appKey=2c9849546d39b4bd016d624fbbf600bb&id=14&period=day&authorization=appid=ghc1bGk4oJrJMPZyEu;timestamp=20191106113332;sign=7C534EC02F0EC765ADA4BEB59D049C2A"
+            ) .then(function (res2) {
+                debugger
+            })
+
+    }).catch(function (error) {
+    });
+
+
+</script>
+
+</html>

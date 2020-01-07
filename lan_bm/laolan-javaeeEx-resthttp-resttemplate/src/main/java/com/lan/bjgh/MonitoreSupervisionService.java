@@ -9,14 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import sun.security.provider.MD5;
 
 import java.net.URI;
 
 @Service
 public class MonitoreSupervisionService {
-
-    private String openapiUrl = "https://datagov.beijingcloud.com.cn:18081/openapi/service/";
 
     @Autowired
     private BjghTokenService bjghTokenService;
@@ -24,11 +21,11 @@ public class MonitoreSupervisionService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public String SP_MS_GetBaseAccountList() throws Exception {
+    public String SP_MS_GetBaseAccountList(String openapiUrl, String appKey, String appSecret) throws Exception {
         // 1. 先获取token
-        String token = bjghTokenService.getMonitoreSupervision(openapiUrl);
+        String token = bjghTokenService.getBjghToken(openapiUrl, appKey, appSecret);
 
-        String url = openapiUrl + "sPMsGetBaseAccountList?token=" + token + "&appKey=2c9849536c502347016c506774120003";
+        String url = openapiUrl + "sPMsGetBaseAccountList?token=" + token + "&appKey=" + appKey;
 
         URI uri = URI.create(url);
         MultiValueMap<String, Object> requestMap = new LinkedMultiValueMap<>();
@@ -39,11 +36,11 @@ public class MonitoreSupervisionService {
         return restTemplate.postForObject(uri, request, String.class);
     }
 
-    public String SP_MS_GetSpiderResultList() throws Exception {
+    public String SP_MS_GetSpiderResultList(String openapiUrl, String appKey, String appSecret) throws Exception {
         // 1. 先获取token
-        String token = bjghTokenService.getMonitoreSupervision(openapiUrl);
+        String token = bjghTokenService.getBjghToken(openapiUrl, appKey, appSecret);
 
-        String url = openapiUrl + "sPMsGetSpiderResultList?token=" + token + "&appKey=2c9849536c502347016c506774120003";
+        String url = openapiUrl + "sPMsGetSpiderResultList?token=" + token + "&appKey=" + appKey;
 
         URI uri = URI.create(url);
         JSONObject reauestJson = new JSONObject();
@@ -59,12 +56,12 @@ public class MonitoreSupervisionService {
         return restTemplate.postForObject(uri, request, String.class);
     }
 
-    public String SP_MS_GetSensitiveProgramList() throws Exception {
+    public String SP_MS_GetSensitiveProgramList(String openapiUrl, String appKey, String appSecret) throws Exception {
 
         // 1. 先获取token
-        String token = bjghTokenService.getMonitoreSupervision(openapiUrl);
+        String token = bjghTokenService.getBjghToken(openapiUrl, appKey, appSecret);
 
-        String url = openapiUrl + "sPMsGetSensitiveProgramList/v1?token=" + token + "&appKey=2c9849536c502347016c506774120003";
+        String url = openapiUrl + "sPMsGetSensitiveProgramList/v1?token=" + token + "&appKey=" + appKey;
 
         URI uri = URI.create(url);
         JSONObject reauestJson = new JSONObject();

@@ -1,32 +1,27 @@
 package com.lan.jobs;
 
-import com.lan.bjgh.ChangpingService;
+import com.lan.bjgh.DataCenterService;
 import com.lan.bjgh.MonitoreSupervisionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class BjghScheduledJobs {
+
+    @Autowired
+    private DataCenterService dataCenterService;
 
     @Autowired
     private MonitoreSupervisionService monitoreSupervisionService;
 
-    @Autowired
-    private ChangpingService changpingService;
-
     @Scheduled(fixedRate  = 1000 * 10)
-    public void monitoreSupervisionScheduledJob() throws Exception {
-        monitoreSupervisionService.SP_MS_GetBaseAccountList();
-        monitoreSupervisionService.SP_MS_GetSpiderResultList();
-        monitoreSupervisionService.SP_MS_GetSensitiveProgramList();
-        System.out.println("***************************** monitoreSupervisionScheduledJob ******************************");
+    public void dataCenterScheduledJob() throws Exception {
+        dataCenterService.SP_DS_ArticleList();
+        System.out.println("***************************** dataCenterScheduledJob ******************************");
     }
 
     @Scheduled(fixedRate  = 1000 * 10)
-    public void changpingScheduledJob() throws Exception {
-        changpingService.SP_CK_AddPush();
-        System.out.println("***************************** changpingScheduledJob ******************************");
+    public void monitoreSupervisionScheduledJob() throws Exception {
     }
 
 }
