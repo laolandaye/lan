@@ -30,3 +30,9 @@ http
         server 192.168.100.101:8078;	指定转发服务器
         server 192.168.100.101:8079 weight=2;	指定转发服务器，及指定权重
     }
+
+##动静分离
+     location /image/ {
+        root   /data/;
+        autoindex on;   // 是否资源显示
+    }
