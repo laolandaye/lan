@@ -10,14 +10,14 @@ import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = HttpDemoApplication.class)
-public class HttpDemoApplicationTests {
+public class RestTemplateTest {
 
 	@Autowired
 	private RestTemplate restTemplate;
 
 	@Test
-	public void httpGet() {
-		User user = this.restTemplate.getForObject("http://localhost/hello", User.class);
+	public void testGet() {
+		User user = this.restTemplate.getForObject("http://localhost:8080/hello", User.class);
 		System.out.println(user);
 	}
 
