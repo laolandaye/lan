@@ -1,6 +1,9 @@
 package com.lan._1utils;
 
+import com.google.common.base.Stopwatch;
+
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 各种id生成策略
@@ -46,7 +49,12 @@ public class IDUtils {
 	}
 	
 	public static void main(String[] args) {
+		Stopwatch stopwatch = Stopwatch.createStarted();
 		for(int i=0;i< 100;i++)
-		System.out.println(genItemId());
+			System.out.println(genItemId());
+
+		long second = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+		System.out.println(second);
+
 	}
 }

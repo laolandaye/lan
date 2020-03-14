@@ -1,9 +1,6 @@
 package com.lan._1utils._2collectionmap.listmap;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TestStaticData {
 
@@ -510,4 +507,16 @@ public class TestStaticData {
             new HashMap<String, Object>(4){{ put("company","湘潭汽车运输有限公司韶山客运分公司"); put("type","县际"); put("car"," (韶山市汽车站-湘乡市泉塘)"); put("car_no","湘C90936"); }},
             new HashMap<String, Object>(4){{ put("company","湘潭汽车运输有限公司韶山客运分公司"); put("type","县际"); put("car"," (韶山市汽车站-湘乡市泉塘)"); put("car_no","湘C91208"); }}
     );
+
+    public static List<Map<String, Object>> kunApiBodys = new ArrayList<>();
+    static {
+        kunApiBodys.add(new HashMap<String, Object>(){{ put("id","297e8a876eb7d928016eb7de0d050001"); put("api_id","297e8a876e37971e016e379a89870017"); put("charging_times","0"); put("desens_rule_id",""); put("desens_type","0"); put("field","a"); put("field_level","2"); put("field_name","a"); put("field_type",""); put("parent_field","task_first_cycle"); put("seq",""); put("parent_full_field",""); put("parent_id","2c9849546e21bbe9016e3e81cf800052"); }});
+        kunApiBodys.add(new HashMap<String, Object>(){{ put("id","297e8a876eb7d928016eb7df4fbf0007"); put("api_id","297e8a876e37971e016e379a89870017"); put("charging_times","0"); put("desens_rule_id",""); put("desens_type","0"); put("field","b"); put("field_level","2"); put("field_name","b"); put("field_type",""); put("parent_field","task_fourth_cycle"); put("seq",""); put("parent_full_field",""); put("parent_id","2c9849546e21bbe9016e3e81cf800051"); }});
+        kunApiBodys.add(new HashMap<String, Object>(){{ put("id","297e8a876eb7d928016eb7e1023f0009"); put("api_id","297e8a876e37971e016e379a89870017"); put("charging_times","0"); put("desens_rule_id",""); put("desens_type","0"); put("field","c"); put("field_level","2"); put("field_name","c"); put("field_type",""); put("parent_field","task_fifth_cycle"); put("seq",""); put("parent_full_field",""); put("parent_id","2c9849546e21bbe9016e3e81cf7f004f"); }});
+        kunApiBodys.add(new HashMap<String, Object>(){{ put("id","2c9849546e21bbe9016e3e81cf7f004e"); put("api_id","297e8a876e37971e016e379a89870017"); put("charging_times","0"); put("desens_rule_id",""); put("desens_type","0"); put("field","task_third_cycle"); put("field_level","1"); put("field_name","16-30日任务数量"); put("field_type",""); put("parent_field",""); put("seq",""); put("parent_full_field",""); put("parent_id","297e8a876eb7d928016eb7de0d050001"); }});
+        kunApiBodys.add(new HashMap<String, Object>(){{ put("id","2c9849546e21bbe9016e3e81cf7f004f"); put("api_id","297e8a876e37971e016e379a89870017"); put("charging_times","0"); put("desens_rule_id",""); put("desens_type","0"); put("field","task_fifth_cycle"); put("field_level","1"); put("field_name","90日以上任务数量"); put("field_type",""); put("parent_field",""); put("seq",""); put("parent_full_field",""); put("parent_id",""); }});
+        kunApiBodys.add(new HashMap<String, Object>(){{ put("id","2c9849546e21bbe9016e3e81cf7f0050"); put("api_id","297e8a876e37971e016e379a89870017"); put("charging_times","0"); put("desens_rule_id",""); put("desens_type","0"); put("field","task_second_cycle"); put("field_level","1"); put("field_name","8-15日任务数量"); put("field_type",""); put("parent_field",""); put("seq",""); put("parent_full_field",""); put("parent_id","297e8a876eb7d928016eb7de0d050001"); }});
+        kunApiBodys.add(new HashMap<String, Object>(){{ put("id","2c9849546e21bbe9016e3e81cf800051"); put("api_id","297e8a876e37971e016e379a89870017"); put("charging_times","0"); put("desens_rule_id",""); put("desens_type","0"); put("field","task_fourth_cycle"); put("field_level","1"); put("field_name","30-90日任务数量"); put("field_type",""); put("parent_field",""); put("seq",""); put("parent_full_field",""); put("parent_id",""); }});
+        kunApiBodys.add(new HashMap<String, Object>(){{ put("id","2c9849546e21bbe9016e3e81cf800052"); put("api_id","297e8a876e37971e016e379a89870017"); put("charging_times","0"); put("desens_rule_id",""); put("desens_type","0"); put("field","task_first_cycle"); put("field_level","1"); put("field_name","2-7日任务数量"); put("field_type",""); put("parent_field",""); put("seq",""); put("parent_full_field",""); put("parent_id",""); }});
+    }
 }

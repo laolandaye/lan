@@ -1,4 +1,4 @@
-package com.lan._1utils.maven._1mapobj;
+package com.lan._1utils.maven._1对象和Map互转;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @author 老兰
  * map 和 T 互转  (利用动态代理对象BeanMap)
  * listMap 和 list<T> 互转
  * https://blog.csdn.net/weixin_38809962/article/details/81584803#commentBox

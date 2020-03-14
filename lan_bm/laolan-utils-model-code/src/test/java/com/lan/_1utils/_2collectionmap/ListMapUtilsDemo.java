@@ -8,73 +8,6 @@ import java.util.*;
 
 public class ListMapUtilsDemo {
 
-    @Test
-    public void getListMapByDateTimeDemo() {
-        System.out.println("******************--------year----------------------");
-        String [] keysMonth = {"collect_month", "totalnum", "num"};
-        List<Map<String, Object>> listYear = ListMapUtils.getListMapByDateTime("year", 1, keysMonth,true);
-        for (Map<String, Object> map:listYear) {
-            System.out.println(map);
-        }
-        System.out.println("------------------------------");
-        List<Map<String, Object>> listYear2 = ListMapUtils.getListMapByDateTime("year", 1, keysMonth,false);
-        for (Map<String, Object> map:listYear2) {
-            System.out.println(map);
-        }
-
-        System.out.println("******************--------month----------------------");
-        String [] keysDate = {"collect_date", "totalnum", "num"};
-        List<Map<String, Object>> listMonth = ListMapUtils.getListMapByDateTime("month", 1, keysDate,true);
-        for (Map<String, Object> map:listMonth) {
-            System.out.println(map);
-        }
-        System.out.println("------------------------------");
-        List<Map<String, Object>> listMonth2 = ListMapUtils.getListMapByDateTime("month", 1, keysMonth,false);
-        for (Map<String, Object> map:listMonth2) {
-            System.out.println(map);
-        }
-
-        System.out.println("******************--------hour----------------------");
-        String [] keysHour = {"collect_hour", "totalnum", "num"};
-        List<Map<String, Object>> listHour = ListMapUtils.getListMapByDateTime("hour", 0,keysHour,true);
-        for (Map<String, Object> map:listHour) {
-            System.out.println(map);
-        }
-        System.out.println("------------------------------");
-        List<Map<String, Object>> listHour2 = ListMapUtils.getListMapByDateTime("hour", 0, keysHour,false);
-        for (Map<String, Object> map:listHour2) {
-            System.out.println(map);
-        }
-    }
-
-    @Test
-    public void getElementTreeDemo(){
-        List<Map<String, Object>> ls = TestStaticData.ls;
-        List<Map<String, Object>> results =
-                ListMapUtils.getElementTree(ls, new String[]{"company", "type", "car_no", "car"});
-
-        for (Map<String,Object> result : results) {
-            System.out.println(result);
-        }
-    }
-
-    @Test
-    public void changeMapKeysDemo() {
-        List<Map<String, Object>> listMapIn2 = TestStaticData.listMapIn;
-        String [] keysResult = {"collectMonth", "totalNum"};
-        String [] keys = {"collect_month", "totalnum"};
-//        List<Map<String, Object>> listMapResult = ListMapUtils.changeMapKeys(listMapIn2, keys, keysResult);
-        List<Map<String, Object>> listMapResult = ListMapUtils.changeMapKeys(listMapIn2);
-        for (Map<String, Object> stringObjectMap : listMapResult) {
-            System.out.println(stringObjectMap);
-        }
-        System.out.println("-----------------------");
-        for (Map<String, Object> stringObjectMap : listMapIn2) {
-            System.out.println(stringObjectMap);
-        }
-        System.out.println(keysResult);
-        System.out.println(keys);
-    }
 
     @Test
     public void changeSplitMapKeysDemo() {
@@ -117,13 +50,6 @@ public class ListMapUtilsDemo {
         }
     }
 
-    @Test
-    public void getListMapOfMonth() {
-        String [] keysMonth = {"collect_month", "totalnum"};
-        List<Map<String, Object>> listYear = ListMapUtils.getListMapOfMonth("2018-02", "2019-02", keysMonth,"0");
-        for (int i = 0; i < listYear.size(); i++) {
-            System.out.println(listYear.get(i));
-        }
-    }
+
 
 }

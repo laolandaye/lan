@@ -1,8 +1,4 @@
-package com.lan._1utils.maven._1mapobj;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import org.springframework.cglib.beans.BeanMap;
+package com.lan._1utils.maven._1对象和Map互转;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;

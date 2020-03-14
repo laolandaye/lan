@@ -1,13 +1,10 @@
-package com.lan._1utils.maven._1mapobj;
+package com.lan._1utils.maven._1对象和Map互转;
 
-import com.lan._1utils._2collectionmap.*;
 import com.lan._1utils._2collectionmap.PhoneVO;
 import com.lan._1utils._2collectionmap.Po;
 import org.junit.Test;
 
 import java.util.*;
-
-import static org.junit.Assert.*;
 
 public class MapObjUtilTest {
 

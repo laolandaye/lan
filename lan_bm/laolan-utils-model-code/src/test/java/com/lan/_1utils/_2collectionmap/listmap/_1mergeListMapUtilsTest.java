@@ -28,7 +28,8 @@ public class _1mergeListMapUtilsTest {
 
         List<Map<String, Object>> listMapIn2 = TestStaticData.listMapIn;
         String [] keysMonth = {"collect_month", "totalnum"};
-        List<Map<String, Object>> listYear = ListMapUtils.getListMapByDateTime("year", 1, keysMonth,true);
+        List<Map<String, Object>> listYear = null;
+//                ListMapUtils.getListMapByDateTime("year", 1, keysMonth,true);
         ListMapUtils.mergeListMapLeft(listYear, listMapIn2, "collect_month");
         for (Map<String, Object> stringObjectMap : listYear) {
             System.out.println("---------" + stringObjectMap);
@@ -50,5 +51,19 @@ public class _1mergeListMapUtilsTest {
         }
     }
 
+    @Test
+    public void mergeListMapLeftTest() {
+        String [] keysHour = {"apiErrTimes", "apiReqTimes", "apiSuccessTimes"};
+        List<Map<String, Object>> listMapOther = _2createListMapUtils.createListMapOther("hour",0, keysHour, true);
+        String [][] timesSet = {
+                {"timeId", "yyyy-MM-dd HH", ":00:00"},
+                {"timeIdHour", "HH", ":00"}
+        };
+        List<Map<String, Object>> listHour = _2createListMapUtils.createDateTimeBetween(timesSet, "2019-01-01 00:00:00","2019-01-01 23:59:59","1");
+        _1mergeListMapUtils.mergeListMapLeft(listHour, listMapOther, "timeOnlyId");
+        for (Map<String, Object> map : listHour) {
+            System.out.println(map);
+        }
+    }
 
 }

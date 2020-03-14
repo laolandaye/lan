@@ -1,4 +1,4 @@
-package com.lan._1utils.maven._2jsonobj;
+package com.lan._1utils.maven._2json和对象转换;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;

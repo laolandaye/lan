@@ -123,8 +123,8 @@ public class ListUtils {
 
     /**
      * 生成fill_date
-     * @param minDate  2019-01  2019-01-26
-     * @param maxDate  2019-06  2019-09-26
+     * @param minDate  2019-01
+     * @param maxDate  2019-06
      * @param type  1(全部) 2 含头不含尾 3 含尾不含头
      * @return
      */
@@ -165,11 +165,49 @@ public class ListUtils {
         return result;
     }
 
-    public static void main(String[] args) {
-        List<String> getMonthBetween = getMonthBetween("2019-01", "2019-02", "2");
-        for (String s : getMonthBetween) {
-            System.out.println(s);
+    /**
+     * 生成 kun_api_cdr_total(time_id)
+     * @param minDateTime  2019-01-01 00:00:00
+     * @param maxDateTime  2019-01-03 00:00:00
+     * @param type  1(全部) 2 含头不含尾 3 含尾不含头
+     * @return
+     */
+    public static List<String> getDateTimeBetween(String minDateTime, String maxDateTime, String type)  {
+        List<String> result = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//格式化为年月
+
+        Calendar min = Calendar.getInstance();
+        Calendar max = Calendar.getInstance();
+
+        try {
+            min.setTime(sdf.parse(minDateTime));
+            max.setTime(sdf.parse(maxDateTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        min.set(min.get(Calendar.YEAR), min.get(Calendar.MONTH), min.get(Calendar.DATE), min.get(Calendar.HOUR_OF_DAY), 0);
+        max.set(max.get(Calendar.YEAR), max.get(Calendar.MONTH), max.get(Calendar.DATE), max.get(Calendar.HOUR_OF_DAY), 0);
+
+        Calendar curr = min;
+        while (curr.before(max)) {
+            result.add(sdf.format(curr.getTime()));
+            curr.add(Calendar.HOUR_OF_DAY, 1);
+        }
+
+        // 判断生成 日期类型
+        switch (type) {
+            case "1":
+                break;
+            case "2":
+                result.remove(result.size() - 1);
+                break;
+            case "3":
+                result.remove(0);
+                break;
+            default:
+        }
+        return result;
     }
+
 
 }

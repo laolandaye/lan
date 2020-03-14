@@ -1,4 +1,4 @@
-package com.lan._1utils.maven._1mapobj;
+package com.lan._1utils.maven._1对象和Map互转;
 
 import java.io.Serializable;
 

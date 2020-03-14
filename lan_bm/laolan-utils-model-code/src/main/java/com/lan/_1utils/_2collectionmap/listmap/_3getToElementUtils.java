@@ -2,6 +2,7 @@ package com.lan._1utils._2collectionmap.listmap;
 
 import com.lan._1utils._2collectionmap.ListUtils;
 import com.lan._1utils._2collectionmap.Uppercase4FirstLetter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -101,6 +102,98 @@ public class _3getToElementUtils {
         ls = null;
         keys = null;
         return results;
+    }
+
+    /**
+     *  参看：https://www.cnblogs.com/1955/p/9844694.html
+     * @param datas 源数据
+     * @param res   结果数据
+     * @param keys 判断的 ["id", "parent_id" ]
+     */
+    public static void getElementTree(List<Map<String, Object>> datas, List<Map<String, Object>> res, String [] keys) {
+        for (Map<String, Object> data :datas) {
+            // parent_id 为空的是一级节点
+            Object parentId = data.get(keys[1]);
+            if(parentId == null || "".equalsIgnoreCase(parentId.toString())) {
+                res.add(data);
+            }
+        }
+        data2treeDG(datas, res, keys);
+    }
+
+    private static void data2treeDG(List<Map<String, Object>> datas, List<Map<String, Object>> res, String [] keys) {
+        for (Map<String, Object> re : res) {
+            List<Map<String, Object>> children = new ArrayList<>();
+            for (Map<String, Object> data : datas) {
+                if(re.get(keys[0]).equals(data.get(keys[1]))) {
+                    children.add(data);
+                }
+            }
+            // 如果有儿子，存在递归儿子节点
+            if(children.size() > 0) {
+//                re.put("hasChildren", true);
+                re.put("children", children);
+                data2treeDG(datas, children, keys);
+            }
+        }
+    }
+
+    /**
+     * 根根据 id 只获得儿子孙子
+     * @param id 条件 id
+     * @param datas  源数据
+     * @param res  结果数据
+     * @param keys 判断的 ["id", "parent_id" ]
+     */
+    public static void getElementTreeByIdExtend(String id, List<Map<String, Object>> datas, List<Map<String, Object>> res, String [] keys) {
+        List<Map<String, Object>> idInfo = new ArrayList<>();
+        // 根据 id 获得此 id 信息
+        for (Map<String, Object> data : datas) {
+            if(data.get(keys[0]).equals(id)) {
+                idInfo.add(data);
+            }
+        }
+        // 递归获得 id 后代信息
+        data2treeDGById(idInfo,  datas, res, keys);
+    }
+
+    /**
+     * 根根据 id 获得本身，及其儿子孙子
+     * @param id 条件 id
+     * @param datas  源数据
+     * @param res  结果数据
+     * @param keys 判断的 ["id", "parent_id" ]
+     */
+    public static void getElementTreeById(String id, List<Map<String, Object>> datas, List<Map<String, Object>> res, String [] keys) {
+        List<Map<String, Object>> idInfo = new ArrayList<>();
+        // 根据 id 获得此 id 信息
+        for (Map<String, Object> data : datas) {
+            if(data.get(keys[0]).equals(id)) {
+                idInfo.add(data);
+                res.add(data);
+            }
+        }
+        // 递归获得 id 后代信息
+        data2treeDGById(idInfo,  datas, res, keys);
+    }
+
+    private static void data2treeDGById(List<Map<String, Object>> idChildren,List<Map<String, Object>> datas, List<Map<String, Object>> res, String [] keys) {
+        for (Map<String, Object> re : idChildren) {
+            List<Map<String, Object>> children = new ArrayList<>();
+            for (Map<String, Object> data : datas) {
+                // parent_id 为空的是一级节点
+                Object parentId = data.get(keys[1]);
+                if(!(parentId != null || "".equalsIgnoreCase(parentId.toString()))) {
+                    if(re.get(keys[0]).equals(data.get(keys[1]))) {
+                        res.add(data);
+                        children.add(data);
+                    }
+                }
+            }
+            if(children.size() > 0) {
+                data2treeDGById(children, datas, res, keys);
+            }
+        }
     }
 
 }

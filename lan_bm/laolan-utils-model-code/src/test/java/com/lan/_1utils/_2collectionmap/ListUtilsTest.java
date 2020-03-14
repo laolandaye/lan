@@ -95,4 +95,20 @@ public class ListUtilsTest {
 
         System.out.println( "去重排序后的集合： " + newList);
     }
+
+    @Test
+    public void getMonthBetweenTest() {
+        List<String> getMonthBetween = ListUtils.getMonthBetween("2018-01", "2019-02", "3");
+        for (String s : getMonthBetween) {
+            System.out.println(s);
+        }
+    }
+    @Test
+    public void getDateTimeBetweenTest() {
+        List<String> getMonthBetween = ListUtils.getDateTimeBetween("2019-01-01 00:00:00", "2019-01-03 00:00:00", "1");
+        for (String s : getMonthBetween) {
+            System.out.println(s);
+        }
+    }
+
 }

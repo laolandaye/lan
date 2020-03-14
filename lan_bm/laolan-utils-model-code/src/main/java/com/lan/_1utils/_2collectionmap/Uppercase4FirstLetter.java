@@ -1,5 +1,7 @@
 package com.lan._1utils._2collectionmap;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,10 @@ public class Uppercase4FirstLetter {
         //testing for data base column-key to java field
         String[] dbKeys = {"id", "user_age", "user_addr"};
         String[] aaa  = convertToJava(dbKeys);
-
+        System.out.println("-----------------------------------");
+        //testing for data base column-key to java field
+        String dbKey = "USER_ADDR", dbKey2 = "USER", dbKey3 = "USER_ADDR_HOME";
+        System.out.println(convertToJava(dbKey) + "  " + convertToJava(dbKey2) + "  "  + convertToJava(dbKey3));
         System.out.println("-----------------------------------");
         //testing for Java field to data base column-key
         String javaFieldNames[] = {"id","userAge","userHomeAddr"};
@@ -63,6 +68,18 @@ public class Uppercase4FirstLetter {
     }
 
     /*
+     * 一行字段 grid_code  =》 id， gridCode
+     */
+    public static String convertToJava(String dbKey) {
+        String result = "";
+        if(StringUtils.isNotBlank(dbKey)) {
+            String[] words = dbKey.split("_");
+            result = toUppercase4FirstLetter(words);
+        }
+        return result;
+    }
+
+    /*
      * 一行字段 [id ， grid_code]  =》 { id， gridCode}
      */
     public static String [] convertToJava(String... dbKeys) {
@@ -93,7 +110,7 @@ public class Uppercase4FirstLetter {
         StringBuffer buffer = new StringBuffer();
         if(words != null && words.length > 0){
             for(int i=0;i<words.length;i++){
-                String word = words[i];
+                String word = words[i].toLowerCase();
                 String firstLetter = word.substring(0, 1);
                 String others = word.substring(1);
                 String upperLetter = null;
