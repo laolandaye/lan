@@ -19,7 +19,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <junit.version>4.12</junit.version>
-        <jupiter.version>RELEASE</jupiter.version>
+        <jupiter.version>5.3.0</jupiter.version>
         <spring.version>5.0.5.RELEASE</spring.version>
         <aspectjweaver.version>1.6.8</aspectjweaver.version>
         <aopalliance.version>1.0</aopalliance.version>
@@ -186,6 +186,12 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${jupiter.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
