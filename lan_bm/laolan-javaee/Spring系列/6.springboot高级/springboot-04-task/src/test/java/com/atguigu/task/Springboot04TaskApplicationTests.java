@@ -24,9 +24,9 @@ public class Springboot04TaskApplicationTests {
 		SimpleMailMessage message = new SimpleMailMessage();
 		//邮件设置
 		message.setSubject("通知-今晚开会");
-		message.setText("今晚7:30开会");
+		message.setText("今晚7:30开会.....");
 
-		message.setTo("1960302182@qq.com");
+		message.setTo("991807467@qq.com");
 		message.setFrom("2476955538@qq.com");
 
 		mailSender.send(message);
@@ -46,9 +46,9 @@ public class Springboot04TaskApplicationTests {
 		helper.setFrom("2476955538@qq.com");
 
 		//上传文件
-		helper.addAttachment("1.gif",new File("G:\\我的资料\\图片\\gif\\1.gif"));
-		helper.addAttachment("2.gif",new File("G:\\我的资料\\图片\\gif\\2.gif"));
-		helper.addAttachment("3.gif",new File("G:\\我的资料\\图片\\gif\\3.gif"));
+		helper.addAttachment("桌面.jpg",new File("D:\\我的\\image\\桌面.jpg"));
+//		helper.addAttachment("2.gif",new File("G:\\我的资料\\图片\\gif\\2.gif"));
+//		helper.addAttachment("3.gif",new File("G:\\我的资料\\图片\\gif\\3.gif"));
 
 		mailSender.send(mimeMessage);
 
