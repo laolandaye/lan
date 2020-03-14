@@ -1,11 +1,11 @@
-package com.lan.javase._8thread._5Ïß³ÌÍ¬²½;
+package com.lan.javase._8thread._5çº¿ç¨‹åŒæ­¥;
 
-//Ê¹ÓÃÊµÏÖRunnable½Ó¿ÚµÄ·½Ê½£¬ÊÛÆ±
+//ä½¿ç”¨å®ç°Runnableæ¥å£çš„æ–¹å¼ï¼Œå”®ç¥¨
 /**
-* ´Ë³ÌĞò´æÔÚÏß³ÌµÄ°²È«ÎÊÌâ£º´òÓ¡³µÆ±Ê±£¬»á³öÏÖÖØÆ±¡¢´íÆ±
+* æ­¤ç¨‹åºå­˜åœ¨çº¿ç¨‹çš„å®‰å…¨é—®é¢˜ï¼šæ‰“å°è½¦ç¥¨æ—¶ï¼Œä¼šå‡ºç°é‡ç¥¨ã€é”™ç¥¨
 **/
 
-class Window1 implements Runnable {
+class WindowRunnable implements Runnable {
 	int ticket = 100;
 
 	public void run() {
@@ -17,7 +17,7 @@ class Window1 implements Runnable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println(Thread.currentThread().getName() + "ÊÛÆ±£¬Æ±ºÅÎª£º"
+				System.out.println(Thread.currentThread().getName() + "å”®ç¥¨ï¼Œç¥¨å·ä¸ºï¼š"
 						+ ticket--);
 			} else {
 				break;
@@ -26,16 +26,16 @@ class Window1 implements Runnable {
 	}
 }
 
-public class TestWindow1 {
+public class TestWindowRunnable {
 	public static void main(String[] args) {
-		Window1 w = new Window1();
+		WindowRunnable w = new WindowRunnable();
 		Thread t1 = new Thread(w);
 		Thread t2 = new Thread(w);
 		Thread t3 = new Thread(w);
 		
-		t1.setName("´°¿Ú1");
-		t2.setName("´°¿Ú2");
-		t3.setName("´°¿Ú3");
+		t1.setName("çª—å£1");
+		t2.setName("çª—å£2");
+		t3.setName("çª—å£3");
 		
 		t1.start();
 		t2.start();

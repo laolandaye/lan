@@ -1,22 +1,22 @@
 
-package com.lan.javase._8thread._7»¥³âËø;
+package com.lan.javase._8thread._6é”;
 
 
 /**
- * ÒøĞĞÓĞÒ»¸öÕË»§¡£ÓĞÁ½¸ö´¢»§·Ö±ğÏòÍ¬Ò»¸öÕË»§´æ3000Ôª£¬Ã¿´Î´æ1000£¬´æ3´Î¡£Ã¿´Î´æÍê´òÓ¡ÕË»§Óà¶î¡£
- * 1.ÊÇ·ñÉæ¼°¶àÏß³Ì£¿ÊÇ¡£ÓĞ2¸ö´¢»§£¨2ÖÖ·½Ê½£©
- * 2.ÊÇ·ñ¹²ÏíÊı¾İ£¿ÓĞ£¬Í¬Ò»¸öÕË»§
- * 3.¿¼ÂÇÏß³ÌÍ¬²½£¨2ÖÖ·½Ê½´¦ÀíÏß³Ì°²È«£©
+ * é“¶è¡Œæœ‰ä¸€ä¸ªè´¦æˆ·ã€‚æœ‰ä¸¤ä¸ªå‚¨æˆ·åˆ†åˆ«å‘åŒä¸€ä¸ªè´¦æˆ·å­˜3000å…ƒï¼Œæ¯æ¬¡å­˜1000ï¼Œå­˜3æ¬¡ã€‚æ¯æ¬¡å­˜å®Œæ‰“å°è´¦æˆ·ä½™é¢ã€‚
+ * 1.æ˜¯å¦æ¶‰åŠå¤šçº¿ç¨‹ï¼Ÿæ˜¯ã€‚æœ‰2ä¸ªå‚¨æˆ·ï¼ˆ2ç§æ–¹å¼ï¼‰
+ * 2.æ˜¯å¦å…±äº«æ•°æ®ï¼Ÿæœ‰ï¼ŒåŒä¸€ä¸ªè´¦æˆ·
+ * 3.è€ƒè™‘çº¿ç¨‹åŒæ­¥ï¼ˆ2ç§æ–¹å¼å¤„ç†çº¿ç¨‹å®‰å…¨ï¼‰
  */
 
 class Account {
-	double balance;		//Óà¶î
+	double balance;		//ä½™é¢
 
 	public Account() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	//´æÇ®
+
+	//å­˜é’±
 	public synchronized void deposit(double amt){
 		balance += amt;
 		try {
@@ -24,15 +24,15 @@ class Account {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 		System.out.println(Thread.currentThread().getName() +":" +balance);
 	}
 }
 
 class Customer extends Thread{
-	
+
 	Account account;
-	
+
 	public Customer(Account account) {
 		this.account = account;
 	}
@@ -48,10 +48,10 @@ public class TestAccount {
 		Account account = new Account();
 		Customer customer1 = new Customer(account);
 		Customer customer2 = new Customer(account);
-		
-		customer1.setName("¼×");
-		customer2.setName("ÒÒ");
-		
+
+		customer1.setName("ç”²");
+		customer2.setName("ä¹™");
+
 		customer1.start();
 		customer2.start();
 	}
