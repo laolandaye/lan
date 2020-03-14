@@ -7,7 +7,7 @@
     <script src="objarr_common.js"></script>
     <!-- 必须写在这上面，console.table 才生效，目前不知道为神魔-->
     <script>
-      /*  console.log('----------------------------  前端分组函数 -------------------------------------');
+/*        console.log('----------------------------  前端分组函数 -------------------------------------');
         console.log(citybusLineStationByLine);
         console.table(objarr.getObjArrGroupJs(citybusLineStationByLine));
         console.table(objarr.getObjArrGroup(citybusLineStationByLine, ['line_code']));
@@ -31,10 +31,10 @@
         console.table(citybusLineStationByLine);
        console.table(objarr.getObjarrBySelect(citybusLineStationByLine, ["line_name", "kind", "station_name"]));*/
 
-        console.log('----------------------------  根据id 获得对象数组中其他的值 -------------------------------------');
-        console.log(data2);
-      console.table(objarr.getValueById(data2, {key: "id", value: "1011"}, "areaName"));
-
+        console.log('----------------------------   数组中，JPA 多对一合并 --------------');
+        let manyItems = appData.appReqTimesInfoByApi;
+        let oneItems = appData.apiList;
+        console.table(objarr.getJpaMany2One(manyItems, oneItems, ['api_id', 'apiPo']));
     </script>
 </head>
 <body>

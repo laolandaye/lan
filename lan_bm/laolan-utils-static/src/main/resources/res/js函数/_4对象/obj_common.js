@@ -61,7 +61,12 @@ Obj.prototype.extractAttrObj = function(obj, conArr) {
     }
     return objs;
 }
-
+addUpdateObj: function (obj, conObj) {
+    for (let key in conObj) {
+        obj[key] = conObj[key];
+    }
+    return obj;
+}
 
 
 

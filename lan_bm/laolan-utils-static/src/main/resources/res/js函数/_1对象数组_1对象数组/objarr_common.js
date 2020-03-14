@@ -204,14 +204,25 @@ Objarr.prototype.getObjarrBySelect = function (objArr, conArr) {
     return arrObj;
 }
 
-Objarr.prototype.getValueById = function(objarr, conItem, resKey) {
-    for (let i = 0; i < objarr.length; i++) {
-        if (conItem.value == objarr[i][conItem.key]) {
-            return objarr[i][resKey]
+/**
+ *
+ * @param manyItems 多
+ * @param oneItems 一
+ * @param ids ['api_id', 'apiPo']
+ */
+Objarr.prototype.getJpaMany2One = function (manyItems, oneItems, ids) {
+    let res = JSON.parse(JSON.stringify(manyItems));
+    labelB:for (let i = 0; i < manyItems.length; i++) {
+        for (let j = 0; j < oneItems.length; j++) {
+            if (manyItems[i][ids[0]] == oneItems[j][ids[0]]) {
+                res[i][ids[1]] = oneItems[j];
+                continue labelB;
+            }
         }
     }
-    return ""
+    return res;
 }
+
 
 
 

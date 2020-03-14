@@ -19,6 +19,8 @@ var Main = new Vue({
                             callback(new Error(data.msg));
                             break;
                         default:
+                            callback();
+                            break;
                     }
                 }).catch(function (err) {
                     callback(new Error(err));
