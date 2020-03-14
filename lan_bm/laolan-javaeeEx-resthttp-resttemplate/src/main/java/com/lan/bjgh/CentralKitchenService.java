@@ -7,6 +7,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -34,6 +35,12 @@ public class CentralKitchenService {
         URI uri = URI.create(url);
 
         return restTemplate.getForEntity(uri, String.class);
+    }
+
+    @Async("taskExector")
+    public void SP_CK_ScriptTotalCountThread(int i) throws Exception {
+        ResponseEntity<String> result = SP_CK_ScriptTotalCount();
+        System.out.println(i + "result:" + result.getBody());
     }
 
     public ResponseEntity<String> SP_CK_TodayUploadScriptCount() throws Exception {
@@ -113,6 +120,7 @@ public class CentralKitchenService {
         return restTemplate.getForEntity(uri, String.class);
     }
 
+    @Async("taskExector")
     public ResponseEntity<String> SP_CK_AddPush(String openapiUrl, String appKey, String appSecret) throws Exception {
         // 1. 先获取token
         String token = bjghTokenService.getBjghToken(openapiUrl, appKey, appSecret);

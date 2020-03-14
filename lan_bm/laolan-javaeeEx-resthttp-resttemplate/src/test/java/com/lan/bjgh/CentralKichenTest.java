@@ -46,6 +46,13 @@ public class CentralKichenTest {
     }
 
     @Test
+    public void SP_CK_ScriptTotalCountThreadTest() throws Exception {
+        for (int i = 0; i < 100; i++) {
+            centralKitchenService.SP_CK_ScriptTotalCountThread(i);
+        }
+    }
+
+    @Test
     public void SP_CK_TodayUploadScriptCountTest() throws Exception {
         ResponseEntity<String> result = centralKitchenService.SP_CK_SingleDayUploadScriptCount();
         System.out.println(result.getBody());
@@ -92,33 +99,5 @@ public class CentralKichenTest {
         ResponseEntity<String> result = centralKitchenService.SP_CK_AddPush(openapiUrl, appKey, appSecret);
         System.out.println(result.getBody());
     }
-    @Test
-    public void SP_CK_AddPushThreadTest() throws Exception {
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
-                .setNameFormat("Mdemo-pool-%d").build();
-        //Common Thread Pool
-        ExecutorService pool = new ThreadPoolExecutor(5,200,0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingDeque<Runnable>(1024),namedThreadFactory,new ThreadPoolExecutor.AbortPolicy());
-        // 缓存线程池，无上限
-        ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-        for (int i = 0; i < 10; i++) {
-            cachedThreadPool.execute(new Runnable() {
-                @Override
-                public void run() {
-                    ResponseEntity<String> result = null;
-                    try {
-                        CentralKitchenService centralKitchenService = new CentralKitchenService();
-                        result = centralKitchenService.SP_CK_AddPush(openapiUrl, appKey, appSecret);
-                        System.out.println(result.getBody());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(Thread.currentThread().getName());
-                }
-            });
-        }
-//        cachedThreadPool.shutdown();
-    }
-
 
 }
