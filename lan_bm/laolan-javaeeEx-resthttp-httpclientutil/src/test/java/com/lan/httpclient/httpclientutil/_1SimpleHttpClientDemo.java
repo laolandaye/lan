@@ -1,7 +1,7 @@
-package com.lan.httpclient;
+package com.lan.httpclient.httpclientutil;
 
-import com.lan.httpclient.SimpleHttpClientDemo.SimpleHttpClientIgnoreVerifySSL;
-import com.lan.httpclient.SimpleHttpClientDemo.SimpleHttpClientPost;
+import com.lan.httpclient.httpclientutil.SimpleHttpClientDemo.SimpleHttpClientIgnoreVerifySSL;
+import com.lan.httpclient.httpclientutil.SimpleHttpClientDemo.SimpleHttpClientPost;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

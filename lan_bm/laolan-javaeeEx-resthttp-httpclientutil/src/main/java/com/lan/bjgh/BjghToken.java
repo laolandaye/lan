@@ -23,6 +23,13 @@ public class BjghToken {
         return getBjghToken(openapiUrl, map);
     }
 
+    public static String getBjghToken(String openapiUrl, String appKey, String appSecret) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("appKey", appKey);
+        map.put("appSecret", appSecret);
+        return getBjghToken(openapiUrl, map);
+    }
+
     // 获取token，这里采用post 表单提交， 其他方式参看《产品理解》
     private static String getBjghToken(String openapiUrl, Map<String, Object> map) throws HttpProcessException {
         String url = openapiUrl + "auth";

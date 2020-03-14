@@ -1,44 +1,22 @@
-package com.lan.bjgh.dataCenter;
+package com.lan.bjgh;
 
 import com.arronlong.httpclientutil.HttpClientUtil;
-import com.arronlong.httpclientutil.builder.HCB;
 import com.arronlong.httpclientutil.common.HttpConfig;
 import com.arronlong.httpclientutil.common.HttpHeader;
-import com.arronlong.httpclientutil.common.SSLs;
-import com.lan.bjgh.BjghToken;
 import org.apache.http.Header;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpHead;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+public class MonitoreSupervision {
 
-public class DataCenterTest {
-
-    public String openapiUrl = "http://47.95.182.97:8081/openapi/service/";
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
-
-    @Test
-    public void SP_MS_GetBaseAccountListTest() throws Exception {
+    public String SP_MS_GetBaseAccountList(String openapiUrl, String appKey, String appSecret) throws Exception {
         // 1. 先获取token
-        String bjghToken = BjghToken.getMonitoreSupervision(openapiUrl);
+        String bjghToken = BjghToken.getBjghToken(openapiUrl, appKey, appSecret);
 
         //插件式配置Header（各种header信息、自定义header）
         Header[] headers 	= HttpHeader.custom()
                 .contentType("application/json")
                 .build();
 
-        String url = openapiUrl + "sPMsGetBaseAccountList?token=" + bjghToken + "&appKey=2c9849536c502347016c506774120003";
+        String url = openapiUrl + "sPMsGetBaseAccountList?token=" + bjghToken + "&appKey=" + appKey;
 
         //插件式配置请求参数（网址、请求参数、编码、client）
         HttpConfig config = HttpConfig.custom()
@@ -59,20 +37,19 @@ public class DataCenterTest {
 
         //使用方式：
         String result2 = HttpClientUtil.post(config);   //post请求
-        System.out.println(result2);
+        return result2;
     }
 
-    @Test
-    public void SP_MS_GetSpiderResultListTest() throws Exception {
+    public String SP_MS_GetSpiderResultList(String openapiUrl, String appKey, String appSecret) throws Exception {
         // 1. 先获取token
-        String bjghToken = BjghToken.getMonitoreSupervision(openapiUrl);
+        String bjghToken = BjghToken.getBjghToken(openapiUrl, appKey, appSecret);
 
         //插件式配置Header（各种header信息、自定义header）
         Header[] headers 	= HttpHeader.custom()
                 .contentType("application/json")
                 .build();
 
-        String url = openapiUrl + "sPMsGetSpiderResultList?token=" + bjghToken + "&appKey=2c9849536c502347016c506774120003";
+        String url = openapiUrl + "sPMsGetSpiderResultList?token=" + bjghToken + "&appKey=" + appKey;
 
         String jsonStr = "{" +
                 "\"accountCode\":\"22_RMTWZ_BJDCOMCN_00_110000\"," +
@@ -101,13 +78,12 @@ public class DataCenterTest {
 
         //使用方式：
         String result2 = HttpClientUtil.post(config);   //post请求
-        System.out.println(result2);
+        return result2;
     }
 
-    @Test
-    public void SP_MS_GetSensitiveProgramListTest() throws Exception {
+    public String SP_MS_GetSensitiveProgramList(String openapiUrl, String appKey, String appSecret) throws Exception {
         // 1. 先获取token
-        String bjghToken = BjghToken.getMonitoreSupervision(openapiUrl);
+        String bjghToken =  BjghToken.getBjghToken(openapiUrl, appKey, appSecret);
 
         //插件式配置Header（各种header信息、自定义header）
         Header[] headers 	= HttpHeader.custom()
@@ -143,6 +119,6 @@ public class DataCenterTest {
 
         //使用方式：
         String result2 = HttpClientUtil.post(config);   //post请求
-        System.out.println(result2);
+        return result2;
     }
 }

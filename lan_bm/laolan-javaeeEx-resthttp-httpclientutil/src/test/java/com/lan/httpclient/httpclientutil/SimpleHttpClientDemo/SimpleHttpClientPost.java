@@ -1,4 +1,4 @@
-package com.lan.httpclient.SimpleHttpClientDemo;
+package com.lan.httpclient.httpclientutil.SimpleHttpClientDemo;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;

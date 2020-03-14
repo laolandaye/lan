@@ -1,4 +1,4 @@
-package com.lan.httpclient;
+package com.lan.httpclient.httpclientutil;
 
 import com.arronlong.httpclientutil.HttpClientUtil;
 import com.arronlong.httpclientutil.builder.HCB;
