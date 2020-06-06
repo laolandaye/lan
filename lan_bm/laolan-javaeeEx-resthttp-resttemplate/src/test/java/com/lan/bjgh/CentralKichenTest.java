@@ -20,8 +20,8 @@ import java.util.concurrent.*;
 @SpringBootTest(classes = RestTemplateBoot.class)
 public class CentralKichenTest {
 
-//    public String openapiUrl = "http://47.95.182.97:8081/openapi/service/";
-    private String openapiUrl = "https://datagov.beijingcloud.com.cn:18081/openapi/service/";
+    public String openapiUrl = "http://121.36.20.117:8180/dam/service/";
+//    private String openapiUrl = "https://datagov.beijingcloud.com.cn:18081/openapi/service/";
     private String appKey = "2c9849536c502347016c506720ee0001";
     private String appSecret = "6AOrH0nIqOsz4cN";
 
@@ -95,8 +95,20 @@ public class CentralKichenTest {
     }
 
     @Test
+    public void SP_CK_AddClueTest() throws Exception {
+        ResponseEntity<String> result = centralKitchenService.SP_CK_AddClue(openapiUrl, appKey, appSecret);
+        System.out.println(result.getBody());
+    }
+
+    @Test
     public void SP_CK_AddPushTest() throws Exception {
         ResponseEntity<String> result = centralKitchenService.SP_CK_AddPush(openapiUrl, appKey, appSecret);
+        System.out.println(result.getBody());
+    }
+
+    @Test
+    public void SP_CK_DisSaveToShareTest() throws Exception {
+        ResponseEntity<String> result = centralKitchenService.SP_CK_DisSaveToShare(openapiUrl, appKey, appSecret);
         System.out.println(result.getBody());
     }
 

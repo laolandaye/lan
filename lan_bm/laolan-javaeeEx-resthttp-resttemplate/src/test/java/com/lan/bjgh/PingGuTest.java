@@ -1,5 +1,6 @@
 package com.lan.bjgh;
 
+import com.kun.framework.crypto.Crypto;
 import com.lan.RestTemplateBoot;
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class PingGuTest {
     private String appSecret = "gl37bQK1gMfOxl0";
 
     @Autowired
-    private DataCenterService dataCenterService;
+    private ScheduleCommandService scheduleCommandService;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -37,8 +38,12 @@ public class PingGuTest {
 
     @Test
     public void SP_DD_FeedBackTest() throws Exception {
-        String result = dataCenterService.SP_DD_FeedBack(openapiUrl, appKey, appSecret);
-        System.out.println(result);
+        String result = scheduleCommandService.SP_DD_FeedBack(openapiUrl, appKey, appSecret);
+        System.out.println("解密前：" + result);
+
+        Crypto crypto = (Crypto) Class.forName("com.kun.framework.crypto.impl.Base64CodecWrapper").newInstance();
+        result = crypto.decrypt(result);
+        System.out.println("解密后：" + result);
     }
 
 

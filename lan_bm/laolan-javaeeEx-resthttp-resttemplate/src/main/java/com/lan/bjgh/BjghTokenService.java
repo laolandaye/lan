@@ -36,68 +36,11 @@ public class BjghTokenService {
         return getBjghToken(openapiUrl, map);
     }
 
-
-    // 指挥调度
-    public String getCentralKitchen3(String openapiUrl) throws Exception {
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        map.add("appKey", "2c9849536c502347016c50674baf0002");
-        map.add("appSecret", "BSzzG2TwjCoZw36");
-        return getBjghToken(openapiUrl, map);
-    }
-
-    // 监测监管
-    public String getMonitoreSupervision(String openapiUrl) throws Exception {
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        map.add("appKey", "2c9849536c502347016c506774120003");
-        map.add("appSecret", "Am3iIOHFnPkItsY");
-        return getBjghToken(openapiUrl, map);
-    }
-
-    // 昌平
-    public String getChangping(String openapiUrl) throws Exception {
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        map.add("appKey", "2c9849536da9faae016db38edd310011");
-        map.add("appSecret", "dKvpVM0GgOkMns6");
-        return getBjghToken(openapiUrl, map);
-    }
-
-    // 延庆大屏
-    public String getChangping2(String openapiUrl) throws Exception {
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        map.add("appKey", "2c9849546d39b4bd016d624fbbf600bb");
-        map.add("appSecret", "JCuyAi1FFKj2pZo");
-        return getBjghToken(openapiUrl, map);
-    }
-
-    // 门头沟
-    public String getChangping3(String openapiUrl) throws Exception {
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        map.add("appKey", "2c9849546d39b4bd016d6255beb100bc");
-        map.add("appSecret", "ZmO36ib7jWf3AfQ");
-        return getBjghToken(openapiUrl, map);
-    }
-
     // 数据中台
     public String getDataCenter(String openapiUrl) throws Exception {
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
         map.add("appKey", "4028b8816bfed7b8016bfef3ec960000");
         map.add("appSecret", "Z9hUspQxjnEzwuF");
-        return getBjghToken(openapiUrl, map);
-    }
-
-    // 平谷区
-    public String getPingGu(String openapiUrl) throws Exception {
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        map.add("appKey", "2c9849546e21bbe9016e3ffaad4b0069");
-        map.add("appSecret", "gl37bQK1gMfOxl0");
-        return getBjghToken(openapiUrl, map);
-    }
-
-    // 人民日报
-    public String getPeopleDaily(String openapiUrl) throws Exception {
-        MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        map.add("appKey", "2c9849536e21bb29016e6e16840f007e");
-        map.add("appSecret", "XfB91IKGj7t26hx");
         return getBjghToken(openapiUrl, map);
     }
 
