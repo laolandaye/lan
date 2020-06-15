@@ -20,7 +20,7 @@
 
         <junit.version>4.12</junit.version>
         <jupiter.version>5.3.0</jupiter.version>
-        <spring.version>5.0.5.RELEASE</spring.version>
+        <spring.version>5.2.7.RELEASE</spring.version>
         <aspectjweaver.version>1.6.8</aspectjweaver.version>
         <aopalliance.version>1.0</aopalliance.version>
         <mybatis.version>3.2.8</mybatis.version>
