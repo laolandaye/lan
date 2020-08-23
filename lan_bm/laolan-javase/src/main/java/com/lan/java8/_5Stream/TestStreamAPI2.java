@@ -2,7 +2,7 @@ package com.lan.java8._5Stream;
 
 import com.lan.java8._5Stream.bean.Employee.Status;
 import com.lan.java8._5Stream.bean.Employee;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;

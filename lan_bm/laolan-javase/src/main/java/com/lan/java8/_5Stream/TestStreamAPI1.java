@@ -1,7 +1,8 @@
 package com.lan.java8._5Stream;
 
 import com.lan.java8._5Stream.bean.Employee;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,5 +1,7 @@
 package com.lan.java8._8新的时间api;
 
+import org.testng.annotations.Test;
+
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.Instant;
@@ -14,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Set;
 
-import org.junit.jupiter.api.Test;
+
 
 public class TestLocalDateTime {
 	

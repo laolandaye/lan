@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import com.lan.java8._5Stream.bean.Employee;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
+
 
 /*
  * 一、Stream API 的操作步骤：
