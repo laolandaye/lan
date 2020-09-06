@@ -1,10 +1,6 @@
 package com.lan._1utils._5socket;
 
-import com.lan._1utils._3date._toDate;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.net.*;
 
 public class URIUtilTest {
 
