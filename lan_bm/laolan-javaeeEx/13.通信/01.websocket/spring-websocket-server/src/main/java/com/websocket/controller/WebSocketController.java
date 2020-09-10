@@ -1,7 +1,6 @@
 package com.websocket.controller;
 
-import com.websocket.config.SpringWebSocketConfig;
-import com.websocket.config.WebsocketHandler;
+import com.websocket.config.WebSocketHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +22,7 @@ public class WebSocketController {
     @RequestMapping(value="/sendAll", method= RequestMethod.GET)
     public String sendAllMessage(@RequestParam(required=true) String message){
         try {
-            WebsocketHandler.BroadCastInfo(new TextMessage(message));
+            WebSocketHandler.BroadCastInfo(new TextMessage(message));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,7 +38,7 @@ public class WebSocketController {
     @RequestMapping(value="/sendOne", method= RequestMethod.GET)
     public String sendOneMessage(@RequestParam(required=true) String message, @RequestParam(required=true) String id){
         try {
-            WebsocketHandler.SendMessage(new TextMessage(message), id);
+            WebSocketHandler.SendMessage(new TextMessage(message), id);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -22,7 +22,7 @@ public class SpringWebSocketConfig implements WebSocketConfigurer {
 
     @Bean
     public TextWebSocketHandler webSocketHandler(){
-        return new WebsocketHandler();
+        return new WebSocketHandler();
     }
 
 }

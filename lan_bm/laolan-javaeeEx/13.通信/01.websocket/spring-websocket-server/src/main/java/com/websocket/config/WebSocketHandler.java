@@ -14,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-public class WebsocketHandler extends TextWebSocketHandler {
+public class WebSocketHandler extends TextWebSocketHandler {
 
     @PostConstruct
     public void init() {
@@ -26,7 +26,7 @@ public class WebsocketHandler extends TextWebSocketHandler {
     private static CopyOnWriteArraySet<WebSocketSession> SessionSet = new CopyOnWriteArraySet<>();
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
-    public WebsocketHandler(){
+    public WebSocketHandler(){
     }
 
 

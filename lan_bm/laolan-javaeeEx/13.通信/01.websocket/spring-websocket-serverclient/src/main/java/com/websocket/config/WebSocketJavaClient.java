@@ -17,11 +17,11 @@ public class WebSocketJavaClient {
            // 这里用的binance的socket接口，国内调用需要VPN，使用换成你的就行
            String url = "ws://114.115.223.240:8083/ws/asset";
            if(id.equals("8083")) {
-//               url = "ws://localhost:8083/ws/asset";
-               url = "ws://114.115.223.240:8083/ws/asset";
+               url = "ws://localhost:8083/ws/asset";
+//               url = "ws://114.115.223.240:8083/ws/asset";
            } else if (id.equals("8084")) {
-//               url = "ws://localhost:8084/ws/asset";
-               url = "ws://114.115.223.240:8083:8084/ws/asset";
+               url = "ws://localhost:8084/ws/asset";
+//               url = "ws://114.115.223.240:8083:8084/ws/asset";
            }
            URI uri = new URI(url);
            WebSocketClient mWs = new WebSocketClient(uri){
