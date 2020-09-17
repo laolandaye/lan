@@ -1,6 +1,6 @@
 package com.lan.bmwai.bm.bjgh;
 
-import com.lan._1utils.maven._2jsonobj.JsonJacksonUtil;
+import com.lan._1utils._6change._2json和对象转换.JsonJacksonUtil;
 import com.lan.bmwai.CommonJunitTest;
 import com.lan.bmwai.CommonQuery;
 import org.apache.commons.lang3.StringUtils;
@@ -114,6 +114,30 @@ public class BjghTest extends CommonJunitTest {
             extendCfgMap.put("apiUserTimesLimitRule", -1);
             String sql2 = "UPDATE kun_api_permit SET  extend_cfg = '"+ JsonJacksonUtil.objectToJson(extendCfgMap) +"' WHERE id = '"+ id +"'";
             baseDao.executeUpdate(sql2);
+        }
+    }
+
+    @Test
+    public void deleteKunApi() throws Exception {
+        // select  table_name  from  information_schema.columns  where  column_name='api_id' AND TABLE_SCHEMA = 'msyqlreback' ;
+        String api = "297e8a876e3af640016e3af8c0ea0133";
+        List<String> tabs = new ArrayList<>();
+        tabs.add("datam_api_visual");
+        tabs.add("kun_api_async_task");
+        tabs.add("kun_api_black_white_list");
+        tabs.add("kun_api_body");
+        tabs.add("kun_api_cdr");
+        tabs.add("kun_api_cdr_his");
+        tabs.add("kun_api_cdr_total");
+        tabs.add("kun_api_param");
+        tabs.add("kun_api_permit");
+        tabs.add("kun_api_step");
+        tabs.add("kun_sec_audit_api_tab");
+        tabs.add("kun_api");
+        for (String tab : tabs) {
+            String sql = "DELETE FROM " + tab + " WHERE api_id = '"+ api +"';";
+            LOG.info(sql);
+//            baseDao.executeUpdate(sql);
         }
     }
 

@@ -28,11 +28,6 @@
             <artifactId>laolan-utils-model-code</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.lan</groupId>
-            <artifactId>laolan-utils-static</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <!-- JsonLib -->
         <dependency>
