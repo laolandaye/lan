@@ -9,8 +9,7 @@ import java.sql.SQLException;
 public class TestDynamic {
 
     public static void main(String[] args) {
-        BaseDruidDao baseDruidDao = new BaseDruidDaoImpl();
-
+        BaseDruidDao baseDruidDao = BaseDruidDaoImpl.getInstance();
 
         //线程1的ThreadLocalMap中存着key为threadLocalA，value为A1；key为threadLocalB，value为B1
         new Thread(){

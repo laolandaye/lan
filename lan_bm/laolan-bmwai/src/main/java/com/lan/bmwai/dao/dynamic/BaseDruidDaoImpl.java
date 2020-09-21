@@ -24,7 +24,22 @@ public class BaseDruidDaoImpl implements BaseDruidDao {
 
     private static final Logger LOG = LoggerFactory.getLogger(BaseDruidDaoImpl.class);
 
-    public BaseDruidDaoImpl() {
+    private static volatile BaseDruidDaoImpl instance;
+
+    private BaseDruidDaoImpl() {}
+
+    //提供一个静态的公有方法，加入双重检查代码，解决线程安全问题, 同时解决懒加载问题
+    //同时保证了效率, 推荐使用
+    public static synchronized BaseDruidDaoImpl getInstance() {
+        if(instance == null) {
+            synchronized (BaseDruidDaoImpl.class) {
+                if(instance == null) {
+                    instance = new BaseDruidDaoImpl();
+                }
+            }
+
+        }
+        return instance;
     }
 
     @Override
