@@ -48,8 +48,8 @@ public class WebsocketHandler extends TextWebSocketHandler {
         log.info("有连接加入，当前连接数为：{}", cnt);
         SendMessage(session, new TextMessage("连接成功"));
 
-        WebSocketJavaClient testApp = new WebSocketJavaClient();
-        testApp.webSocketClient(id, session);
+//        WebSocketJavaClient testApp = new WebSocketJavaClient();
+//        testApp.webSocketClient(id, session);
     }
 
     /**
