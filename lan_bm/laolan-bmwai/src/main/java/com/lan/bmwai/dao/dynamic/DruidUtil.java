@@ -124,18 +124,11 @@ public class DruidUtil {
 		}
 	}
 
-	public static void closePreparedStatement(PreparedStatement pstmt) {
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				LOG.error("关闭PreparedStatement失败", e);
-				e.printStackTrace();
-			}
-		}
-	}
 
-	public static void closeResultSet(ResultSet res) {
+	/**
+	 * 释放 连接，关闭结果集(合并)
+	 */
+	public static void release(Connection conn, PreparedStatement pstmt, ResultSet res) {
 		if (res != null) {
 			try {
 				res.close();
@@ -144,14 +137,14 @@ public class DruidUtil {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	/**
-	 * 释放 连接，关闭结果集(合并)
-	 */
-	public static void release(Connection conn, PreparedStatement pstmt, ResultSet res) {
-		if(null != res) closeResultSet(res);
-		if(null != pstmt) closePreparedStatement(pstmt);
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				LOG.error("关闭PreparedStatement失败", e);
+				e.printStackTrace();
+			}
+		}
 		if(null != conn) {
 			try {
 				closeConnection(conn);

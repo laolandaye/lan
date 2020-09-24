@@ -97,7 +97,7 @@ public class BaseDaoImpl implements BaseDao {
 
     // insert、update、delete封装到一个方法中
     @Override
-    public int executeUpdate(String sql, Object... params) throws SQLException  {
+    public int  executeUpdate(String sql, Object... params) throws SQLException  {
         Connection conn = getConnectionByTwo();
         PreparedStatement ps = conn.prepareStatement(sql);
         setParameters(ps, params);

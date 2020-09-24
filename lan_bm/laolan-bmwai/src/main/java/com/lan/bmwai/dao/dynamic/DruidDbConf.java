@@ -20,6 +20,8 @@ public class DruidDbConf {
 			properties.setProperty("url", properties.getProperty("jdbc.url"));
 			properties.setProperty("username", properties.getProperty("jdbc.user"));
 			properties.setProperty("password", properties.getProperty("jdbc.password"));
+			properties.setProperty("removeAbandoned", "true");
+			properties.setProperty("removeAbandonedTimeout", "1800");
 			return properties;
 		} catch (Exception e) {
 			e.printStackTrace();
