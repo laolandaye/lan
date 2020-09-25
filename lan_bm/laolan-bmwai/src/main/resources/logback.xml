@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<!-- 控制台输出 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+<!--			  <pattern>%d{yyyyMMdd HH:mm:ss} [%thread{5}] %logger{5}.%method:%line - %msg%n</pattern>-->
+			<pattern>%d{yyyyMMdd HH:mm:ss} %-5level %logger{0}.%method:%line - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!-- 	 -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/kun.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>../logs/kun.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.kun" level="INFO" />
+	<logger name="org.springframework" level="WARN" />
+	<logger name="org.apache" level="WARN" />
+	<logger name="org.hibernat
+	e.SQL" level="DEBUG" />
+	<logger name="org.hibernate.cache" level="ERROR" />
+	<logger name="com.alibaba.druid" level="ERROR" />
+	<!-- 
+	<logger name="org.hibernate.type.descriptor.sql.BasicBinder"
+		level="TRACE" />
+	<logger name="org.hibernate.type.descriptor.sql.BasicExtractor"
+		level="TRACE" />
+	<logger name="org.hibernate.SQL" level="DEBUG" />
+	<logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
+	<logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />
+	-->
+	<!--motan服务中的心跳日志改为warn级别，不然会一直出现
+		serviceStatsLog-[motan-totalAccessStatistic] app: motan module: motan total_count: 0 slow_count: 0 biz_excp: 0 other_excp: 0 avg_time: 0.00ms biz_time: 0.00ms avg_tps: 0
+		serviceStatsLog-[motan-memoryStatistic] 233.65MB of 1746.00 MB (13.4%) used-->
+	<logger name="serviceStatsLog" level="WARN"/>
+	<logger name="com.weibo" level="WARN" />
+
+	
+	<!-- 日志输出级别 -->
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

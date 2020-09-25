@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    primary:
+      username: root
+      password: root
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/crawler?useUnicode=true&characterEncoding=utf8
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+    secondary:
+      username: root
+      password: root
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/changgou_oauth?useUnicode=true&characterEncoding=utf8
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
