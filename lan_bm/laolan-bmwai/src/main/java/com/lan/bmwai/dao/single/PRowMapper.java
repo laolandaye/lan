@@ -8,6 +8,6 @@ import java.sql.SQLException;
  * 		ResultSet，转换为用户需要的任意实体对象
  * @ClassName	:	PRowMapper2
  */
-public interface SinglePRowMapper<T> {
+public interface PRowMapper<T> {
 	public T mappingRow(ResultSet rs, int rownum) throws SQLException;
 }

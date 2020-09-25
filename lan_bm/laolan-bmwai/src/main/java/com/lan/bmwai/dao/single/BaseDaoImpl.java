@@ -20,21 +20,21 @@ import java.util.Map;
  * Map<String, Object> queryForObject
  * <E> E queryForObject
  */
-public class SingleBaseDaoImpl implements SingleBaseDao {
+public class BaseDaoImpl implements BaseDao {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SingleBaseDaoImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BaseDaoImpl.class);
 
-    private static volatile SingleBaseDaoImpl instance;
+    private static volatile BaseDaoImpl instance;
 
-    private SingleBaseDaoImpl() {}
+    private BaseDaoImpl() {}
 
     //提供一个静态的公有方法，加入双重检查代码，解决线程安全问题, 同时解决懒加载问题
     //同时保证了效率, 推荐使用
-    public static synchronized SingleBaseDaoImpl getInstance() {
+    public static synchronized BaseDaoImpl getInstance() {
         if(instance == null) {
-            synchronized (SingleBaseDaoImpl.class) {
+            synchronized (BaseDaoImpl.class) {
                 if(instance == null) {
-                    instance = new SingleBaseDaoImpl();
+                    instance = new BaseDaoImpl();
                 }
             }
 
@@ -54,11 +54,11 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
     // insert、update、delete封装到一个方法中
     @Override
     public int  executeUpdate(String sql, Object... params) throws SQLException  {
-        Connection conn = SingleDruidUtil.getConnection();
+        Connection conn = DruidUtil.getConnection();
         PreparedStatement ps = conn.prepareStatement(sql);
         setParameters(ps, params);
         int n = ps.executeUpdate();
-        SingleDruidUtil.closePreparedStatement(ps);
+        DruidUtil.closePreparedStatement(ps);
         return n;
     }
 
@@ -66,17 +66,40 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
     // 批量插入
     @Override
     public int[] executeBatch(String sql, List<Object[]> params) throws SQLException  {
-        Connection conn = SingleDruidUtil.getConnection();
+        Connection conn = DruidUtil.getConnection();
         PreparedStatement ps = conn.prepareStatement(sql);
         for (Object[] param : params) {
             setParameters(ps, param);
             ps.addBatch();
         }
         int [] n = ps.executeBatch();
-        SingleDruidUtil.closePreparedStatement(ps);
+        DruidUtil.closePreparedStatement(ps);
         return n;
     }
 
+    // insert、update、delete封装到一个方法中
+    @Override
+    public int  executeUpdate(String sql) throws SQLException  {
+        Connection conn = DruidUtil.getConnection();
+        Statement stmt = conn.createStatement();
+        int n = stmt.executeUpdate(sql);
+        DruidUtil.closeStatement(stmt);
+        return n;
+    }
+
+    @Override
+    public int[] executeBatch(List<String> sqls) throws SQLException {
+        Connection conn = DruidUtil.getConnection();
+        // 得到一个Statement对象
+        Statement stmt = conn.createStatement();
+        for (String sql : sqls) {
+            stmt.addBatch(sql);
+        }
+        // 执行批处理
+        int [] n = stmt.executeBatch();
+        DruidUtil.closeStatement(stmt);
+        return n;
+    }
 
     /**
      * 查询封装到一个方法中
@@ -92,7 +115,7 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = SingleDruidUtil.getConnection();
+            conn = DruidUtil.getConnection();
             ps = conn.prepareStatement(sql);
             setParameters(ps, params);
             rs = ps.executeQuery();            // ResultSet结果集对象，实质看做一张表数据
@@ -116,8 +139,8 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
             e.printStackTrace();
             return result;
         } finally {
-            SingleDruidUtil.closeResultSet(rs);
-            SingleDruidUtil.closePreparedStatement(ps);
+            DruidUtil.closeResultSet(rs);
+            DruidUtil.closePreparedStatement(ps);
         }
     }
 
@@ -132,13 +155,13 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
      * @return
      */
     @Override
-    public <E> List<E> queryForList(SinglePRowMapper<E> mapper, String sql, Object... params) {
+    public <E> List<E> queryForList(PRowMapper<E> mapper, String sql, Object... params) {
         List<E> result = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = SingleDruidUtil.getConnection();
+            conn = DruidUtil.getConnection();
             ps = conn.prepareStatement(sql);
             setParameters(ps, params);
             rs = ps.executeQuery();            // ResultSet结果集对象，实质看做一张表数据
@@ -152,8 +175,8 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
             e.printStackTrace();
             return result;
         } finally {
-            SingleDruidUtil.closeResultSet(rs);
-            SingleDruidUtil.closePreparedStatement(ps);
+            DruidUtil.closeResultSet(rs);
+            DruidUtil.closePreparedStatement(ps);
         }
     }
 
@@ -189,7 +212,7 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = SingleDruidUtil.getConnection();
+            conn = DruidUtil.getConnection();
             ps = conn.prepareStatement(sql);
             setParameters(ps, params);
             rs = ps.executeQuery();            // ResultSet结果集对象，实质看做一张表数据
@@ -244,8 +267,8 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
             e.printStackTrace();
             return result;
         }  finally {
-            SingleDruidUtil.closeResultSet(rs);
-            SingleDruidUtil.closePreparedStatement(ps);
+            DruidUtil.closeResultSet(rs);
+            DruidUtil.closePreparedStatement(ps);
         }
     }
 
@@ -264,7 +287,7 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = SingleDruidUtil.getConnection();
+            conn = DruidUtil.getConnection();
             ps = conn.prepareStatement(sql);
             setParameters(ps, params);
             rs = ps.executeQuery();            // ResultSet结果集对象，实质看做一张表数据
@@ -283,19 +306,19 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
             e.printStackTrace();
             return result;
         }  finally {
-            SingleDruidUtil.closeResultSet(rs);
-            SingleDruidUtil.closePreparedStatement(ps);
+            DruidUtil.closeResultSet(rs);
+            DruidUtil.closePreparedStatement(ps);
         }
     }
 
     @Override
-    public <E> E queryForObject(SinglePRowMapper<E> mapper, String sql, Object... params) {
+    public <E> E queryForObject(PRowMapper<E> mapper, String sql, Object... params) {
         E result = null;
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = SingleDruidUtil.getConnection();
+            conn = DruidUtil.getConnection();
             ps = conn.prepareStatement(sql);
             setParameters(ps, params);
             rs = ps.executeQuery();            // ResultSet结果集对象，实质看做一张表数据
@@ -309,8 +332,8 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
             e.printStackTrace();
             return result;
         } finally {
-            SingleDruidUtil.closeResultSet(rs);
-            SingleDruidUtil.closePreparedStatement(ps);
+            DruidUtil.closeResultSet(rs);
+            DruidUtil.closePreparedStatement(ps);
         }
 
     }
@@ -322,7 +345,7 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            conn = SingleDruidUtil.getConnection();
+            conn = DruidUtil.getConnection();
             ps = conn.prepareStatement(sql);
             setParameters(ps, params);
             rs = ps.executeQuery();            // ResultSet结果集对象，实质看做一张表数据
@@ -376,8 +399,8 @@ public class SingleBaseDaoImpl implements SingleBaseDao {
             e.printStackTrace();
             return obj;
         } finally {
-            SingleDruidUtil.closeResultSet(rs);
-            SingleDruidUtil.closePreparedStatement(ps);
+            DruidUtil.closeResultSet(rs);
+            DruidUtil.closePreparedStatement(ps);
         }
     }
 

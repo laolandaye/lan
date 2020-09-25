@@ -15,13 +15,19 @@ import java.util.Map;
  * <E> E queryForObject
  * <E> E queryForObject
  */
-public interface SingleBaseDao {
+public interface BaseDao {
 
     // insert、update、delete封装到一个方法中
     int executeUpdate(String sql, Object... params) throws SQLException;
 
     // 批量插入
     int[] executeBatch(String sql, List<Object[]> params) throws SQLException;
+
+    // insert、update、delete封装到一个方法中,sql 拼接
+    int executeUpdate(String sql) throws SQLException;
+
+    // 批量插入,sql 拼接
+    int[] executeBatch(List<String> sqls) throws SQLException;
 
     /**
      * 查询封装到一个方法中
@@ -35,7 +41,7 @@ public interface SingleBaseDao {
     /**
      * 通过PRowMapper接口定义的规范，将每一行转换为对应的对象
      */
-    <E> List<E> queryForList(SinglePRowMapper<E> mapper, String sql, Object... params);
+    <E> List<E> queryForList(PRowMapper<E> mapper, String sql, Object... params);
 
     /**
      * 【补充】反射：在程序运行过程中动态调用类的方法或修改类的属性，后门
@@ -64,7 +70,7 @@ public interface SingleBaseDao {
      */
     public Map<String, Object> queryForObject(String sql, Object... params);
 
-    public <E> E queryForObject(SinglePRowMapper<E> mapper, String sql, Object... params);
+    public <E> E queryForObject(PRowMapper<E> mapper, String sql, Object... params);
 
     public <E> E queryForObject(Class<E> clazz, String sql, Object... params) ;
 

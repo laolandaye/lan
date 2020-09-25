@@ -1,7 +1,6 @@
 package com.lan.bmwai.dao.single;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import org.apache.commons.beanutils.converters.SqlDateConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,21 +11,17 @@ import java.util.Properties;
 /**
  * Druid数据库连接池的核心类 ： DruidDataSourceFactory
  */
-public class SingleDruidUtil {
+public class DruidUtil {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SingleDruidUtil.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DruidUtil.class);
 
 	// 线程局部变量，保存某个线程使用的连接
 	private static ThreadLocal<Connection> thread = new ThreadLocal<>();
-	// 无参构造方法会去获取c3p0-config.xml配置文件中的默认配置信息default-config
-	//static DataSource ds = new ComboPooledDataSource();
-	// 获取配置文件中named-config name="oracle11gorcl"对应的配置
-	static DruidDataSourceFactory factory = new DruidDataSourceFactory();
-	static DataSource dataSource = null;
+	private static DataSource dataSource = null;
 	static{
 		Properties properties = new Properties();
 		try {
-			properties.load(SingleDruidUtil.class.getClassLoader().getResourceAsStream("single/db.properties"));
+			properties.load(DruidUtil.class.getClassLoader().getResourceAsStream("single/db.properties"));
 			properties.setProperty("driverClassName", properties.getProperty("jdbc.driver"));
 			properties.setProperty("url", properties.getProperty("jdbc.url"));
 			properties.setProperty("username", properties.getProperty("jdbc.user"));
@@ -36,6 +31,7 @@ public class SingleDruidUtil {
 			e.printStackTrace();
 		}
 	}
+
 	public static synchronized Connection getConnection() {
 		// 首先从线程局部变量中获取连接，如果线程局部变量中没有保存有连接，说明是第一次获取
 		Connection conn = thread.get();
@@ -53,12 +49,31 @@ public class SingleDruidUtil {
 	}
 
 	/**
-	 * 释放 连接，关闭结果集
+	 * 释放 连接，关闭结果集(单个结果，非事务使用)
 	 */
-	public static void closeConnection(Connection connection) throws SQLException{
+	public static void closeConnection() {
 		Connection conn = thread.get();
 		if(conn == null){
-			throw new SQLException("Connection未开启");
+			LOG.info("Connection未开启");
+		} else {
+			try {
+				conn.close();
+				thread.remove();//移走
+				LOG.info("Conn已关闭连接");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	/**
+	 * 释放 连接，关闭结果集（事务，本类调用就可以了）
+	 */
+	private static void closeConnection(Connection connection) {
+		Connection conn = thread.get();
+		if(conn == null){
+			LOG.info("Connection未开启");
 		} else {
 			try {
 				conn.close();
@@ -71,11 +86,15 @@ public class SingleDruidUtil {
 
 		if(conn != connection){
 			if(connection == null){
-				throw new SQLException("Connection未开启");
+				LOG.info("Connection未开启");
 			} else {
-				connection.close();
-                thread.remove();// 移除线程
-				LOG.info("Connection已关闭连接");
+				try {
+					connection.close();
+					thread.remove();// 移除线程
+					LOG.info("Connection已关闭连接");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -86,6 +105,17 @@ public class SingleDruidUtil {
 				pstmt.close();
 			} catch (SQLException e) {
 				LOG.error("关闭PreparedStatement失败", e);
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void closeStatement(Statement stmt) {
+		if (stmt != null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				LOG.error("关闭Statement失败", e);
 				e.printStackTrace();
 			}
 		}
@@ -117,24 +147,30 @@ public class SingleDruidUtil {
 	/**
 	 * 提交事务
 	 */
-	public static void commitTransaction() throws SQLException {
+	public static void commitTransaction() {
 		Connection conn = getConnection();
-		conn.commit();
-		LOG.info("提交事务成功");
-		closeConnection(conn);
+		try {
+			conn.commit();
+			LOG.info("提交事务成功");
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			closeConnection(conn);
+		}
 	}
 
 	/**
 	 * 回滚事务，发生异常时，应该撤销的操作
 	 */
 	public static void rollbackTransaction()  {
+		Connection conn = getConnection();
 		try {
-			Connection conn = getConnection();
 			conn.rollback();
 			LOG.error("回滚事务成功");
-			closeConnection(conn);
 		} catch (SQLException se) {
 			se.printStackTrace();
+		} finally {
+			closeConnection(conn);
 		}
 
 	}
@@ -163,15 +199,16 @@ public class SingleDruidUtil {
 	 * 回滚事务，发生异常时，应该撤销的操作
 	 */
 	public static void rollbackTransPoint(Savepoint sp)  {
+		Connection conn = getConnection();
 		try {
-			Connection conn = getConnection();
 			conn.rollback(sp);
 			LOG.error("回滚事务成功:{}", sp.getSavepointName());
 			conn.commit();
 			LOG.info("提交事务节点：{}", sp.getSavepointName());
-			closeConnection(conn);
 		} catch (SQLException se) {
 			se.printStackTrace();
+		}  finally {
+			closeConnection(conn);
 		}
 
 	}

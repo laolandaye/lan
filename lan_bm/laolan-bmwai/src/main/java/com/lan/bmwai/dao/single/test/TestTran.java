@@ -1,16 +1,16 @@
 package com.lan.bmwai.dao.single.test;
 
-import com.lan.bmwai.dao.single.SingleBaseDao;
-import com.lan.bmwai.dao.single.SingleBaseDaoImpl;
-import com.lan.bmwai.dao.single.SingleDruidUtil;
+import com.lan.bmwai.dao.single.BaseDao;
+import com.lan.bmwai.dao.single.BaseDaoImpl;
+import com.lan.bmwai.dao.single.DruidUtil;
 
 public class TestTran {
 
     public static void main(String[] args) {
         try {
-            SingleDruidUtil.openTransaction();
+            DruidUtil.openTransaction();
 
-            SingleBaseDao baseDao = SingleBaseDaoImpl.getInstance();
+            BaseDao baseDao = BaseDaoImpl.getInstance();
             String sql = "INSERT INTO jd_sc(id, name) VALUES (?, ?)";
             int a = baseDao.executeUpdate(sql, new Object[]{1, "22"});
             System.out.println(a);
@@ -19,12 +19,11 @@ public class TestTran {
             int a2 = baseDao.executeUpdate(sql2, new Object[]{1, "22"});
             System.out.println(a2);
 
-            SingleDruidUtil.commitTransaction();
+            DruidUtil.commitTransaction();
         } catch (Exception e) {
             e.printStackTrace();
-            SingleDruidUtil.rollbackTransaction();
+            DruidUtil.rollbackTransaction();
         }
-
     }
 
 
