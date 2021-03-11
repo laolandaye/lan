@@ -1,0 +1,11 @@
+### 模拟登陆,
+POST {{url}}/t-spread-sys-user/login
+Accept: application/json
+Content-Type: application/json
+
+{
+  "account":"super",
+  "password":"123456"
+}
+
+###

@@ -1,0 +1,13 @@
+###
+GET {{url}}/testLogin/noNeedLogin
+Accept: application/json
+Content-Type: application/json
+
+### 需要token
+GET {{url}}/testLogin/needLogin
+Accept: application/json
+Content-Type: application/json
+Authorization: {{Authorization}}
+
+###
+

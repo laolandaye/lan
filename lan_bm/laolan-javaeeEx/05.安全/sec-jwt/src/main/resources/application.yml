@@ -1,0 +1,15 @@
+server:
+  port: 9801
+  servlet:
+    context-path: /j/platform
+spring:
+  application:
+    name: sec-jwt
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+logging:
+  level:
+    org.springframework.boot.autoconfigure: ERROR
+jwt:
+  secret: SONGSHUSUKEJWTTOKEN
