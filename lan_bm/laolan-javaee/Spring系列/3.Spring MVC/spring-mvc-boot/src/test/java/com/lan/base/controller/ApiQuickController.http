@@ -1,0 +1,37 @@
+### @Valid 生效普通的
+POST {{url}}/api/openapi/apiQuick/sqlQuery
+Accept: application/json
+Content-Type:  application/json;charset=UTF-8
+
+{
+  "apiCode": "apiCode",
+  "authType": "authType",
+  "apiLabel": 0,
+  "remark": "remark",
+  "requestUrl": "requestUrl"
+}
+###
+POST {{url}}/api/openapi/apiQuick/defaultSqlQuery
+Accept: application/json
+Content-Type:  application/json;charset=UTF-8
+
+{
+
+}
+
+### SaveValidGroup 分组的会生效
+POST {{url}}/api/openapi/apiQuick/saveSqlQuery
+Accept: application/json
+Content-Type:  application/json;charset=UTF-8
+
+{
+  "apiCode": "apiCode",
+  "apiLabel": "apiLabel",
+  "authType": "authType",
+  "requestUrl": "requestUrl",
+  "remark": "remark",
+  "dbuserId": "dbuserId",
+  "tabName": "tabName"
+}
+
+###

@@ -45,7 +45,7 @@ public class UploadController {
             // 得到随机目录
             String randomDirectory = FileUploadUtils.getRandomDirectory(filename);
             // 注意:随机目录可能不存在，需要创建.
-            File rd = new File("G:/upload/temp/", randomDirectory);
+            File rd = new File("D:/upload/temp/", randomDirectory);
             if (!rd.exists()) {
                 rd.mkdirs();
             }
