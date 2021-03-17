@@ -1,0 +1,13 @@
+###
+GET http://localhost:8080/helloExecutor
+Accept: application/json
+
+###
+GET http://localhost:8080/testCountDownLatch
+Accept: application/json
+
+###
+GET http://localhost:8080/testManyCountDownLatch
+Accept: application/json
+
+###
