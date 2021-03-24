@@ -12,7 +12,7 @@
     <url>http://www.example.com</url>
 
     <properties>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <spring.version>4.3.6.RELEASE</spring.version>
         <aspectjweaver.version>1.6.8</aspectjweaver.version>
         <aopalliance.version>1.0</aopalliance.version>
